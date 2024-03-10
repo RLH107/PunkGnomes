@@ -9,10 +9,11 @@ public class LevelRecorce : MonoBehaviour
     [SerializeField] private float N_of_Seconds_before_next_addition;
     [SerializeField] private int N_of_Passive_Increce;
     private int RES_count;
+    private int RES_sheck;
     private float NofSbA;
     void Start()
     {
-        RES_count = 0;
+        RES_count = Initial_RES_count;
         NofSbA = N_of_Seconds_before_next_addition;
     }
 
@@ -32,8 +33,41 @@ public class LevelRecorce : MonoBehaviour
             {
                 RES_count += N_of_Passive_Increce;
                 NofSbA = N_of_Seconds_before_next_addition;
+                Debug.Log("NumberOf_RES" + RES_count);
             }
         }
-        print("NumberOf_RES" +  RES_count);
+    }
+    public void PayResorce(int NumberToSubtract)
+    {
+        RES_sheck = RES_count;
+        RES_sheck -= NumberToSubtract;
+        if(RES_sheck >= 0 || RES_sheck == 0)
+        {
+            RES_count -= NumberToSubtract;
+        }
+        else
+        {
+            Debug.Log("Insuficiant Recorces");
+        }
+    }
+    public void AddResorce(int NumberToAdd)
+    {
+        RES_sheck = RES_count;
+        RES_sheck += NumberToAdd;
+        if(RES_sheck >= Max_RES_count)
+        {
+            RES_count = Max_RES_count;
+            Debug.Log("Can Not Pass Max_RES_count" + RES_count);
+        }
+        if (RES_sheck == Max_RES_count)
+        {
+            RES_count += NumberToAdd;
+            Debug.Log("RES_count = Max_RES_count");
+        }
+        else
+        {
+            RES_count += NumberToAdd;
+            Debug.Log("RES Added");
+        }
     }
 }
