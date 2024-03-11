@@ -10,7 +10,7 @@ public class Void_Function_Test : MonoBehaviour
     private float T_F2;
     private bool T1 = true;
     private bool T2 = true;
-    // Start is called before the first frame update
+     //Start is called before the first frame update
     void Start()
     {
         LevelRecorce_Script = LevelMeneger.GetComponent<LevelRecorce>();
@@ -18,7 +18,7 @@ public class Void_Function_Test : MonoBehaviour
         T_F2 = 28;
     }
 
-    // Update is called once per frame
+     //Update is called once per frame
     void Update()
     {
         T_F1 -= Time.deltaTime;
