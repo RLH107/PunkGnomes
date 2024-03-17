@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Inimigo_Base : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private int Health;
+    [SerializeField] private int Attack;
+    [SerializeField] private float Speed;
+    [SerializeField] private bool ActivationState;
     void Start()
     {
-        
+    //https://forum.unity.com/threads/toggling-on-off-update-event.270879/
     }
 
     // Update is called once per frame

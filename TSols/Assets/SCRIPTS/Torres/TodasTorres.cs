@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TodasTorres : MonoBehaviour
 {
+    [SerializeField] private float PCoolDown;
+    [SerializeField] private float PSpeed;
+    [SerializeField] private float Range;
     private enum TowerAI_State
     {
 
