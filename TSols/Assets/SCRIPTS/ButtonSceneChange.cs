@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonSceneChange : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class ButtonSceneChange : MonoBehaviour
     {
         LChanger_Script = GetComponent<LevelChanger>();
     }
-    public void OnButtonClickSendMessege()
+    public void OnButtonClick_ChangeScene()
     {
         Debug.Log("Button_PRESET");
-        LChanger_Script.ChangeScene(NextScene);
+        SceneManager.LoadScene(NextScene);
     }
 }
