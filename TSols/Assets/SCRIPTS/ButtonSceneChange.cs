@@ -6,16 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class ButtonSceneChange : MonoBehaviour
 {
+    [SerializeField] private string LoadingScene;
     [SerializeField] private string NextScene;
-    LevelChanger LChanger_Script;
+
+    private GameObject DoNotDestroyObject;
+    DontDestroyOnLoad DontDestroyOnLoad_SCRIPT;
 
     private void Start()
     {
-        LChanger_Script = GetComponent<LevelChanger>();
+        DoNotDestroyObject = GameObject.Find("DoNotDestroy");
+        DontDestroyOnLoad_SCRIPT = DoNotDestroyObject.GetComponent<DontDestroyOnLoad>();
     }
     public void OnButtonClick_ChangeScene()
     {
-        Debug.Log("Button_PRESET");
-        SceneManager.LoadScene(NextScene);
+        //Adiciona a procima cena no DoNotDestroy
+        SceneManager.LoadScene(LoadingScene);
     }
 }

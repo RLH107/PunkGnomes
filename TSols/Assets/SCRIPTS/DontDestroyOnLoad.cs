@@ -10,5 +10,5 @@ public class DontDestroyOnLoad : MonoBehaviour
     }
     //Public Info.
 
-    public string NextScene;
+    [HideInInspector] public string ERROR_SCENE;
 }

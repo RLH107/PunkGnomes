@@ -19,11 +19,6 @@ public class ChengeScene_SCRIPT : MonoBehaviour
         {
             Debug.Log("THE_GAME_OBJECT" + DoNotDestroyObject);
         }
-
-
-
-
-
         //SceneManager.LoadSceneAsync(NextScene);
     }
 }
