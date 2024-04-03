@@ -11,4 +11,9 @@ public class DontDestroyOnLoad : MonoBehaviour
     //Public Info.
 
     [HideInInspector] public string ERROR_SCENE;
+
+    private void Start()
+    {
+        Debug.Log("Next Scene to be Loaded" + ERROR_SCENE);
+    }
 }

@@ -19,7 +19,8 @@ public class ButtonSceneChange : MonoBehaviour
     }
     public void OnButtonClick_ChangeScene()
     {
+        Debug.Log("ButtonPressed");
         //Adiciona a procima cena no DoNotDestroy
-        SceneManager.LoadScene(LoadingScene);
+        //SceneManager.LoadScene(LoadingScene);
     }
 }
