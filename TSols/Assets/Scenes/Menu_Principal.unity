@@ -1062,7 +1062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338d4b21f516a544e956611c6545ee8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: ERROR_SCENE
 --- !u!1 &1110444208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,7 +1510,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1751685687}
         m_TargetAssemblyTypeName: ButtonSceneChange, Assembly-CSharp
-        m_MethodName: OnButtonClickSendMessege
+        m_MethodName: OnButtonClick_ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

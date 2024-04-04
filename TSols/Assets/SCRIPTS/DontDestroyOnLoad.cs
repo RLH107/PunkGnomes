@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DontDestroyOnLoad : MonoBehaviour
 {
@@ -8,12 +9,10 @@ public class DontDestroyOnLoad : MonoBehaviour
     {
         DontDestroyOnLoad(transform.gameObject);
     }
-    //Public Info.
 
-    [HideInInspector] public string ERROR_SCENE;
-
-    private void Start()
+    public void ChangeToNextScene(string next_scene, string LoadingScene)
     {
-        Debug.Log("Next Scene to be Loaded" + ERROR_SCENE);
+        SceneManager.LoadScene(LoadingScene);
+        SceneManager.LoadSceneAsync(next_scene);
     }
 }

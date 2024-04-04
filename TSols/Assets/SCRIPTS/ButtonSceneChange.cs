@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class ButtonSceneChange : MonoBehaviour
 {
@@ -20,7 +19,6 @@ public class ButtonSceneChange : MonoBehaviour
     public void OnButtonClick_ChangeScene()
     {
         Debug.Log("ButtonPressed");
-        //Adiciona a procima cena no DoNotDestroy
-        //SceneManager.LoadScene(LoadingScene);
+        DontDestroyOnLoad_SCRIPT.ChangeToNextScene(NextScene,LoadingScene);
     }
 }
