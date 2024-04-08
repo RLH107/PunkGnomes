@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class Inimigo_Base : MonoBehaviour
 {
-    [SerializeField] private int Health;
-    [SerializeField] private int Attack;
-    [SerializeField] private float Speed;
-    [SerializeField] private bool ActivationState;
+    [SerializeField] private string EnemyTipe;
+    private float Health;
+    private float HealthCheck;
+    private float Attack;
+    private float Speed;
+    private bool ActivationState;
     void Start()
     {
-    //https://forum.unity.com/threads/toggling-on-off-update-event.270879/
+        //https://forum.unity.com/threads/toggling-on-off-update-event.270879/
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TakeDamege(float DemegeTaken)
     {
-        
+
     }
+
+    private void EnemyAttack(float AttackDemege)
+    {
+
+    }
+
+        //ADD Helth?
+        //
 }
