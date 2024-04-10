@@ -13,8 +13,6 @@ public class Inimigo_Base : MonoBehaviour
     private bool ActivationState;
     void Start()
     {
-        //https://forum.unity.com/threads/toggling-on-off-update-event.270879/
-
         Health = 50f;
         MaxHealth = 55f;
         Attack = 5f;
