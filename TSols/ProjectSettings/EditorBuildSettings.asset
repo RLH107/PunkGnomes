@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/EMPTY.unity
     guid: ffd1125a660711948b2aedf7e2a6865b
   - enabled: 1
+    path: "Assets/AcelerometroVibra\xE7\xE3o/Vibration-master/Vibration/Example/VibrationExample.unity"
+    guid: 97713010e65794861b2e4b75c95a2ece
+  - enabled: 1
     path: Assets/Scenes/Menu_Principal.unity
     guid: 05c107c47ba44864cb0869984c66268b
   - enabled: 1

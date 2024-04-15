@@ -11,6 +11,7 @@ public class Inimigo_Base : MonoBehaviour
     private float Attack;
     private float Speed;
     private bool ActivationState;
+
     void Start()
     {
         Health = 50f;
