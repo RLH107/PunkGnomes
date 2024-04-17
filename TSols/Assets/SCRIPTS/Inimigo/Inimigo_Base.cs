@@ -12,6 +12,8 @@ public class Inimigo_Base : MonoBehaviour
     private float Speed;
     private bool ActivationState;
 
+    private Quaternion ToRotate;
+
     void Start()
     {
         Health = 50f;
@@ -19,16 +21,6 @@ public class Inimigo_Base : MonoBehaviour
         Attack = 5f;
         Speed = 10f;
         ActivationState = false;
-
-        Debug.Log(Health);
-
-        AddHealth(10f);
-
-        Debug.Log(Health);
-
-        TakeDamege(15f);
-
-        Debug.Log(Health);
     }
 
     private void TakeDamege(float DemegeTaken)
@@ -40,7 +32,6 @@ public class Inimigo_Base : MonoBehaviour
             Dead();
         }
     }
-
 
     private void AddHealth(float HealthToAdd)
     {
@@ -57,6 +48,12 @@ public class Inimigo_Base : MonoBehaviour
             Debug.Log("Else_CALLED");
             Health = MaxHealth;
         }
+    }
+
+    public void TurnEnemy(float HowMutshToRotate, float HowFast)
+    {
+        ToRotate = Quaternion.Euler(0, HowMutshToRotate, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * HowFast);
     }
 
     private void Dead()

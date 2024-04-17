@@ -17,7 +17,7 @@ public class Void_Function_Test : MonoBehaviour
         T_F2 = 28;
     }
 
-     //Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
         T_F1 -= Time.deltaTime;
