@@ -14,7 +14,7 @@ public class ColisionDetection : MonoBehaviour
 
     private void Start()
     {
-        Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
+        //Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class ColisionDetection : MonoBehaviour
             //Debug.Log("Object_Is" + other.gameObject);
             TurnInfo_Script = other.gameObject.GetComponent<TurnInfo>();
 
-            Inimigo_Base_Script.TurnEnemy(TurnInfo_Script.HowMutchToTurn, TurnInfo_Script.HowLongIsTheTurn);
+            //Inimigo_Base_Script.TurnEnemy(TurnInfo_Script.HowMutchToTurn, TurnInfo_Script.HowLongIsTheTurn);
         }
     }
 }

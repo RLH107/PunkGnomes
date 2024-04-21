@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bd79d921efdc6429ca3aff6d2f4abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HowMutchToTurn: 90
+  HowMutchToTurn: 0.9
   HowLongIsTheTurn: 2
