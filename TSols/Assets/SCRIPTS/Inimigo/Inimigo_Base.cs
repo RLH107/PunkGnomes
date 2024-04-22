@@ -16,28 +16,56 @@ public class Inimigo_Base : MonoBehaviour
     private Quaternion ToRotate;
 
 
+    /// <summary>
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    
     public enum EState
     {
         IDLE,
         MOVE,
         TURN,
-        ATTACK,
-        DAMEGE,
     }
     public EState enemyState;
+       
+    /// <summary>
+    /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+
 
     void Start()
     {
-        Health = 50f;
-        MaxHealth = 55f;
-        Attack = 5f;
-        Speed = 10f;
-        ActivationState = false;
+        if (Health <= 0f)
+        {
+            Health = 50f;
+        }
 
+        if (MaxHealth <= 0f)
+        {
+            MaxHealth = 55f;
+        }
+
+        if (Attack <= 0f)
+        {
+            Attack = 5f;
+        }
+
+        if (Speed <= 0f)
+        {
+            Speed = 10f;
+        }
+
+        ActivationState = false;
         CurrentRotation = transform.rotation;
     }
 
 
+
+    /// <summary>
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+
+    
 
     private void TakeDamege(float DemegeTaken)
     {
@@ -66,10 +94,18 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
+    
+
     private void Dead()
     {
-        Debug.Log("DEAD");
+        Debug.Log(gameObject + "DEAD");
     }
+
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+
 
     private void EnemyStateSwitch(EState E_State)
     {
@@ -82,12 +118,11 @@ public class Inimigo_Base : MonoBehaviour
                 break;
             case EState.TURN:
                 break;
-            case EState.DAMEGE:
-                break;
-            case EState.ATTACK:
-                break;
         }
     }
+
+
+
     private IEnumerator IDLE()
     {
         Debug.Log("IDLE Called");
@@ -103,6 +138,8 @@ public class Inimigo_Base : MonoBehaviour
             EnemyStateSwitch(EState.IDLE);
         }
     }
+
+
     private IEnumerator MOVE()
     {
         Debug.Log("MOVE Called");
@@ -124,23 +161,25 @@ public class Inimigo_Base : MonoBehaviour
             }
         }
     }
+
+
     private IEnumerator TURN()
     {
         Debug.Log("TURN Called");
         yield return null;
+        if (CurrentRotation == ToRotate)
+        {
+            EnemyStateSwitch(EState.MOVE);
+        }
+        else
+        {
+            EnemyStateSwitch(EState.TURN);
+        }
     }
-    private IEnumerator DAMEGE()
-    {
-        yield return null;
-    }
-    private IEnumerator ATTACK()
-    {
-        yield return null;
-    }
-
-    private void TurnEnemy(float HowMutshToRotate, float HowFast)
-    {
-        ToRotate = Quaternion.Euler(0, HowMutshToRotate, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * HowFast);
-    }
+    
+    //private void TurnEnemy(float HowMutshToRotate, float HowFast)
+    //{
+    //    ToRotate = Quaternion.Euler(0, HowMutshToRotate, 0);
+    //    transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * HowFast);
+    //}
 }
