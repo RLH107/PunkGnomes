@@ -14,7 +14,7 @@ public class ColisionDetection : MonoBehaviour
 
     private void Start()
     {
-        //Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
+        Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
     }
 
     private void OnTriggerEnter(Collider other)

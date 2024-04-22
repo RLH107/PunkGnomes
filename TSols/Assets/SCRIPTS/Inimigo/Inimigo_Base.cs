@@ -12,6 +12,7 @@ public class Inimigo_Base : MonoBehaviour
     private float Speed;
     private bool ActivationState;
 
+    private Quaternion CurrentRotation;
     private Quaternion ToRotate;
 
 
@@ -32,6 +33,8 @@ public class Inimigo_Base : MonoBehaviour
         Attack = 5f;
         Speed = 10f;
         ActivationState = false;
+
+        CurrentRotation = transform.rotation;
     }
 
 
@@ -87,6 +90,7 @@ public class Inimigo_Base : MonoBehaviour
     }
     private IEnumerator IDLE()
     {
+        Debug.Log("IDLE Called");
         yield return null;
         if (ActivationState == true)
         {
@@ -101,11 +105,28 @@ public class Inimigo_Base : MonoBehaviour
     }
     private IEnumerator MOVE()
     {
+        Debug.Log("MOVE Called");
         yield return null;
-
+        if(ActivationState == false)
+        {
+            EnemyStateSwitch(EState.IDLE);
+        }
+        else
+        {
+            CurrentRotation = transform.rotation;
+            if(CurrentRotation == ToRotate)
+            {
+                EnemyStateSwitch(EState.MOVE);
+            }
+            else
+            {
+                EnemyStateSwitch(EState.TURN);
+            }
+        }
     }
     private IEnumerator TURN()
     {
+        Debug.Log("TURN Called");
         yield return null;
     }
     private IEnumerator DAMEGE()
@@ -122,5 +143,4 @@ public class Inimigo_Base : MonoBehaviour
         ToRotate = Quaternion.Euler(0, HowMutshToRotate, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * HowFast);
     }
-
 }
