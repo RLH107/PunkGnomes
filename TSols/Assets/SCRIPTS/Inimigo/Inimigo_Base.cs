@@ -14,8 +14,10 @@ public class Inimigo_Base : MonoBehaviour
     private float HealthCheck;
     private float Attack;
     private float Speed;
+    private float Force;
 
     private Vector3 EnemyVelocity;
+    private Vector3 VForce;
     private Quaternion CurrentRotation;
     private Quaternion ToRotate;
 
@@ -66,6 +68,8 @@ public class Inimigo_Base : MonoBehaviour
         ToRotate = CurrentRotation;
 
         EnemyVelocity = new Vector3();
+
+        VForce = new Vector3(Force, 0, 0);
 
         EnemyStateSwitch(EState.IDLE);
     }
@@ -196,11 +200,13 @@ public class Inimigo_Base : MonoBehaviour
                 EnemyVelocity = rb.velocity;
                 if(EnemyVelocity.x <= Speed)
                 {
-                    //AddForceForwards
+                    Debug.Log("Velocity < Speed");
+                    rb.AddForce( VForce, ForceMode.Acceleration);
                 }
                 if(EnemyVelocity.x >= Speed)
                 {
-                    //AddForceBackwards
+                    Debug.Log("Velocity > Speed");
+                    rb.AddForce(-VForce, ForceMode.Acceleration);
                 }
                 /////////////////////////////////
 
