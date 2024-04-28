@@ -5,32 +5,38 @@ using UnityEngine;
 public class Inimigo_Base : MonoBehaviour
 {
     [SerializeField] private string EnemyTipe;
+    [SerializeField] private Rigidbody rb;
+
+    [HideInInspector] public bool ActivationState;
+
     private float Health;
     private float MaxHealth; 
     private float HealthCheck;
     private float Attack;
     private float Speed;
-    private bool ActivationState;
 
+    private Vector3 EnemyVelocity;
     private Quaternion CurrentRotation;
     private Quaternion ToRotate;
 
 
     /// <summary>
-    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
     
-    public enum EState
+    private enum EState
     {
         IDLE,
         MOVE,
         TURN,
     }
-    public EState enemyState;
-       
+    private EState enemyState;
+
+
     /// <summary>
-    /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
+    /// <param name="Start"></param>
 
 
     void Start()
@@ -57,15 +63,19 @@ public class Inimigo_Base : MonoBehaviour
 
         ActivationState = false;
         CurrentRotation = transform.rotation;
+        ToRotate = CurrentRotation;
+
+        EnemyVelocity = new Vector3();
+
+        EnemyStateSwitch(EState.IDLE);
     }
 
 
-
     /// <summary>
-    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
+    /// <param name="DemegeTaken"></param>
 
-    
 
     private void TakeDamege(float DemegeTaken)
     {
@@ -99,12 +109,35 @@ public class Inimigo_Base : MonoBehaviour
     private void Dead()
     {
         Debug.Log(gameObject + "DEAD");
+        ActivationState = false;
+        EnemyStateSwitch(EState.IDLE);
+    }
+
+
+
+    /// <summary>
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    /// <param name="collision"></param>
+
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "TurnColider")
+        {
+            Debug.Log("Colision Detected");
+            ToRotate = collision.gameObject.transform.rotation;
+            EnemyStateSwitch(EState.TURN);
+        }
     }
 
 
     /// <summary>
-    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
+    /// <param name="StateSwitch"></param>
 
 
     private void EnemyStateSwitch(EState E_State)
@@ -113,15 +146,21 @@ public class Inimigo_Base : MonoBehaviour
         switch (enemyState)
         {
             case EState.IDLE:
+                StartCoroutine(IDLE());
                 break;
             case EState.MOVE:
+                StartCoroutine(MOVE());
                 break;
             case EState.TURN:
+                StartCoroutine(TURN());
                 break;
         }
     }
 
-
+    /// <summary>
+    /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    /// <param name="IEnumerators"></param>
 
     private IEnumerator IDLE()
     {
@@ -153,6 +192,18 @@ public class Inimigo_Base : MonoBehaviour
             CurrentRotation = transform.rotation;
             if(CurrentRotation == ToRotate)
             {
+                /////////////////////////////////
+                EnemyVelocity = rb.velocity;
+                if(EnemyVelocity.x <= Speed)
+                {
+                    //AddForceForwards
+                }
+                if(EnemyVelocity.x >= Speed)
+                {
+                    //AddForceBackwards
+                }
+                /////////////////////////////////
+
                 EnemyStateSwitch(EState.MOVE);
             }
             else
@@ -169,10 +220,12 @@ public class Inimigo_Base : MonoBehaviour
         yield return null;
         if (CurrentRotation == ToRotate)
         {
+            Debug.Log("Rotation==");
             EnemyStateSwitch(EState.MOVE);
         }
         else
         {
+            Debug.Log("Rotation=!");
             EnemyStateSwitch(EState.TURN);
         }
     }
