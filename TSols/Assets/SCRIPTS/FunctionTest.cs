@@ -16,7 +16,7 @@ public class FunctionTest : MonoBehaviour
     {
         Enemy = GameObject.FindWithTag("ENEMY");
         Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
-        T_F1 = 5;
+        T_F1 = 2;
         T_F2 = 28;
     }
 

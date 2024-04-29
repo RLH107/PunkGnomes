@@ -14,12 +14,20 @@ public class Inimigo_Base : MonoBehaviour
     private float HealthCheck;
     private float Attack;
     private float Speed;
+    private float SpeedVariance;
+    private float TurningSpeed;
+    private float TurningVariance;
     private float Force;
 
-    private Vector3 EnemyVelocity;
+    private float MaxSpeed;
+    private float MinSpeed;
+
     private Vector3 VForce;
-    private Quaternion CurrentRotation;
+
     private Quaternion ToRotate;
+    private float RotR;
+    private float RotL;
+
 
 
     /// <summary>
@@ -60,14 +68,34 @@ public class Inimigo_Base : MonoBehaviour
 
         if (Speed <= 0f)
         {
-            Speed = 10f;
+            Speed = 2f;
         }
 
-        ActivationState = false;
-        CurrentRotation = transform.rotation;
-        ToRotate = CurrentRotation;
+        if (SpeedVariance <= 0f)
+        {
+            SpeedVariance = 1f;
+        }
 
-        EnemyVelocity = new Vector3();
+        if (TurningSpeed <= 0f)
+        {
+            TurningSpeed = 1f;
+        }
+
+        if (Force <= 0f)
+        {
+            Force = 1f;
+        }
+
+
+        MaxSpeed = Speed + SpeedVariance;
+        MinSpeed = Speed - SpeedVariance;
+
+        //Debug.Log(MinSpeed +"MIN MAX"+  MaxSpeed);
+
+        ActivationState = false;
+        ToRotate = transform.rotation;
+        RotR = ToRotate.y + 0.05f;
+        RotL = ToRotate.y - 0.05f;
 
         VForce = new Vector3(Force, 0, 0);
 
@@ -133,6 +161,8 @@ public class Inimigo_Base : MonoBehaviour
         {
             Debug.Log("Colision Detected");
             ToRotate = collision.gameObject.transform.rotation;
+            RotR = ToRotate.y + 0.5f;
+            RotL = ToRotate.y - 0.5f;
             EnemyStateSwitch(EState.TURN);
         }
     }
@@ -168,16 +198,16 @@ public class Inimigo_Base : MonoBehaviour
 
     private IEnumerator IDLE()
     {
-        Debug.Log("IDLE Called");
+        //Debug.Log("IDLE Called");
         yield return null;
         if (ActivationState == true)
         {
-            Debug.Log("ActivationState" + ActivationState);
+            //Debug.Log("ActivationState" + ActivationState);
             EnemyStateSwitch(EState.MOVE);
         }
         else
         {
-            Debug.Log("ActivationState" + ActivationState);
+            //Debug.Log("ActivationState" + ActivationState);
             EnemyStateSwitch(EState.IDLE);
         }
     }
@@ -185,7 +215,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private IEnumerator MOVE()
     {
-        Debug.Log("MOVE Called");
+        //Debug.Log("MOVE Called");
         yield return null;
         if(ActivationState == false)
         {
@@ -193,22 +223,26 @@ public class Inimigo_Base : MonoBehaviour
         }
         else
         {
-            CurrentRotation = transform.rotation;
-            if(CurrentRotation == ToRotate)
+            if(transform.rotation == ToRotate)
             {
-                /////////////////////////////////
-                EnemyVelocity = rb.velocity;
-                if(EnemyVelocity.x <= Speed)
+                ///////////////////////////////////////////////////////////////////
+                //EnemyVelocity = rb.velocity;
+                if(rb.velocity.x <= MinSpeed)
                 {
-                    Debug.Log("Velocity < Speed");
+                    Debug.Log("Velocity < Speed " + rb.velocity);
                     rb.AddForce( VForce, ForceMode.Acceleration);
                 }
-                if(EnemyVelocity.x >= Speed)
+                if(rb.velocity.x >= MaxSpeed)
                 {
-                    Debug.Log("Velocity > Speed");
+                    Debug.Log("Velocity > Speed " + rb.velocity);
                     rb.AddForce(-VForce, ForceMode.Acceleration);
                 }
-                /////////////////////////////////
+                if(rb.velocity.x <= MinSpeed && rb.velocity.x >= MaxSpeed)
+                {
+                    Debug.Log("Velocity = Speed");
+                }
+
+                ///////////////////////////////////////////////////////////////////
 
                 EnemyStateSwitch(EState.MOVE);
             }
@@ -219,21 +253,26 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
+    //RotR = ToRotate.y + 0.5f;
+    //RotL = ToRotate.y - 0.5f;
 
     private IEnumerator TURN()
     {
-        Debug.Log("TURN Called");
+        //Debug.Log("TURN Called");
         yield return null;
-        if (CurrentRotation == ToRotate)
-        {
-            Debug.Log("Rotation==");
-            EnemyStateSwitch(EState.MOVE);
-        }
-        else
+        ////////////////////////////////////////////////////////////////////
+        if (transform.rotation.y <= RotL || transform.rotation.y >= RotR)
         {
             Debug.Log("Rotation=!");
+            transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * TurningSpeed);
             EnemyStateSwitch(EState.TURN);
         }
+        if (transform.rotation.y <= RotR || transform.rotation.y >= RotL)
+        {
+            Debug.Log("Rotation==");
+        }
+
+        ////////////////////////////////////////////////////////////////////
     }
     
     //private void TurnEnemy(float HowMutshToRotate, float HowFast)
