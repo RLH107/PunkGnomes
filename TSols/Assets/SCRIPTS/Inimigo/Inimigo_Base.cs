@@ -15,20 +15,13 @@ public class Inimigo_Base : MonoBehaviour
     private float Attack;
     private float Speed;
     private float SpeedVariance;
-    private float TurningSpeed;
-    private float TurningVariance;
     private float Force;
 
     private float MaxSpeed;
     private float MinSpeed;
 
     private Vector3 VForce;
-
-    private Quaternion ToRotate;
-    private float RotR;
-    private float RotL;
-
-
+    private Quaternion RotateTo;
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,12 +66,7 @@ public class Inimigo_Base : MonoBehaviour
 
         if (SpeedVariance <= 0f)
         {
-            SpeedVariance = 1f;
-        }
-
-        if (TurningSpeed <= 0f)
-        {
-            TurningSpeed = 1f;
+            SpeedVariance = 0.5f;
         }
 
         if (Force <= 0f)
@@ -93,12 +81,8 @@ public class Inimigo_Base : MonoBehaviour
         //Debug.Log(MinSpeed +"MIN MAX"+  MaxSpeed);
 
         ActivationState = false;
-        ToRotate = transform.rotation;
-        RotR = ToRotate.y + 0.05f;
-        RotL = ToRotate.y - 0.05f;
-
         VForce = new Vector3(Force, 0, 0);
-
+        RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
 
@@ -160,9 +144,8 @@ public class Inimigo_Base : MonoBehaviour
         if(collision.gameObject.tag == "TurnColider")
         {
             Debug.Log("Colision Detected");
-            ToRotate = collision.gameObject.transform.rotation;
-            RotR = ToRotate.y + 0.5f;
-            RotL = ToRotate.y - 0.5f;
+            RotateTo = collision.gameObject.transform.rotation;
+            
             EnemyStateSwitch(EState.TURN);
         }
     }
@@ -223,25 +206,24 @@ public class Inimigo_Base : MonoBehaviour
         }
         else
         {
-            if(transform.rotation == ToRotate)
+            if(transform.rotation == RotateTo)
             {
                 ///////////////////////////////////////////////////////////////////
                 //EnemyVelocity = rb.velocity;
-                if(rb.velocity.x <= MinSpeed)
+                if(rb.velocity.x < MinSpeed)
                 {
                     Debug.Log("Velocity < Speed " + rb.velocity);
                     rb.AddForce( VForce, ForceMode.Acceleration);
                 }
-                if(rb.velocity.x >= MaxSpeed)
+                if(rb.velocity.x > MaxSpeed)
                 {
                     Debug.Log("Velocity > Speed " + rb.velocity);
                     rb.AddForce(-VForce, ForceMode.Acceleration);
                 }
-                if(rb.velocity.x <= MinSpeed && rb.velocity.x >= MaxSpeed)
+                else
                 {
-                    Debug.Log("Velocity = Speed");
+                    Debug.Log("Velo = Speed");
                 }
-
                 ///////////////////////////////////////////////////////////////////
 
                 EnemyStateSwitch(EState.MOVE);
@@ -253,24 +235,12 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
-    //RotR = ToRotate.y + 0.5f;
-    //RotL = ToRotate.y - 0.5f;
 
     private IEnumerator TURN()
     {
         //Debug.Log("TURN Called");
         yield return null;
         ////////////////////////////////////////////////////////////////////
-        if (transform.rotation.y <= RotL || transform.rotation.y >= RotR)
-        {
-            Debug.Log("Rotation=!");
-            transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * TurningSpeed);
-            EnemyStateSwitch(EState.TURN);
-        }
-        if (transform.rotation.y <= RotR || transform.rotation.y >= RotL)
-        {
-            Debug.Log("Rotation==");
-        }
 
         ////////////////////////////////////////////////////////////////////
     }
