@@ -17,12 +17,13 @@ public class Inimigo_Base : MonoBehaviour
     private float SpeedVariance;
     private float Force;
 
-    private float MaxSpeed;
-    private float MinSpeed;
 
-    private Vector3 VForce;
+
+    private Vector3 XForce;
+    private Vector3 YForce;
+    private Vector3 ZForce;
     private Quaternion RotateTo;
-    public float RSpeed;
+    private float RSpeed;
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +34,7 @@ public class Inimigo_Base : MonoBehaviour
         IDLE,
         MOVE,
         TURN,
+        STOP,
     }
     private EState enemyState;
 
@@ -77,13 +79,12 @@ public class Inimigo_Base : MonoBehaviour
 
         RSpeed = 1f;
 
-        MaxSpeed = Speed + SpeedVariance;
-        MinSpeed = Speed - SpeedVariance;
-
         //Debug.Log(MinSpeed +"MIN MAX"+  MaxSpeed);
 
-        ActivationState = false;
-        VForce = new Vector3(Force, 0, 0);
+        ActivationState = true;
+        XForce = new Vector3(Force, 0, 0);
+        YForce = new Vector3(0, Force, 0);
+        ZForce = new Vector3(0, 0, Force);
         RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
@@ -97,7 +98,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private void TakeDamege(float DemegeTaken)
     {
-        Debug.Log("TakeDamge_CALLED");
+        //Debug.Log("TakeDamge_CALLED");
         Health -= DemegeTaken;
         if (Health <= 0)
         {
@@ -107,17 +108,17 @@ public class Inimigo_Base : MonoBehaviour
 
     private void AddHealth(float HealthToAdd)
     {
-        Debug.Log("addHealth_CALLED");
+        //Debug.Log("addHealth_CALLED");
         HealthCheck = Health;
         HealthCheck += HealthToAdd;
         if(HealthCheck < MaxHealth)
         {
-            Debug.Log("If_CALLED");
+            //Debug.Log("If_CALLED");
             Health += HealthToAdd;
         }
         else
         {
-            Debug.Log("Else_CALLED");
+            //Debug.Log("Else_CALLED");
             Health = MaxHealth;
         }
     }
@@ -126,7 +127,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private void Dead()
     {
-        Debug.Log(gameObject + "DEAD");
+        //Debug.Log(gameObject + "DEAD");
         ActivationState = false;
         EnemyStateSwitch(EState.IDLE);
     }
@@ -138,17 +139,13 @@ public class Inimigo_Base : MonoBehaviour
     /// </summary>
     /// <param name="collision"></param>
 
-
-
-
-    private void OnCollisionEnter(Collision collision)
+    public void ColisionDetect(GameObject other)
     {
-        if(collision.gameObject.tag == "TurnColider")
+        if (other.gameObject.tag == "TurnColider")
         {
-            Debug.Log("Colision Detected");
-            RotateTo = collision.gameObject.transform.rotation;
-            
-            EnemyStateSwitch(EState.TURN);
+            //Debug.Log("Colision Detected");
+            RotateTo = other.gameObject.transform.rotation;
+            EnemyStateSwitch(EState.STOP);
         }
     }
 
@@ -172,6 +169,9 @@ public class Inimigo_Base : MonoBehaviour
                 break;
             case EState.TURN:
                 StartCoroutine(TURN());
+                break;
+            case EState.STOP:
+                StartCoroutine(STOP());
                 break;
         }
     }
@@ -204,27 +204,22 @@ public class Inimigo_Base : MonoBehaviour
         yield return null;
         if(ActivationState == false)
         {
-            EnemyStateSwitch(EState.IDLE);
+            EnemyStateSwitch(EState.STOP);
         }
         else
         {
             if(transform.rotation == RotateTo)
             {
                 ///////////////////////////////////////////////////////////////////
-                //EnemyVelocity = rb.velocity;
                 if(rb.velocity.x < Speed)
                 {
-                    Debug.Log("Velocity < Speed " + rb.velocity);
-                    rb.AddForce( VForce, ForceMode.Acceleration);
+                    //Debug.Log("Velocity < Speed " + rb.velocity);
+                    rb.AddForce( XForce, ForceMode.Acceleration);
                 }
                 if(rb.velocity.x > Speed)
                 {
-                    Debug.Log("Velocity > Speed " + rb.velocity);
-                    rb.AddForce(-VForce, ForceMode.Acceleration);
-                }
-                else
-                {
-                    Debug.Log("Velo = Speed");
+                    //Debug.Log("Velocity > Speed " + rb.velocity);
+                    rb.AddForce(-XForce, ForceMode.Acceleration);
                 }
                 ///////////////////////////////////////////////////////////////////
 
@@ -232,19 +227,81 @@ public class Inimigo_Base : MonoBehaviour
             }
             else
             {
-                EnemyStateSwitch(EState.TURN);
+                EnemyStateSwitch(EState.STOP);
             }
         }
     }
 
+    private IEnumerator STOP()
+    {
+        yield return null;
+        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation != RotateTo)
+        {
+            EnemyStateSwitch(EState.TURN);
+        }
+        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation == RotateTo && ActivationState == true)
+        {
+            EnemyStateSwitch(EState.MOVE);
+        }
+        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation == RotateTo && ActivationState == false)
+        {
+            EnemyStateSwitch(EState.IDLE);
+        }
+
+        if (rb.velocity.x <= 1 && rb.velocity.x >= -1)
+        {
+            rb.velocity = new Vector3( 0, rb.velocity.y, rb.velocity.z);
+        }
+        if (rb.velocity.y <= 1 && rb.velocity.y >= -1)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        }
+        if (rb.velocity.z <= 1 && rb.velocity.z >= -1)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
+        }
+
+        ///////////////////////
+        if (rb.velocity.x != 0)
+        {
+            if (rb.velocity.x > 0)
+            {
+                rb.AddForce(-XForce, ForceMode.Acceleration);
+            }
+            if (rb.velocity.x < 0)
+            {
+                rb.AddForce(XForce, ForceMode.Acceleration);
+            }
+        }
+        if (rb.velocity.y != 0)
+        {
+            if (rb.velocity.x > 0)
+            {
+                rb.AddForce(-YForce, ForceMode.Acceleration);
+            }
+            if (rb.velocity.x < 0)
+            {
+                rb.AddForce(YForce, ForceMode.Acceleration);
+            }
+        }
+        if (rb.velocity.z != 0)
+        {
+            if (rb.velocity.x > 0)
+            {
+                rb.AddForce(-ZForce, ForceMode.Acceleration);
+            }
+            if (rb.velocity.x < 0)
+            {
+                rb.AddForce(ZForce, ForceMode.Acceleration);
+            }
+        }
+        EnemyStateSwitch(EState.STOP);
+    }
 
     private IEnumerator TURN()
     {
-        //Debug.Log("TURN Called");
         yield return null;
-        ////////////////////////////////////////////////////////////////////
         transform.rotation = Quaternion.RotateTowards(transform.rotation, RotateTo, RSpeed * Time.deltaTime);
-        ////////////////////////////////////////////////////////////////////
         EnemyStateSwitch(EState.TURN);
     }
     

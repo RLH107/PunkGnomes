@@ -5,31 +5,97 @@ using UnityEngine;
 
 public class TodasTorres : MonoBehaviour
 {
-    [SerializeField] private float PCoolDown;
+    [SerializeField] private float TCoolDown;
+    [SerializeField] private float TSpeed;
     [SerializeField] private float PSpeed;
-    [SerializeField] private float Range;
+
+    private float ListCheck;
+
     [HideInInspector] public List<GameObject> EnemysList;
     private enum TState
     {
         IDLE,
         AIM,
+        Cooldown,
+        FIRE,
     }
+    private TState TowerState;
     void Start()
     {
-        
+        ListCheck = 10;
     }
     private void Update()
     {
-        
+       
+        ListCheck -= Time.deltaTime;
+        Debug.Log(ListCheck);
+        if (ListCheck >= 0)
+        {
+            ListCheck = 10;
+            Debug.Log(EnemysList[EnemysList.Count - 1].ToString());
+        }
+       
     }
+
+    /// <summary>
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    /// <param name="T_state"></param>
+
+    private void TowerStateSwitch(TState T_state)
+    {
+        TowerState = T_state;
+        switch (TowerState)
+        {
+            case TState.IDLE:
+                StartCoroutine(IDLE());
+                break;
+            case TState.AIM:
+                StartCoroutine (AIM());
+                break;
+            case TState.Cooldown:
+                StartCoroutine(Cooldown());
+                break;
+            case TState.FIRE:
+                StartCoroutine(FIRE());
+                break;
+        }
+    }
+    private IEnumerator IDLE()
+    {
+        yield return null;
+    }
+    private IEnumerator AIM()
+    {
+        yield return null;
+    }
+    private IEnumerator Cooldown()
+    {
+        yield return null;
+    }
+    private IEnumerator FIRE()
+    {
+        yield return null;
+    }
+
+    /// <summary>
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
+    /// <param name="other"></param>
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemysList.Add(other.gameObject);
+        if (other.gameObject.tag == "ENEMY")
+        {
+            EnemysList.Add(other.gameObject);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        
+        if (other.gameObject.tag == "ENEMY")
+        {
+            EnemysList.Remove(other.gameObject);
+        }
     }
 
     private void Dead()

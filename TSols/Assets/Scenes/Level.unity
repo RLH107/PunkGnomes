@@ -202,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 2969228191210312880, guid: 65410285b5a24c849883b9e17a40e17d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.2
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 2969228191210312880, guid: 65410285b5a24c849883b9e17a40e17d,
         type: 3}
@@ -253,6 +253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055429999879286062, guid: 65410285b5a24c849883b9e17a40e17d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8029598569613288366, guid: 65410285b5a24c849883b9e17a40e17d, type: 3}
@@ -498,6 +503,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3966453224656353648, guid: 7cfdac9a0273bb845a742d887cf167c4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6344086894743449658, guid: 7cfdac9a0273bb845a742d887cf167c4,
         type: 3}
       propertyPath: m_Name
