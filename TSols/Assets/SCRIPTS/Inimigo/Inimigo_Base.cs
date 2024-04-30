@@ -22,6 +22,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private Vector3 VForce;
     private Quaternion RotateTo;
+    public float RSpeed;
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +75,7 @@ public class Inimigo_Base : MonoBehaviour
             Force = 1f;
         }
 
+        RSpeed = 1f;
 
         MaxSpeed = Speed + SpeedVariance;
         MinSpeed = Speed - SpeedVariance;
@@ -210,12 +212,12 @@ public class Inimigo_Base : MonoBehaviour
             {
                 ///////////////////////////////////////////////////////////////////
                 //EnemyVelocity = rb.velocity;
-                if(rb.velocity.x < MinSpeed)
+                if(rb.velocity.x < Speed)
                 {
                     Debug.Log("Velocity < Speed " + rb.velocity);
                     rb.AddForce( VForce, ForceMode.Acceleration);
                 }
-                if(rb.velocity.x > MaxSpeed)
+                if(rb.velocity.x > Speed)
                 {
                     Debug.Log("Velocity > Speed " + rb.velocity);
                     rb.AddForce(-VForce, ForceMode.Acceleration);
@@ -241,8 +243,9 @@ public class Inimigo_Base : MonoBehaviour
         //Debug.Log("TURN Called");
         yield return null;
         ////////////////////////////////////////////////////////////////////
-
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, RotateTo, RSpeed * Time.deltaTime);
         ////////////////////////////////////////////////////////////////////
+        EnemyStateSwitch(EState.TURN);
     }
     
     //private void TurnEnemy(float HowMutshToRotate, float HowFast)
