@@ -73,7 +73,7 @@ public class Inimigo_Base : MonoBehaviour
 
         RSpeed = 0.1f;
 
-        ActivationState = false;
+        ActivationState = true;
         RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
@@ -151,19 +151,15 @@ public class Inimigo_Base : MonoBehaviour
         switch (enemyState)
         {
             case EState.IDLE:
-                Debug.Log("IDLE");
                 StartCoroutine(IDLE());
                 break;
             case EState.MOVE:
-                Debug.Log("MOVE");
                 StartCoroutine(MOVE());
                 break;
             case EState.TURN:
-                Debug.Log("TURN");
                 StartCoroutine(TURN());
                 break;
             case EState.STOP:
-                Debug.Log("STOP");
                 StartCoroutine(STOP());
                 break;
         }

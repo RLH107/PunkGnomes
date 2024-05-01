@@ -22,19 +22,21 @@ public class TodasTorres : MonoBehaviour
     private TState TowerState;
     void Start()
     {
-        ListCheck = 10;
+        ListCheck = 20;
     }
     private void Update()
     {
-       
+       /*
         ListCheck -= Time.deltaTime;
-        Debug.Log(ListCheck);
         if (ListCheck >= 0)
         {
-            ListCheck = 10;
-            Debug.Log(EnemysList[EnemysList.Count - 1].ToString());
+            ListCheck = 20;
+            foreach(var item in EnemysList)
+            {
+                Debug.Log(item.ToString());
+            }
         }
-       
+       */
     }
 
     /// <summary>
