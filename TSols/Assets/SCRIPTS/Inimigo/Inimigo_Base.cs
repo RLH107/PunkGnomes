@@ -6,22 +6,19 @@ public class Inimigo_Base : MonoBehaviour
 {
     [SerializeField] private string EnemyTipe;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Transform orientation;
 
     [HideInInspector] public bool ActivationState;
 
     private float Health;
     private float MaxHealth; 
-    private float HealthCheck;
     private float Attack;
-    private float Speed;
-    private float SpeedVariance;
-    private float Force;
+    private float MoveSpeed;
+    private float MoveForce;
 
 
-
-    private Vector3 XForce;
-    private Vector3 YForce;
-    private Vector3 ZForce;
+    private Vector3 CurrentVel;
+    private Vector3 MovementDirection;
     private Quaternion RotateTo;
     private float RSpeed;
 
@@ -47,6 +44,8 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
+        rb.freezeRotation = true;
+
         if (Health <= 0f)
         {
             Health = 50f;
@@ -62,29 +61,19 @@ public class Inimigo_Base : MonoBehaviour
             Attack = 5f;
         }
 
-        if (Speed <= 0f)
+        if (MoveSpeed <= 0f)
         {
-            Speed = 2f;
+            MoveSpeed = 2f;
         }
 
-        if (SpeedVariance <= 0f)
+        if (MoveForce <= 0f)
         {
-            SpeedVariance = 0.5f;
+            MoveForce = 1f;
         }
 
-        if (Force <= 0f)
-        {
-            Force = 1f;
-        }
+        RSpeed = 0.1f;
 
-        RSpeed = 1f;
-
-        //Debug.Log(MinSpeed +"MIN MAX"+  MaxSpeed);
-
-        ActivationState = true;
-        XForce = new Vector3(Force, 0, 0);
-        YForce = new Vector3(0, Force, 0);
-        ZForce = new Vector3(0, 0, Force);
+        ActivationState = false;
         RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
@@ -109,6 +98,7 @@ public class Inimigo_Base : MonoBehaviour
     private void AddHealth(float HealthToAdd)
     {
         //Debug.Log("addHealth_CALLED");
+        float 
         HealthCheck = Health;
         HealthCheck += HealthToAdd;
         if(HealthCheck < MaxHealth)
@@ -145,7 +135,6 @@ public class Inimigo_Base : MonoBehaviour
         {
             //Debug.Log("Colision Detected");
             RotateTo = other.gameObject.transform.rotation;
-            EnemyStateSwitch(EState.STOP);
         }
     }
 
@@ -162,15 +151,19 @@ public class Inimigo_Base : MonoBehaviour
         switch (enemyState)
         {
             case EState.IDLE:
+                Debug.Log("IDLE");
                 StartCoroutine(IDLE());
                 break;
             case EState.MOVE:
+                Debug.Log("MOVE");
                 StartCoroutine(MOVE());
                 break;
             case EState.TURN:
+                Debug.Log("TURN");
                 StartCoroutine(TURN());
                 break;
             case EState.STOP:
+                Debug.Log("STOP");
                 StartCoroutine(STOP());
                 break;
         }
@@ -197,117 +190,84 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
-
     private IEnumerator MOVE()
     {
-        //Debug.Log("MOVE Called");
         yield return null;
-        if(ActivationState == false)
+
+        //Get Velocity x and z 
+        CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        //Check if velocity is less then speed
+        if (CurrentVel.magnitude < MoveSpeed)
+        {
+            //Force Forward
+            rb.AddForce(orientation.forward * MoveForce, ForceMode.Force);
+        }
+        //Check if velocity exeeds speed
+        if (CurrentVel.magnitude > MoveSpeed)
+        {
+            //Calculates speed limit
+            Vector3 LimitedSpeed = CurrentVel.normalized * MoveSpeed;
+            //Limits speed
+            rb.velocity = new Vector3(LimitedSpeed.x, rb.velocity.y, LimitedSpeed.z);
+        }
+        //Checks for Exit Condition
+        if (RotateTo != orientation.rotation)
         {
             EnemyStateSwitch(EState.STOP);
         }
         else
         {
-            if(transform.rotation == RotateTo)
-            {
-                ///////////////////////////////////////////////////////////////////
-                if(rb.velocity.x < Speed)
-                {
-                    //Debug.Log("Velocity < Speed " + rb.velocity);
-                    rb.AddForce( XForce, ForceMode.Acceleration);
-                }
-                if(rb.velocity.x > Speed)
-                {
-                    //Debug.Log("Velocity > Speed " + rb.velocity);
-                    rb.AddForce(-XForce, ForceMode.Acceleration);
-                }
-                ///////////////////////////////////////////////////////////////////
-
-                EnemyStateSwitch(EState.MOVE);
-            }
-            else
-            {
-                EnemyStateSwitch(EState.STOP);
-            }
+            EnemyStateSwitch(EState.MOVE);
         }
     }
 
     private IEnumerator STOP()
     {
         yield return null;
-        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation != RotateTo)
-        {
-            EnemyStateSwitch(EState.TURN);
-        }
-        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation == RotateTo && ActivationState == true)
-        {
-            EnemyStateSwitch(EState.MOVE);
-        }
-        if (rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0 && transform.rotation == RotateTo && ActivationState == false)
-        {
-            EnemyStateSwitch(EState.IDLE);
-        }
 
-        if (rb.velocity.x <= 1 && rb.velocity.x >= -1)
-        {
-            rb.velocity = new Vector3( 0, rb.velocity.y, rb.velocity.z);
-        }
-        if (rb.velocity.y <= 1 && rb.velocity.y >= -1)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        }
-        if (rb.velocity.z <= 1 && rb.velocity.z >= -1)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 0);
-        }
+        CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        ///////////////////////
-        if (rb.velocity.x != 0)
+
+        //Slows down Movement
+        rb.AddForce(orientation.forward * -MoveForce, ForceMode.Acceleration);
+        //Checks if speed is Slow
+        if (rb.velocity.magnitude < 0.5f)
         {
-            if (rb.velocity.x > 0)
+            //Stops
+            rb.velocity = new Vector3(0, 0, 0);
+        }
+        //Exit Clauses
+        if (rb.velocity.magnitude == 0)
+        {
+            if (orientation.rotation == RotateTo)
             {
-                rb.AddForce(-XForce, ForceMode.Acceleration);
+                EnemyStateSwitch(EState.MOVE);
             }
-            if (rb.velocity.x < 0)
+            if (orientation.rotation != RotateTo)
             {
-                rb.AddForce(XForce, ForceMode.Acceleration);
+                EnemyStateSwitch(EState.TURN);
             }
         }
-        if (rb.velocity.y != 0)
+        else
         {
-            if (rb.velocity.x > 0)
-            {
-                rb.AddForce(-YForce, ForceMode.Acceleration);
-            }
-            if (rb.velocity.x < 0)
-            {
-                rb.AddForce(YForce, ForceMode.Acceleration);
-            }
+            EnemyStateSwitch(EState.STOP);
         }
-        if (rb.velocity.z != 0)
-        {
-            if (rb.velocity.x > 0)
-            {
-                rb.AddForce(-ZForce, ForceMode.Acceleration);
-            }
-            if (rb.velocity.x < 0)
-            {
-                rb.AddForce(ZForce, ForceMode.Acceleration);
-            }
-        }
-        EnemyStateSwitch(EState.STOP);
     }
 
     private IEnumerator TURN()
     {
         yield return null;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, RotateTo, RSpeed * Time.deltaTime);
-        EnemyStateSwitch(EState.TURN);
+        //Rotates
+        orientation.rotation = Quaternion.RotateTowards(orientation.rotation, RotateTo, RSpeed);
+
+        if (RotateTo == orientation.rotation)
+        {
+            EnemyStateSwitch(EState.MOVE);
+        }
+        else
+        {
+            EnemyStateSwitch(EState.TURN);
+        }
     }
     
-    //private void TurnEnemy(float HowMutshToRotate, float HowFast)
-    //{
-    //    ToRotate = Quaternion.Euler(0, HowMutshToRotate, 0);
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, ToRotate, Time.deltaTime * HowFast);
-    //}
 }
