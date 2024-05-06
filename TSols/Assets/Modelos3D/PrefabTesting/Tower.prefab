@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8397794962382151216}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 3585187575495140614}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.411, y: 0, z: 0}
-  m_LocalScale: {x: 0.5090557, y: 0.18683, z: 0.18683}
+  m_LocalPosition: {x: 0.005, y: 0.022, z: 0.531}
+  m_LocalScale: {x: 0.16458279, y: 0.18683, z: 0.3325387}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3542677371237033435}
@@ -101,10 +101,41 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5587584398228812723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2593891638430617727}
+  m_Layer: 0
+  m_Name: SootPos
+  m_TagString: Tower
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2593891638430617727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587584398228812723}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.004, y: 0.036, z: 0.862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3542677371237033435}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8175552415172699160
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,8 +150,8 @@ GameObject:
   - component: {fileID: 5611230746831650410}
   - component: {fileID: 6729381763520988496}
   m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
+  m_Name: Tower
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,6 +170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1980549947604345230}
+  - {fileID: 2593891638430617727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4640417019233811137
@@ -206,11 +238,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 5.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6729381763520988496
 MonoBehaviour:
@@ -225,6 +257,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TCoolDown: 0
-  TSpeed: 0
-  PSpeed: 0
-  EnemysList: []
+  TSpeed: 1
+  PForce: 4
+  NumberOfProjectiles: 2
+  Projectile: {fileID: 3239743058682517361, guid: 75922bf193ef7aa48a2a0d9ca94934a7,
+    type: 3}
+  ProjectileSootPosition: {fileID: 2593891638430617727}
+  ProjetilsScripts: []
+  EnemysTransforms: []

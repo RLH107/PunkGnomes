@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ENEMY
   - TurnColider
+  - Tower
+  - Projectile
   layers:
   - Default
   - TransparentFX

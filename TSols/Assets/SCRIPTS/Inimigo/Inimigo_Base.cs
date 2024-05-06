@@ -9,18 +9,17 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private Transform orientation;
 
     [HideInInspector] public bool ActivationState;
-
-    private float Health;
-    private float MaxHealth; 
-    private float Attack;
-    private float MoveSpeed;
-    private float MoveForce;
+    [SerializeField] private float RSpeed;
+    [SerializeField] private float Health;
+    [SerializeField] private float MaxHealth;
+    [SerializeField] private float Attack;
+    [SerializeField] private float MoveSpeed;
+    [SerializeField] private float MoveForce;
 
 
     private Vector3 CurrentVel;
-    private Vector3 MovementDirection;
     private Quaternion RotateTo;
-    private float RSpeed;
+    
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +72,7 @@ public class Inimigo_Base : MonoBehaviour
 
         RSpeed = 0.1f;
 
-        ActivationState = true;
+        ActivationState = false;
         RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
@@ -112,18 +111,12 @@ public class Inimigo_Base : MonoBehaviour
             Health = MaxHealth;
         }
     }
-
-    
-
     private void Dead()
     {
         //Debug.Log(gameObject + "DEAD");
         ActivationState = false;
         EnemyStateSwitch(EState.IDLE);
     }
-
-
-
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
@@ -135,6 +128,14 @@ public class Inimigo_Base : MonoBehaviour
         {
             //Debug.Log("Colision Detected");
             RotateTo = other.gameObject.transform.rotation;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Projectile")
+        {
+
         }
     }
 

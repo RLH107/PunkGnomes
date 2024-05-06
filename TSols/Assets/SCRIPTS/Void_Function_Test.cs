@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Void_Function_Test : MonoBehaviour
 {
-    [SerializeField] private GameObject LevelMeneger;
-    LevelRecorce LevelRecorce_Script;
+    [SerializeField] private GameObject Object;
+    [SerializeField] private Transform Transform;
     private float T_F1;
     private float T_F2;
     private bool T1 = true;
     private bool T2 = true;
     void Start()
     {
-        LevelRecorce_Script = LevelMeneger.GetComponent<LevelRecorce>();
-        T_F1 = 5;
-        T_F2 = 28;
+        transform.position = new Vector3(0, 0, 0);
+        T_F1 = 10;
+        T_F2 = 15;
     }
 
     //Update is called once per frame
@@ -24,12 +24,12 @@ public class Void_Function_Test : MonoBehaviour
         T_F2 -= Time.deltaTime;
         if(T_F1 == 0 && T1 == true || T_F1 <= 0 && T1 == true)
         {
-            LevelRecorce_Script.PayResorce(5);
+            transform.position = new Vector3(0, 0, 5);
             T1 = false;
         }
         if (T_F2 == 0 && T2 == true || T_F2 <= 0 && T2 == true)
         {
-            LevelRecorce_Script.AddResorce(5);
+            transform.position = new Vector3(0, 0, 10);
             T2 = false;
         }
     }
