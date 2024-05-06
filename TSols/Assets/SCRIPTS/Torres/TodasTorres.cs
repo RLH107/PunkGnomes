@@ -142,6 +142,11 @@ public class TodasTorres : MonoBehaviour
         FCooldown = FCooldown - Time.deltaTime;
     }
 
+    public void MoveTower(Vector3 moveTo)
+    {
+        transform.position = moveTo;
+    }
+
     private void Dead()
     {
 

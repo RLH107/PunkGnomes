@@ -8,7 +8,9 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform orientation;
 
-    [HideInInspector] public bool ActivationState;
+    public bool ActivationState;
+    private bool PreActive;
+
     [SerializeField] private float RSpeed;
     [SerializeField] private float Health;
     [SerializeField] private float MaxHealth;
@@ -17,6 +19,8 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private float MoveForce;
 
 
+    private Vector3 StartingPos;
+    private Quaternion StartingRot;
     private Vector3 CurrentVel;
     private Quaternion RotateTo;
     
@@ -43,6 +47,8 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
+        StartingPos = transform.position + new Vector3(0, -10, 0);
+        StartingRot = transform.rotation;
         rb.freezeRotation = true;
 
         if (Health <= 0f)
@@ -72,11 +78,24 @@ public class Inimigo_Base : MonoBehaviour
 
         RSpeed = 0.1f;
 
-        ActivationState = false;
+        ActivationState = true;
+        PreActive = true;
         RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
     }
 
+    void Update()
+    {
+        if (ActivationState == false)
+        {
+            PreActive = true;
+        }
+        if (ActivationState == true && PreActive == true)
+        {
+            PreActive = false;
+            EnemyStateSwitch(EState.MOVE);
+        }
+    }
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +103,7 @@ public class Inimigo_Base : MonoBehaviour
     /// <param name="DemegeTaken"></param>
 
 
-    private void TakeDamege(float DemegeTaken)
+    public void TakeDamege(float DemegeTaken)
     {
         //Debug.Log("TakeDamge_CALLED");
         Health -= DemegeTaken;
@@ -116,6 +135,8 @@ public class Inimigo_Base : MonoBehaviour
         //Debug.Log(gameObject + "DEAD");
         ActivationState = false;
         EnemyStateSwitch(EState.IDLE);
+        transform.position = StartingPos;
+        transform.rotation = StartingRot;
     }
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,14 +149,6 @@ public class Inimigo_Base : MonoBehaviour
         {
             //Debug.Log("Colision Detected");
             RotateTo = other.gameObject.transform.rotation;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Projectile")
-        {
-
         }
     }
 
@@ -152,15 +165,19 @@ public class Inimigo_Base : MonoBehaviour
         switch (enemyState)
         {
             case EState.IDLE:
+                Debug.Log("IDLE");
                 StartCoroutine(IDLE());
                 break;
             case EState.MOVE:
+                Debug.Log("MOVE");
                 StartCoroutine(MOVE());
                 break;
             case EState.TURN:
+                Debug.Log("TURN");
                 StartCoroutine(TURN());
                 break;
             case EState.STOP:
+                Debug.Log("STOP");
                 StartCoroutine(STOP());
                 break;
         }
@@ -178,12 +195,12 @@ public class Inimigo_Base : MonoBehaviour
         if (ActivationState == true)
         {
             //Debug.Log("ActivationState" + ActivationState);
+            rb.constraints = RigidbodyConstraints.None;
             EnemyStateSwitch(EState.MOVE);
         }
-        else
+        if (ActivationState == false)
         {
-            //Debug.Log("ActivationState" + ActivationState);
-            EnemyStateSwitch(EState.IDLE);
+            rb.constraints = RigidbodyConstraints.FreezePosition;
         }
     }
 
@@ -193,14 +210,20 @@ public class Inimigo_Base : MonoBehaviour
 
         //Get Velocity x and z 
         CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        
+        if (ActivationState == false)
+        {
+            EnemyStateSwitch(EState.STOP);
+        }
+
         //Check if velocity is less then speed
-        if (CurrentVel.magnitude < MoveSpeed)
+        if (CurrentVel.magnitude < MoveSpeed && ActivationState == true)
         {
             //Force Forward
             rb.AddForce(orientation.forward * MoveForce, ForceMode.Force);
         }
         //Check if velocity exeeds speed
-        if (CurrentVel.magnitude > MoveSpeed)
+        if (CurrentVel.magnitude > MoveSpeed && ActivationState == true)
         {
             //Calculates speed limit
             Vector3 LimitedSpeed = CurrentVel.normalized * MoveSpeed;
@@ -236,11 +259,15 @@ public class Inimigo_Base : MonoBehaviour
         //Exit Clauses
         if (rb.velocity.magnitude == 0)
         {
-            if (orientation.rotation == RotateTo)
+            if (ActivationState == false)
+            {
+                EnemyStateSwitch(EState.IDLE);
+            }
+            if (orientation.rotation == RotateTo && ActivationState == true)
             {
                 EnemyStateSwitch(EState.MOVE);
             }
-            if (orientation.rotation != RotateTo)
+            if (orientation.rotation != RotateTo && ActivationState == true)
             {
                 EnemyStateSwitch(EState.TURN);
             }
@@ -255,7 +282,7 @@ public class Inimigo_Base : MonoBehaviour
     {
         yield return null;
         //Rotates
-        orientation.rotation = Quaternion.RotateTowards(orientation.rotation, RotateTo, RSpeed);
+        orientation.rotation = Quaternion.RotateTowards(orientation.rotation, RotateTo, RSpeed * 100);
 
         if (RotateTo == orientation.rotation)
         {

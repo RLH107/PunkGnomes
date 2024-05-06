@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Projetil : MonoBehaviour
 {
+    Inimigo_Base Inimigo_BaseScript;
     private Vector3 WatingPos;
+    private float Lifetime;
     [SerializeField] private Rigidbody rb;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Tower")
         {
             transform.position = WatingPos;
             rb.velocity = new Vector3(0, 0, 0);
+
+            if (other.gameObject.tag == "ENEMY")
+            {
+                Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
+                Inimigo_BaseScript.TakeDamege(5f);
+            }
         }
     }
 
