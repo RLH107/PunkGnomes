@@ -42,7 +42,7 @@ public class TodasTorres : MonoBehaviour
         for (int i = NumberOfProjectiles; i > 0; i--)
         {
             GameObject gameObject;
-            gameObject = Instantiate(Projectile, new Vector3(transform.position.x + -100,transform.position.y + -100 + i * 5,transform.position.z -100), Quaternion.identity);
+            gameObject = Instantiate(Projectile, new Vector3(transform.position.x + -100, transform.position.y + -100 + i * 5, transform.position.z - 100), Quaternion.identity);
 
             ProjetilScript = gameObject.GetComponent<Projetil>();
             ProjetilsScripts.Add(ProjetilScript);
@@ -65,7 +65,7 @@ public class TodasTorres : MonoBehaviour
                 StartCoroutine(IDLE());
                 break;
             case TState.AIM:
-                StartCoroutine (AIM());
+                StartCoroutine(AIM());
                 break;
         }
     }
@@ -77,12 +77,26 @@ public class TodasTorres : MonoBehaviour
     {
         yield return null;
         //Selects a target From List and Aims twords it
+        while (EnemysTransforms.Count > 0)
+        {
+            Transform target = EnemysTransforms[0];
+            Vector3 targetDirection = target.position - transform.position;
 
-        //If list is empty
+            Quaternion RotateTo = Quaternion.LookRotation(targetDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, RotateTo, TSpeed);
+
+            float angle = Quaternion.Angle(transform.rotation, RotateTo);
+            if (angle < AngleBeforeFire)
+            {
+                Fire();
+            }
+            yield return new WaitForEndOfFrame();
+        }
         if (EnemysTransforms.Count == 0)
         {
             TowerStateSwitch(TState.IDLE);
         }
+
         if (EnemysTransforms.Count > 0)
         {
             Transform target = EnemysTransforms[0];
@@ -96,8 +110,6 @@ public class TodasTorres : MonoBehaviour
             {
                 Fire();
             }
-
-            TowerStateSwitch(TState.AIM);
         }
 
     }
@@ -112,7 +124,10 @@ public class TodasTorres : MonoBehaviour
         if (other.gameObject.tag == "ENEMY")
         {
             EnemysTransforms.Add(other.transform);
-            TowerStateSwitch(TState.AIM);
+            if (EnemysTransforms.Count == 1)
+            {
+                TowerStateSwitch(TState.AIM);
+            }
         }
     }
     private void OnTriggerExit(Collider other)
