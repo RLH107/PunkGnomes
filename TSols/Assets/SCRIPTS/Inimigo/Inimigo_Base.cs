@@ -8,27 +8,26 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform orientation;
 
-    public bool ActivationState;
-    private bool PreActive;
-
     [SerializeField] private float RSpeed;
     [SerializeField] private float Health;
     [SerializeField] private float MaxHealth;
     [SerializeField] private float Attack;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float MoveForce;
+    [SerializeField] private float AngleBeforeMove;
 
-
+    [SerializeField] private bool ActivationState;
     private Vector3 StartingPos;
+    private Vector3 targetDirection;
     private Quaternion StartingRot;
-    private Vector3 CurrentVel;
-    private Quaternion RotateTo;
-    
+    private Quaternion TurnTo;
+    private GameObject Target;
+
 
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
-    
+
     private enum EState
     {
         IDLE,
@@ -47,54 +46,13 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
-        StartingPos = transform.position + new Vector3(0, -10, 0);
+        StartingPos = transform.position + new Vector3(0, -10, 0); //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
+        ActivationState = true; // Change Later
+        TurnTo = transform.rotation;
 
-        if (Health <= 0f)
-        {
-            Health = 50f;
-        }
-
-        if (MaxHealth <= 0f)
-        {
-            MaxHealth = 55f;
-        }
-
-        if (Attack <= 0f)
-        {
-            Attack = 5f;
-        }
-
-        if (MoveSpeed <= 0f)
-        {
-            MoveSpeed = 2f;
-        }
-
-        if (MoveForce <= 0f)
-        {
-            MoveForce = 1f;
-        }
-
-        RSpeed = 0.1f;
-
-        ActivationState = true;
-        PreActive = true;
-        RotateTo = transform.rotation;
         EnemyStateSwitch(EState.IDLE);
-    }
-
-    void Update()
-    {
-        if (ActivationState == false)
-        {
-            PreActive = true;
-        }
-        if (ActivationState == true && PreActive == true)
-        {
-            PreActive = false;
-            EnemyStateSwitch(EState.MOVE);
-        }
     }
 
     /// <summary>
@@ -105,51 +63,64 @@ public class Inimigo_Base : MonoBehaviour
 
     public void TakeDamege(float DemegeTaken)
     {
-        //Debug.Log("TakeDamge_CALLED");
         Health -= DemegeTaken;
         if (Health <= 0)
         {
-            Dead();
+            DeactivateEnemy();
         }
     }
 
-    private void AddHealth(float HealthToAdd)
+    public void AddHealth(float HealthToAdd)
     {
-        //Debug.Log("addHealth_CALLED");
-        float 
-        HealthCheck = Health;
+        float HealthCheck = Health;
+
         HealthCheck += HealthToAdd;
-        if(HealthCheck < MaxHealth)
+        if (HealthCheck < MaxHealth)
         {
-            //Debug.Log("If_CALLED");
             Health += HealthToAdd;
         }
         else
         {
-            //Debug.Log("Else_CALLED");
             Health = MaxHealth;
         }
     }
-    private void Dead()
+
+    public void ActivateEnemy()
     {
-        //Debug.Log(gameObject + "DEAD");
-        ActivationState = false;
-        EnemyStateSwitch(EState.IDLE);
-        transform.position = StartingPos;
-        transform.rotation = StartingRot;
+        if (ActivationState == false)
+        {
+            ActivationState = true;
+            EnemyStateSwitch(EState.IDLE);
+        }
     }
+
+    public void DeactivateEnemy()
+    {
+        if (ActivationState)
+        {
+            StopAllCoroutines();
+            ActivationState = false;
+            EnemyStateSwitch(EState.IDLE);
+        }
+    }
+
+    public void TurnEnemy(GameObject NextTarget)
+    {
+        Target = NextTarget;
+        targetDirection = Target.transform.position - transform.position;
+    }
+
+
+
+
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
     /// <param name="collision"></param>
 
-    public void ColisionDetect(GameObject other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.tag == "TurnColider")
-        {
-            //Debug.Log("Colision Detected");
-            RotateTo = other.gameObject.transform.rotation;
-        }
+
     }
 
 
@@ -192,15 +163,19 @@ public class Inimigo_Base : MonoBehaviour
     {
         //Debug.Log("IDLE Called");
         yield return null;
+
+        if (ActivationState == false)
+        {
+            transform.position = StartingPos;
+            transform.rotation = StartingRot;
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+        }
         if (ActivationState == true)
         {
             //Debug.Log("ActivationState" + ActivationState);
             rb.constraints = RigidbodyConstraints.None;
+            rb.freezeRotation = true;
             EnemyStateSwitch(EState.MOVE);
-        }
-        if (ActivationState == false)
-        {
-            rb.constraints = RigidbodyConstraints.FreezePosition;
         }
     }
 
@@ -208,90 +183,105 @@ public class Inimigo_Base : MonoBehaviour
     {
         yield return null;
 
-        //Get Velocity x and z 
-        CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        
-        if (ActivationState == false)
+        //REWRITE CODE
+        TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
+
+        while (TurnTo == orientation.rotation)
+        {
+            TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
+            Vector3 CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            if (CurrentVel.magnitude < MoveSpeed)
+            {
+                //Force Forward
+                rb.AddForce(orientation.forward * MoveForce, ForceMode.Force);
+            }
+
+            if (CurrentVel.magnitude > MoveSpeed)
+            {
+                //Calculates speed limit
+                Vector3 LimitedSpeed = CurrentVel.normalized * MoveSpeed;
+
+                //Limits speed
+                rb.velocity = new Vector3(LimitedSpeed.x, rb.velocity.y, LimitedSpeed.z);
+            }
+
+
+
+            yield return new WaitForEndOfFrame();
+        }
+        //End OF Loop
+
+        //Corutine Exit Clauses
+        if (TurnTo != orientation.rotation)
         {
             EnemyStateSwitch(EState.STOP);
         }
 
-        //Check if velocity is less then speed
-        if (CurrentVel.magnitude < MoveSpeed && ActivationState == true)
-        {
-            //Force Forward
-            rb.AddForce(orientation.forward * MoveForce, ForceMode.Force);
-        }
-        //Check if velocity exeeds speed
-        if (CurrentVel.magnitude > MoveSpeed && ActivationState == true)
-        {
-            //Calculates speed limit
-            Vector3 LimitedSpeed = CurrentVel.normalized * MoveSpeed;
-            //Limits speed
-            rb.velocity = new Vector3(LimitedSpeed.x, rb.velocity.y, LimitedSpeed.z);
-        }
-        //Checks for Exit Condition
-        if (RotateTo != orientation.rotation)
-        {
-            EnemyStateSwitch(EState.STOP);
-        }
-        else
-        {
-            EnemyStateSwitch(EState.MOVE);
-        }
+
+        ///REWRITE
     }
 
     private IEnumerator STOP()
     {
+
         yield return null;
 
-        CurrentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-
-        //Slows down Movement
-        rb.AddForce(orientation.forward * -MoveForce, ForceMode.Acceleration);
-        //Checks if speed is Slow
-        if (rb.velocity.magnitude < 0.5f)
+        //While loop
+        while (rb.velocity.magnitude != 0)
         {
-            //Stops
-            rb.velocity = new Vector3(0, 0, 0);
+            //Slows down Movement
+            rb.AddForce(orientation.forward * -1, ForceMode.Acceleration);
+            //Checks if speed is Slow
+            if (rb.velocity.magnitude < 0.5f)
+            {
+                //Stops
+                rb.velocity = new Vector3(0, 0, 0);
+            }
+            //Waits For End Of Frame
+            yield return new WaitForEndOfFrame();
         }
-        //Exit Clauses
+        //End OF Loop
+
+        //Corutine Exit Clauses
+
         if (rb.velocity.magnitude == 0)
         {
-            if (ActivationState == false)
-            {
-                EnemyStateSwitch(EState.IDLE);
-            }
-            if (orientation.rotation == RotateTo && ActivationState == true)
-            {
-                EnemyStateSwitch(EState.MOVE);
-            }
-            if (orientation.rotation != RotateTo && ActivationState == true)
-            {
-                EnemyStateSwitch(EState.TURN);
-            }
+            EnemyStateSwitch(EState.TURN);
         }
-        else
-        {
-            EnemyStateSwitch(EState.STOP);
-        }
+
+        ////REWRITE
+
+
     }
 
     private IEnumerator TURN()
     {
         yield return null;
-        //Rotates
-        orientation.rotation = Quaternion.RotateTowards(orientation.rotation, RotateTo, RSpeed * 100);
 
-        if (RotateTo == orientation.rotation)
+
+        targetDirection = Target.transform.position - transform.position;
+        TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
+
+        while (TurnTo != orientation.rotation)
+        {
+            targetDirection = Target.transform.position - transform.position;
+            TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(orientation.rotation, TurnTo, RSpeed);
+            yield return new WaitForEndOfFrame();
+        }
+        //End OF Loop
+
+        //Corutine Exit Clauses
+
+        if (TurnTo == orientation.rotation)
         {
             EnemyStateSwitch(EState.MOVE);
         }
-        else
-        {
-            EnemyStateSwitch(EState.TURN);
-        }
+
+        ////Rewrite
+
+
     }
-    
+
 }
