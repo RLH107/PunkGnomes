@@ -17,11 +17,11 @@ public class InstanTower : MonoBehaviour
     {
         Vibration.Init();
         TCD = 0;
-        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y /*-50*/ , InsPOS.position.z), Quaternion.identity);
+        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y -50 , InsPOS.position.z), Quaternion.identity);
         TowerScript = ThisTower.GetComponent<TodasTorres>();
     }
 
-
+    
     public void Touched()
     {
         if (TCD <= 0)
@@ -39,5 +39,5 @@ public class InstanTower : MonoBehaviour
 
 
 
-
+    
 }

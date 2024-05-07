@@ -26,7 +26,7 @@ public class FunctionTest : MonoBehaviour
         T_F2 -= Time.deltaTime;
         if (T_F1 == 0 && T1 == true || T_F1 <= 0 && T1 == true)
         {
-            Inimigo_Base_Script.ActivateEnemy();
+            Inimigo_Base_Script.ActivationState = true;
             T1 = false;
         }
         if (T_F2 == 0 && T2 == true || T_F2 <= 0 && T2 == true)

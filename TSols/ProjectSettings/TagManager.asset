@@ -8,6 +8,8 @@ TagManager:
   - TurnColider
   - Tower
   - Projectile1
+  - Projectile2
+  - Projectile3
   layers:
   - Default
   - TransparentFX
