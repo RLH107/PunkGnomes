@@ -256,11 +256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df80f025f5f92cc40a3c7a45108d95ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TCoolDown: 3
-  TSpeed: 0.5
+  TCoolDown: 1
+  TSpeed: 1
   PForce: 100
-  AngleBeforeFire: 1
-  NumberOfProjectiles: 2
+  AngleBeforeFire: 0.5
+  NumberOfProjectiles: 3
   Projectile: {fileID: 3239743058682517361, guid: 75922bf193ef7aa48a2a0d9ca94934a7,
     type: 3}
   ProjectileSootPosition: {fileID: 2593891638430617727}

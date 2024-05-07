@@ -14,7 +14,6 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private float Attack;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float MoveForce;
-    [SerializeField] private float AngleBeforeMove;
 
     [SerializeField] private bool ActivationState;
     private Vector3 StartingPos;
@@ -50,7 +49,17 @@ public class Inimigo_Base : MonoBehaviour
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
         ActivationState = true; // Change Later
-        TurnTo = transform.rotation;
+
+
+        RSpeed = 1;
+        Health = 20;
+        MaxHealth = 20;
+        Attack = 30;
+        MoveSpeed = 6;
+        MoveForce = 6;
+
+
+
 
         EnemyStateSwitch(EState.IDLE);
     }
@@ -64,6 +73,7 @@ public class Inimigo_Base : MonoBehaviour
     public void TakeDamege(float DemegeTaken)
     {
         Health -= DemegeTaken;
+        Debug.Log("EnemyHealth = "+ Health);
         if (Health <= 0)
         {
             DeactivateEnemy();
@@ -98,6 +108,7 @@ public class Inimigo_Base : MonoBehaviour
     {
         if (ActivationState)
         {
+            Debug.Log("DeactivateEnemy");
             StopAllCoroutines();
             ActivationState = false;
             EnemyStateSwitch(EState.IDLE);
@@ -106,8 +117,11 @@ public class Inimigo_Base : MonoBehaviour
 
     public void TurnEnemy(GameObject NextTarget)
     {
+        Debug.Log("TurnEnemy");
         Target = NextTarget;
+        Debug.Log("Target = " +  Target);
         targetDirection = Target.transform.position - transform.position;
+        Debug.Log("targetDirection = " + targetDirection);
     }
 
 
@@ -117,11 +131,6 @@ public class Inimigo_Base : MonoBehaviour
     /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
     /// <param name="collision"></param>
-
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
 
 
     /// <summary>
@@ -175,6 +184,7 @@ public class Inimigo_Base : MonoBehaviour
             //Debug.Log("ActivationState" + ActivationState);
             rb.constraints = RigidbodyConstraints.None;
             rb.freezeRotation = true;
+            TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
             EnemyStateSwitch(EState.MOVE);
         }
     }
@@ -210,7 +220,7 @@ public class Inimigo_Base : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //End OF Loop
-
+        Debug.Log("Move while exit");
         //Corutine Exit Clauses
         if (TurnTo != orientation.rotation)
         {
@@ -233,16 +243,19 @@ public class Inimigo_Base : MonoBehaviour
             //Slows down Movement
             rb.AddForce(orientation.forward * -1, ForceMode.Acceleration);
             //Checks if speed is Slow
+            Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
+            //Waits For End Of Frame
+            yield return new WaitForEndOfFrame();
             if (rb.velocity.magnitude < 0.5f)
             {
                 //Stops
                 rb.velocity = new Vector3(0, 0, 0);
+                Debug.Log("Stops");
             }
-            //Waits For End Of Frame
-            yield return new WaitForEndOfFrame();
+            Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
         }
         //End OF Loop
-
+        Debug.Log("RB.velocity = "+ rb.velocity.magnitude);
         //Corutine Exit Clauses
 
         if (rb.velocity.magnitude == 0)
@@ -263,14 +276,19 @@ public class Inimigo_Base : MonoBehaviour
         targetDirection = Target.transform.position - transform.position;
         TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
 
+        Debug.Log("targetDirection = "+targetDirection);
+        Debug.Log("TurnTo = "+TurnTo);
+
         while (TurnTo != orientation.rotation)
         {
             targetDirection = Target.transform.position - transform.position;
             TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(orientation.rotation, TurnTo, RSpeed);
+            orientation.rotation = Quaternion.RotateTowards(orientation.rotation, TurnTo, RSpeed);
             yield return new WaitForEndOfFrame();
         }
         //End OF Loop
+        Debug.Log("TurnTo = " + TurnTo);
+        Debug.Log("orientation.rotation = " + orientation.rotation);
 
         //Corutine Exit Clauses
 

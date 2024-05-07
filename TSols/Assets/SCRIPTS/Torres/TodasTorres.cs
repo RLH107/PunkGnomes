@@ -42,11 +42,11 @@ public class TodasTorres : MonoBehaviour
         for (int i = NumberOfProjectiles; i > 0; i--)
         {
             GameObject gameObject;
-            gameObject = Instantiate(Projectile, new Vector3(transform.position.x + -100, transform.position.y + -100 + i * 5, transform.position.z - 100), Quaternion.identity);
+            gameObject = Instantiate(Projectile, new Vector3(transform.position.x + -10, transform.position.y + -20 + i * 5, transform.position.z - 10), Quaternion.identity);
 
             ProjetilScript = gameObject.GetComponent<Projetil>();
             ProjetilsScripts.Add(ProjetilScript);
-            ProjetilScript.ProjectileWatingPos(new Vector3(transform.position.x + -100, transform.position.y + -100 + i * 5, transform.position.z - 100));
+            ProjetilScript.ProjectileWatingPos(new Vector3(transform.position.x + -10, transform.position.y + -20 + i * 5, transform.position.z - 10));
         }
         TowerStateSwitch(TState.IDLE);
     }
@@ -72,6 +72,11 @@ public class TodasTorres : MonoBehaviour
     private IEnumerator IDLE()
     {
         yield return null;
+        while (EnemysTransforms.Count == 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        TowerStateSwitch(TState.AIM);
     }
     private IEnumerator AIM()
     {
@@ -124,10 +129,6 @@ public class TodasTorres : MonoBehaviour
         if (other.gameObject.tag == "ENEMY")
         {
             EnemysTransforms.Add(other.transform);
-            if (EnemysTransforms.Count == 1)
-            {
-                TowerStateSwitch(TState.AIM);
-            }
         }
     }
     private void OnTriggerExit(Collider other)

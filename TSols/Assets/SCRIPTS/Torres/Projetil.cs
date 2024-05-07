@@ -6,7 +6,6 @@ public class Projetil : MonoBehaviour
 {
     Inimigo_Base Inimigo_BaseScript;
     private Vector3 WatingPos;
-    private float Lifetime;
     [SerializeField] private Rigidbody rb;
     private void OnTriggerEnter(Collider other)
     {

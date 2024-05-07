@@ -19,13 +19,18 @@ public class ColisionDetection : MonoBehaviour
 
         Inimigo_Base_Script.TurnEnemy(TurnColiders[x].gameObject);
         x++;
+        for (int i = 0; i < TurnColiders.Count; i++)
+        {
+            Debug.Log("TurnColider = " +TurnColiders[i].ToString());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Detector Detects Coision");
         if (other.gameObject.tag == "TurnColider")
         {
-            //Debug.Log("Triggered");
+            Debug.Log("Detector Detects TurnColider");
             if (x >= TurnColiders.Count)
             {
                 Inimigo_Base_Script.TurnEnemy(LastTarget.gameObject);
