@@ -6,7 +6,6 @@ using UnityEngine;
 public class TodasTorres : MonoBehaviour
 {
     [SerializeField] private float TCoolDown;
-    private float FCooldown;
     [SerializeField] private float TSpeed;
     [SerializeField] private float PForce;
 
@@ -19,11 +18,10 @@ public class TodasTorres : MonoBehaviour
     Projetil ProjetilScript;
 
     [HideInInspector] public List<Projetil> ProjetilsScripts;
-
     [HideInInspector] public List<Transform> EnemysTransforms;
 
     private int NPorjectile;
-
+    private float FCooldown;
     private enum TState
     {
         IDLE,
@@ -33,7 +31,7 @@ public class TodasTorres : MonoBehaviour
     }
     private TState TowerState;
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void Start()
     {
@@ -52,7 +50,7 @@ public class TodasTorres : MonoBehaviour
     }
 
     /// <summary>
-    /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
     /// <param name="T_state"></param>
 
@@ -102,25 +100,10 @@ public class TodasTorres : MonoBehaviour
             TowerStateSwitch(TState.IDLE);
         }
 
-        if (EnemysTransforms.Count > 0)
-        {
-            Transform target = EnemysTransforms[0];
-            Vector3 targetDirection = target.position - transform.position;
-
-            Quaternion RotateTo = Quaternion.LookRotation(targetDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, RotateTo, TSpeed);
-
-            float angle = Quaternion.Angle(transform.rotation, RotateTo);
-            if (angle < AngleBeforeFire)
-            {
-                Fire();
-            }
-        }
-
     }
 
     /// <summary>
-    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
     /// <param name="other"></param>
 
