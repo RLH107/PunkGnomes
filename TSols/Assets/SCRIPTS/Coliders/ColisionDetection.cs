@@ -21,16 +21,16 @@ public class ColisionDetection : MonoBehaviour
         x++;
         for (int i = 0; i < TurnColiders.Count; i++)
         {
-            Debug.Log("TurnColider = " +TurnColiders[i].ToString());
+            //Debug.Log("TurnColider = " +TurnColiders[i].ToString());
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Detector Detects Coision");
+        //Debug.Log("Detector Detects Coision");
         if (other.gameObject.tag == "TurnColider")
         {
-            Debug.Log("Detector Detects TurnColider");
+            //Debug.Log("Detector Detects TurnColider");
             if (x >= TurnColiders.Count)
             {
                 Inimigo_Base_Script.TurnEnemy(LastTarget.gameObject);

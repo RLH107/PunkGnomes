@@ -70,6 +70,7 @@ MonoBehaviour:
   TowerPrefab: {fileID: 8175552415172699160, guid: 658972f789f1e60479d03b6d9fec2761,
     type: 3}
   InsPOS: {fileID: 4921338743074218054}
+  ReactionCooldown: 5
 --- !u!1 &4569157676750150113
 GameObject:
   m_ObjectHideFlags: 0

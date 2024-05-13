@@ -20,6 +20,7 @@ public class TodasTorres : MonoBehaviour
     [HideInInspector] public List<Projetil> ProjetilsScripts;
     [HideInInspector] public List<Transform> EnemysTransforms;
 
+    private bool Active;
     private int NPorjectile;
     private float FCooldown;
     private enum TState
@@ -37,6 +38,7 @@ public class TodasTorres : MonoBehaviour
     {
         FCooldown = TCoolDown;
         NPorjectile = 0;
+        Active = false;
         for (int i = NumberOfProjectiles; i > 0; i--)
         {
             GameObject gameObject;
@@ -70,11 +72,17 @@ public class TodasTorres : MonoBehaviour
     private IEnumerator IDLE()
     {
         yield return null;
-        while (EnemysTransforms.Count == 0)
+
+
+
+
+        
+        if (EnemysTransforms.Count >= 0 && Active == false)
         {
-            yield return new WaitForEndOfFrame();
+            Active = true;
+            TowerStateSwitch(TState.AIM);
         }
-        TowerStateSwitch(TState.AIM);
+        
     }
     private IEnumerator AIM()
     {
@@ -95,8 +103,9 @@ public class TodasTorres : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
-        if (EnemysTransforms.Count == 0)
+        if (EnemysTransforms.Count == 0 && Active == true)
         {
+            Active = false;
             TowerStateSwitch(TState.IDLE);
         }
 
