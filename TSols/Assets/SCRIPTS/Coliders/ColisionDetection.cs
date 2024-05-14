@@ -4,42 +4,43 @@ using UnityEngine;
 
 public class ColisionDetection : MonoBehaviour
 {
+    //external Information
     [SerializeField] private GameObject Enemy;
+    public GameObject Target {get; private set;}
 
-    public List<GameObject> TurnColiders;
-    public GameObject LastTarget;
+    //internal Working
+    bool called;
     private int x;
-
     Inimigo_Base Inimigo_Base_Script;
 
     private void Start()
     {
         x = 0;
-        Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
+        called = false;
+        Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>(); 
+    }
 
-        Inimigo_Base_Script.TurnEnemy(TurnColiders[x].gameObject);
-        x++;
-        for (int i = 0; i < TurnColiders.Count; i++)
+    public void GiveObjectForList()
+    {
+    }
+
+    public void FirstTarget()
+    {
+        if (called == false)
         {
-            //Debug.Log("TurnColider = " +TurnColiders[i].ToString());
+            Inimigo_Base_Script.NewTarget(Target);
+            called = true;
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Detector Detects Coision");
         if (other.gameObject.tag == "TurnColider")
         {
-            //Debug.Log("Detector Detects TurnColider");
-            if (x >= TurnColiders.Count)
-            {
-                Inimigo_Base_Script.TurnEnemy(LastTarget.gameObject);
-            }
-            else
-            {
-                Inimigo_Base_Script.TurnEnemy(TurnColiders[x].gameObject);
-            }
             x++;
+            Inimigo_Base_Script.NewTarget(Target);
         }
     }
 }

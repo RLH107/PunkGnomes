@@ -45,10 +45,10 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
-        StartingPos = transform.position + new Vector3(0, -10, 0); //Change Later
+        StartingPos = transform.position; //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
-        ActivationState = true; // Change Later
+        ActivationState = false; // Change Later
 
 
         //RSpeed = 1;
@@ -115,7 +115,7 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
-    public void TurnEnemy(GameObject NextTarget)
+    public void NewTarget(GameObject NextTarget)
     {
         //Debug.Log("TurnEnemy");
         Target = NextTarget;
