@@ -48,8 +48,7 @@ public class Inimigo_Base : MonoBehaviour
         StartingPos = transform.position; //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
-        ActivationState = false; // Change Later
-
+        //ActivationState = false;
 
         //RSpeed = 1;
         //Health = 20;
@@ -57,9 +56,6 @@ public class Inimigo_Base : MonoBehaviour
         //Attack = 30;
         //MoveSpeed = 6;
         //MoveForce = 6;
-
-
-
 
         EnemyStateSwitch(EState.IDLE);
     }
@@ -123,15 +119,6 @@ public class Inimigo_Base : MonoBehaviour
         targetDirection = Target.transform.position - transform.position;
         //Debug.Log("targetDirection = " + targetDirection);
     }
-
-
-
-
-    /// <summary>
-    /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /// </summary>
-    /// <param name="collision"></param>
-
 
     /// <summary>
     /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

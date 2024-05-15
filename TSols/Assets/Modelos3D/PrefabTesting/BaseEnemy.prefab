@@ -278,7 +278,7 @@ MonoBehaviour:
   Attack: 1
   MoveSpeed: 6
   MoveForce: 6
-  ActivationState: 0
+  ActivationState: 1
 --- !u!1 &6900251111516133210
 GameObject:
   m_ObjectHideFlags: 0
