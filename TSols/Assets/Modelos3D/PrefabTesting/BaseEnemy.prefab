@@ -150,7 +150,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.770236, y: -7.982504, z: -15.221435}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.19567, y: 0.19567, z: 0.19567}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 980233470108271766}
@@ -272,11 +272,11 @@ MonoBehaviour:
   EnemyTipe: Enemy
   rb: {fileID: 6324588482039278030}
   orientation: {fileID: 8087198712747310144}
-  RSpeed: 5
+  RSpeed: 2
   Health: 15
   MaxHealth: 20
   Attack: 1
-  MoveSpeed: 6
+  MoveSpeed: 2
   MoveForce: 6
   ActivationState: 1
 --- !u!1 &6900251111516133210

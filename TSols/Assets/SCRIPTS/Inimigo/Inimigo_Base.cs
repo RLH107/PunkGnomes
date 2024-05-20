@@ -69,7 +69,7 @@ public class Inimigo_Base : MonoBehaviour
     public void TakeDamege(float DemegeTaken)
     {
         Health -= DemegeTaken;
-        //Debug.Log("EnemyHealth = "+ Health);
+        Debug.Log("EnemyHealth = "+ Health);
         if (Health <= 0)
         {
             DeactivateEnemy();
@@ -104,7 +104,7 @@ public class Inimigo_Base : MonoBehaviour
     {
         if (ActivationState)
         {
-            //Debug.Log("DeactivateEnemy");
+            Debug.Log("DeactivateEnemy");
             StopAllCoroutines();
             ActivationState = false;
             EnemyStateSwitch(EState.IDLE);
@@ -113,11 +113,11 @@ public class Inimigo_Base : MonoBehaviour
 
     public void NewTarget(GameObject NextTarget)
     {
-        //Debug.Log("TurnEnemy");
+        Debug.Log("TurnEnemy");
         Target = NextTarget;
-        //Debug.Log("Target = " +  Target);
+        Debug.Log("Target = " +  Target);
         targetDirection = Target.transform.position - transform.position;
-        //Debug.Log("targetDirection = " + targetDirection);
+        Debug.Log("targetDirection = " + targetDirection);
     }
 
     /// <summary>
@@ -132,19 +132,19 @@ public class Inimigo_Base : MonoBehaviour
         switch (enemyState)
         {
             case EState.IDLE:
-                //Debug.Log("IDLE");
+                Debug.Log("IDLE");
                 StartCoroutine(IDLE());
                 break;
             case EState.MOVE:
-                //Debug.Log("MOVE");
+                Debug.Log("MOVE");
                 StartCoroutine(MOVE());
                 break;
             case EState.TURN:
-                //Debug.Log("TURN");
+                Debug.Log("TURN");
                 StartCoroutine(TURN());
                 break;
             case EState.STOP:
-                //Debug.Log("STOP");
+                Debug.Log("STOP");
                 StartCoroutine(STOP());
                 break;
         }
@@ -157,7 +157,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private IEnumerator IDLE()
     {
-        //Debug.Log("IDLE Called");
+        Debug.Log("IDLE Called");
         yield return null;
 
         if (ActivationState == false)
@@ -168,7 +168,7 @@ public class Inimigo_Base : MonoBehaviour
         }
         if (ActivationState == true)
         {
-            //Debug.Log("ActivationState" + ActivationState);
+            Debug.Log("ActivationState" + ActivationState);
             rb.constraints = RigidbodyConstraints.None;
             rb.freezeRotation = true;
             TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
@@ -192,7 +192,6 @@ public class Inimigo_Base : MonoBehaviour
                 //Force Forward
                 rb.AddForce(orientation.forward * MoveForce, ForceMode.Force);
             }
-
             if (CurrentVel.magnitude > MoveSpeed)
             {
                 //Calculates speed limit
@@ -201,48 +200,51 @@ public class Inimigo_Base : MonoBehaviour
                 //Limits speed
                 rb.velocity = new Vector3(LimitedSpeed.x, rb.velocity.y, LimitedSpeed.z);
             }
-
-
-
             yield return new WaitForFixedUpdate();
         }
         //End OF Loop
-        //Debug.Log("Move while exit");
+        Debug.Log("Move while exit");
         //Corutine Exit Clauses
         if (TurnTo != orientation.rotation)
         {
             EnemyStateSwitch(EState.STOP);
         }
-
-
         ///REWRITE
     }
 
     private IEnumerator STOP()
     {
-
         yield return null;
-
-
         //While loop
         while (rb.velocity.magnitude != 0)
         {
-            //Slows down Movement
-            rb.AddForce(orientation.forward * -1, ForceMode.VelocityChange);
-            //Checks if speed is Slow
-            //Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
             //Waits For End Of Frame
             yield return new WaitForFixedUpdate();
-            if (rb.velocity.magnitude < 0.5f)
+            //Slows down Movement
+
+            rb.velocity = new Vector3(0, 0, 0);  ///////////////////////////////////////////// MUDA ESTA PORRA
+
+            //rb.AddForce(orientation.forward * -1, ForceMode.VelocityChange);
+
+
+
+
+            //Checks if speed is Slow
+            Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
+            //Checks if speed is Slow
+
+            /*
+            if (rb.velocity.magnitude < 0.1f)
             {
                 //Stops
                 rb.velocity = new Vector3(0, 0, 0);
-                //Debug.Log("Stops");
+                Debug.Log("Stops");
             }
-            //Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
+            */
+            Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
         }
         //End OF Loop
-        //Debug.Log("RB.velocity = "+ rb.velocity.magnitude);
+        Debug.Log("RB.velocity = "+ rb.velocity.magnitude);
         //Corutine Exit Clauses
 
         if (rb.velocity.magnitude == 0)
@@ -263,8 +265,8 @@ public class Inimigo_Base : MonoBehaviour
         targetDirection = Target.transform.position - transform.position;
         TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        //Debug.Log("targetDirection = "+targetDirection);
-        //Debug.Log("TurnTo = "+TurnTo);
+        Debug.Log("targetDirection = "+targetDirection);
+        Debug.Log("TurnTo = "+TurnTo);
 
         while (TurnTo != orientation.rotation)
         {
@@ -274,8 +276,8 @@ public class Inimigo_Base : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         //End OF Loop
-        //Debug.Log("TurnTo = " + TurnTo);
-        //Debug.Log("orientation.rotation = " + orientation.rotation);
+        Debug.Log("TurnTo = " + TurnTo);
+        Debug.Log("orientation.rotation = " + orientation.rotation);
 
         //Corutine Exit Clauses
 
