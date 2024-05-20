@@ -5,12 +5,10 @@ using UnityEngine;
 public class React2 : MonoBehaviour
 {
     private float timer;
-    private bool T;
 
     private void Start()
     {
         Vibration.Init();
-        T = true;
     }
 
     public void Touched()
@@ -22,7 +20,7 @@ public class React2 : MonoBehaviour
             Debug.Log("Button Was Pressed");
             GetComponent<Renderer>().material.color = new Color(Random.value, Random.value, Random.value);
             Vibration.VibratePop();
-            timer = 0.04f;
+            timer = 0.05f;
             StartCoroutine(TimerToZero());
         }
         if(timer > 0)
@@ -30,7 +28,7 @@ public class React2 : MonoBehaviour
             //Still Pressed
             Debug.Log("Still Pressed");
         }
-        timer = 0.04f;
+        timer = 0.05f;
     }
 
     IEnumerator TimerToZero()

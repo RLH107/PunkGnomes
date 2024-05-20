@@ -6,47 +6,63 @@ using UnityEngine;
 
 public class InstanTower : MonoBehaviour
 {
+    //External Information
     [SerializeField] private GameObject TowerPrefab;
     [SerializeField] private Transform InsPOS;
-    [SerializeField] private float ReactionCooldown;
-    private float ReactCD_Number;
-    private TodasTorres TowerScript;
+
+    //Internal Information
     private GameObject ThisTower;
-    private bool Tower;
-    // Start is called before the first frame update
+    private TodasTorres Tower_Script;
+    private Vector3 StartingPos;
+    private bool TowerState;
+
+    //Timer For Button Debounce
+    private float timer;
+
     void Start()
     {
         Vibration.Init();
-        ReactCD_Number = 0f;
-        Tower = false;
-        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y -50 , InsPOS.position.z), Quaternion.identity);
-        TowerScript = ThisTower.GetComponent<TodasTorres>();
 
-        Debug.Log("ReactCD_Number " + ReactCD_Number);
-        Debug.Log("ReactionCooldown " + ReactionCooldown);
+        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
+        Tower_Script = ThisTower.GetComponent<TodasTorres>();
+        StartingPos = ThisTower.transform.position;
+        TowerState = false;
     }
-    private void FixedUpdate()
-    {
-        if (ReactCD_Number > 0)
-        {
-            ReactCD_Number = ReactCD_Number - Time.deltaTime;
-            Debug.Log("ReactCD_Number " + ReactCD_Number);
-        }
-    }
-
+    
     public void Touched()
     {
-        if (ReactCD_Number <= 0 && Tower == false)
+        Debug.Log("This Object Is = "+ gameObject);
+        Debug.Log("Tower object = "+ ThisTower);
+        Debug.Log("TowerPos = " + ThisTower.transform.position);
+        if (timer <= 0)
         {
-            Debug.Log("INS_T IF_");
-            ReactCD_Number = ReactionCooldown;
-            Debug.Log("ReactCD_Number " + ReactCD_Number);
-
+            Debug.Log("Timer = "+timer);
             Vibration.VibratePop();
-            TowerScript.MoveTower(InsPOS.position);
-
+            // If Pressed ////////////////////////////
+            if (TowerState == false)
+            {
+                Tower_Script.MoveTower(new Vector3(InsPOS.position.x, InsPOS.position.y, InsPOS.position.z));
+                Debug.Log("false = "+ ThisTower.transform.position);
+                TowerState = true;
+            }
+            if (TowerState == true)
+            {
+                Tower_Script.MoveTower(new Vector3(InsPOS.position.x, InsPOS.position.y - 50, InsPOS.position.z));
+                Debug.Log("true = "+ ThisTower.transform.position);
+                TowerState = false;
+            }
+            //////////////////////////////////////////
+            StartCoroutine(TimerToZero());
         }
-
-
+        timer = 0.05f;
+    }
+    IEnumerator TimerToZero()
+    {
+        while (timer > 0)
+        {
+            yield return null;
+            timer = timer - Time.deltaTime;
+            Debug.Log("Timer = " + timer);
+        }
     }
 }

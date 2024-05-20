@@ -71,23 +71,18 @@ public class TodasTorres : MonoBehaviour
     }
     private IEnumerator IDLE()
     {
-        yield return null;
-
-
-
-
-        
         if (EnemysTransforms.Count >= 0 && Active == false)
         {
             Active = true;
             TowerStateSwitch(TState.AIM);
         }
-        
+        yield return null;
     }
+    //Tower Aims At TargetEnemy
     private IEnumerator AIM()
     {
         yield return null;
-        //Selects a target From List and Aims twords it
+        //Selects the first target From List and Aims twords it
         while (EnemysTransforms.Count > 0)
         {
             Transform target = EnemysTransforms[0];
@@ -99,6 +94,7 @@ public class TodasTorres : MonoBehaviour
             float angle = Quaternion.Angle(transform.rotation, RotateTo);
             if (angle < AngleBeforeFire)
             {
+                //Fires Projectile
                 Fire();
             }
             yield return new WaitForEndOfFrame();
@@ -116,6 +112,8 @@ public class TodasTorres : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
 
+
+    //If Enemy Adds to Target List
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "ENEMY")
@@ -123,6 +121,8 @@ public class TodasTorres : MonoBehaviour
             EnemysTransforms.Add(other.transform);
         }
     }
+
+    //If Enemy Removes From Target List
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "ENEMY")
@@ -133,28 +133,39 @@ public class TodasTorres : MonoBehaviour
 
     private void Fire()
     {
+        //Takes Time out of cooldown
+        FCooldown = FCooldown - Time.deltaTime;
+
+        //Is cooldown UP?
         if (FCooldown <= 0)
         {
+            //Gets Script From List
             ProjetilScript = ProjetilsScripts[NPorjectile];
 
+            //Calles Function From Projectile Script
             ProjetilScript.MoveProjectil(ProjectileSootPosition, PForce);
 
+            //Next Projectile
             NPorjectile++;
+
+            //Stops Next Projectile From Being NULL
             if (NPorjectile >= ProjetilsScripts.Count)
             {
                 NPorjectile = 0;
             }
 
+            //Resets Cooldown
             FCooldown = TCoolDown;
         }
-        FCooldown = FCooldown - Time.deltaTime;
     }
 
+    //Moves Tower To New Position
     public void MoveTower(Vector3 moveTo)
     {
         transform.position = moveTo;
     }
 
+    //Maybe?
     private void Dead()
     {
 
