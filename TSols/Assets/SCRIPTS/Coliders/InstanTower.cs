@@ -31,29 +31,34 @@ public class InstanTower : MonoBehaviour
     
     public void Touched()
     {
-        Debug.Log("This Object Is = "+ gameObject);
-        Debug.Log("Tower object = "+ ThisTower);
-        Debug.Log("TowerPos = " + ThisTower.transform.position);
         if (timer <= 0)
         {
             Debug.Log("Timer = "+timer);
             Vibration.VibratePop();
             // If Pressed ////////////////////////////
+            
+            //If Tower Is Inactive -> Activate Tower
             if (TowerState == false)
             {
-                Tower_Script.MoveTower(new Vector3(InsPOS.position.x, InsPOS.position.y, InsPOS.position.z));
-                Debug.Log("false = "+ ThisTower.transform.position);
+                Tower_Script.MoveTower(InsPOS.position);
+                Debug.Log("Activating Tower/ TowerPos = "+ ThisTower.transform.position + "InsTransform.position = "+ InsPOS);
                 TowerState = true;
+                StartCoroutine(TimerToZero());
             }
+            //If Tower Is Active -> Deactivate Tower
             if (TowerState == true)
             {
-                Tower_Script.MoveTower(new Vector3(InsPOS.position.x, InsPOS.position.y - 50, InsPOS.position.z));
-                Debug.Log("true = "+ ThisTower.transform.position);
+                Tower_Script.MoveTower(StartingPos);
+                Debug.Log("Deactivating Tower/ TowerPos = " + ThisTower.transform.position + "Initial Tower Transform.position = " + StartingPos);
                 TowerState = false;
             }
             //////////////////////////////////////////
-            StartCoroutine(TimerToZero());
         }
+        if (timer > 0)
+        {
+            Debug.Log("StillPressed");
+        }
+
         timer = 0.05f;
     }
     IEnumerator TimerToZero()
