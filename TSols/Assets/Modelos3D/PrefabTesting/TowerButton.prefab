@@ -202,6 +202,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 8175552415172699160, guid: 658972f789f1e60479d03b6d9fec2761,
+  TowerPrefab_1: {fileID: 265929268744726968, guid: 222f6d30d385101449afe88090b0bdb9,
+    type: 3}
+  TowerPrefab_2: {fileID: 6037772344495836192, guid: 24716aa68aa486b4a8953b665a533c0b,
+    type: 3}
+  TowerPrefab_3: {fileID: 1892925749904917779, guid: b836582490c817a4f95f7be003c19d90,
+    type: 3}
+  TowerPrefab_4: {fileID: 4443100773030154, guid: fde9d1e99208b6749b3abbce376a9b01,
     type: 3}
   InsPOS: {fileID: 2400584961930172364}
