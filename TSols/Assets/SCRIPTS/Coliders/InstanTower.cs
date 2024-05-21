@@ -24,7 +24,7 @@ public class InstanTower : MonoBehaviour
     {
         Vibration.Init();
 
-        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
+        ThisTower = Instantiate(TowerPrefab, new Vector3(InsPOS.position.x, InsPOS.position.y /*-5*/, InsPOS.position.z), Quaternion.identity);
         Tower_Script = ThisTower.GetComponent<TodasTorres>();
         StartingPos = ThisTower.transform.position;
         TowerState = false;
