@@ -38,13 +38,8 @@ public class InstanTower : MonoBehaviour
 
     private Vector3 StartingPos;
 
-
-    private bool TowerState1;
-    private bool TowerState2;
-    private bool TowerState3;
-    private bool TowerState4;
-
     private bool TowerState;
+    private bool TowerChange;
 
 
     private MeshRenderer ThisMesh;
@@ -61,11 +56,15 @@ public class InstanTower : MonoBehaviour
         ThisTower3 = Instantiate(TowerPrefab_3, new Vector3(InsPOS.position.x, InsPOS.position.y -15, InsPOS.position.z), Quaternion.identity);
         ThisTower4 = Instantiate(TowerPrefab_4, new Vector3(InsPOS.position.x, InsPOS.position.y -20, InsPOS.position.z), Quaternion.identity);
 
+        ThisTower = ThisTower1;
+
 
         Tower_Script1 = ThisTower1.GetComponent<TodasTorres>();
         Tower_Script2 = ThisTower2.GetComponent<TodasTorres>();
         Tower_Script3 = ThisTower3.GetComponent<TodasTorres>();
         Tower_Script4 = ThisTower4.GetComponent<TodasTorres>();
+
+        Tower_Script = Tower_Script1;
 
 
         StartingPos1 = ThisTower1.transform.position;
@@ -73,8 +72,11 @@ public class InstanTower : MonoBehaviour
         StartingPos3 = ThisTower3.transform.position;
         StartingPos4 = ThisTower4.transform.position;
 
+        StartingPos = StartingPos1;
 
-        TowerState1 = false;
+
+        TowerState = false;
+        TowerChange = false;
     }
 
 
@@ -103,18 +105,25 @@ public class InstanTower : MonoBehaviour
         if (timer > 0)
         {
             Debug.Log("StillPressed");
+            //Debounce Timer Reset
             timer = 0.05f;
         }
         if (timer <= 0)
         {
             Vibration.VibratePop();
 
+            //If Tower Is Active -> Deactivate Tower
             if (TowerState == true && Used == false)
             {
                 Tower_Script.MoveTower(StartingPos);
                 TowerState = false;
                 Used = true;
+
+                // Check for Change of Tower
+
+
             }
+
             //If Tower Is Inactive -> Activate Tower
             if (TowerState == false && Used == false)
             {
@@ -122,21 +131,15 @@ public class InstanTower : MonoBehaviour
                 TowerState = true;
                 Used = true;
             }
-        }
-    }
-
-    public void ResetTower()
-    {
-        if (TowerState == true)
-        {
-            Tower_Script.MoveTower(StartingPos);
-            TowerState = false;
+            
+            //Debounce Timer Start
+            timer = 0.05f;
+            StartCoroutine(TimerToZero());
         }
     }
 
 
-
-    
+    /*
     public void Touchede()
     {
         bool Used = false;
@@ -171,6 +174,7 @@ public class InstanTower : MonoBehaviour
             //////////////////////////////////////////
         }
     }
+    */
     
     IEnumerator TimerToZero()
     {
