@@ -2122,6 +2122,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 869410025}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1111399345 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 654333221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1125991327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2216,6 +2228,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1125991327}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1126253802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 427966097}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1178668143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 608770250}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1197716820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7000202211203381823, guid: 65410285b5a24c849883b9e17a40e17d,
@@ -3193,6 +3229,126 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1608610676}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1978924256}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1821632048}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1603198363}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1932706241}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1111399345}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1812659203}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1178668143}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1126253802}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2072239479}
+        m_TargetAssemblyTypeName: InstanTower, Assembly-CSharp
+        m_MethodName: CallSwitsh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1553528801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7000202211203381823, guid: 65410285b5a24c849883b9e17a40e17d,
@@ -3280,6 +3436,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602096684}
   m_CullTransparentMesh: 1
+--- !u!114 &1603198363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1125991327}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1608610676 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 354227554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1688672051
 GameObject:
   m_ObjectHideFlags: 0
@@ -3622,6 +3802,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1799075304}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1812659203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1108168804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1821632048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1799075304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1869273742
 GameObject:
   m_ObjectHideFlags: 0
@@ -3813,6 +4017,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1928355949}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1932706241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 805208546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939846789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,6 +4194,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1958484377}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1978924256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1312259287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1987208618
 GameObject:
   m_ObjectHideFlags: 0
@@ -4297,6 +4525,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2072239477}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2072239479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2072239477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5052922381048433912
 PrefabInstance:
   m_ObjectHideFlags: 0

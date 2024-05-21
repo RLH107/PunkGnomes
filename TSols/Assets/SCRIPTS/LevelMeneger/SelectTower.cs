@@ -13,6 +13,8 @@ public class SelectTower : MonoBehaviour
     public bool Tower_3 { get; private set; }
     public bool Tower_4 { get; private set; }
 
+    public int NextTowerN { get; private set; }
+
 
 
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class SelectTower : MonoBehaviour
         Tower_2 = false;
         Tower_3 = false;
         Tower_4 = false;
+        NextTowerN = 1;
         BeforeInvoke();
     }
 
@@ -31,6 +34,7 @@ public class SelectTower : MonoBehaviour
         Tower_3 = false;
         Tower_4 = false;
         Tower_1 = true;
+        NextTowerN = 1;
         BeforeInvoke();
     }
     public void SetTower_2_Bool()
@@ -39,6 +43,7 @@ public class SelectTower : MonoBehaviour
         Tower_3 = false;
         Tower_4 = false;
         Tower_2 = true;
+        NextTowerN = 2;
         BeforeInvoke();
     }
     public void SetTower_3_Bool()
@@ -47,6 +52,7 @@ public class SelectTower : MonoBehaviour
         Tower_1 = false;
         Tower_4 = false;
         Tower_3 = true;
+        NextTowerN = 3;
         BeforeInvoke();
     }
     public void SetTower_4_Bool()
@@ -55,6 +61,7 @@ public class SelectTower : MonoBehaviour
         Tower_3 = false;
         Tower_1 = false;
         Tower_4 = true;
+        NextTowerN = 4;
         BeforeInvoke();
     }
 
