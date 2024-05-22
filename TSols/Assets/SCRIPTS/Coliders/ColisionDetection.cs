@@ -9,7 +9,6 @@ public class ColisionDetection : MonoBehaviour
     private GameObject Target;
 
     //internal Working
-    private bool called;
     private int x;
     private int ListCount;
     Inimigo_Base Inimigo_Base_Script;
@@ -18,7 +17,6 @@ public class ColisionDetection : MonoBehaviour
     private void Start()
     {
         x = 0;
-        called = false;
         Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
         InsEnemy_Script = GameObject.Find("InsEnemy").GetComponent<InsEnemy>();
 

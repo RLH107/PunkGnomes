@@ -22,7 +22,7 @@ public class InstanTower : MonoBehaviour
     private GameObject ThisTower3;
     private GameObject ThisTower4;
 
-    private GameObject ThisTower;
+    // private GameObject ThisTower;
 
 
     private TodasTorres Tower_Script1;
@@ -53,8 +53,6 @@ public class InstanTower : MonoBehaviour
     void Start()
     {
         SelectTower_Script = GameObject.Find("LevelMeneger").GetComponent<SelectTower>();
-        Debug.Log("SelectTowerScript" + SelectTower_Script);
-        Debug.Log("SelectTower_Script.NextTowerN" + SelectTower_Script.NextTowerN);
         Vibration.Init();
 
         ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
@@ -91,7 +89,7 @@ public class InstanTower : MonoBehaviour
     {
         switch (Tower)
         {
-            case 1:
+            case 0:
                 if(TowerState == false)
                 {
                     Tower_Script = Tower_Script1;
@@ -103,7 +101,7 @@ public class InstanTower : MonoBehaviour
                     TowerChange = true;
                 }
                 break;
-            case 2:
+            case 1:
                 if (TowerState == false)
                 {
                     Tower_Script = Tower_Script2;
@@ -115,7 +113,7 @@ public class InstanTower : MonoBehaviour
                     TowerChange = true;
                 }
                 break;
-            case 3:
+            case 2:
                 if (TowerState == false)
                 {
                     Tower_Script = Tower_Script3;
@@ -127,7 +125,7 @@ public class InstanTower : MonoBehaviour
                     TowerChange = true;
                 }
                 break;
-            case 4:
+            case 3:
                 if (TowerState == false)
                 {
                     Tower_Script = Tower_Script4;
@@ -144,8 +142,10 @@ public class InstanTower : MonoBehaviour
 
     public void CallSwitsh()
     {
-        Debug.Log("SelectTower_Script.NextTowerN"+ SelectTower_Script.NextTowerN);
+        int i;
         //switchTower(SelectTower_Script.NextTowerN);
+        i = SelectTower_Script.RetuenTowerN();
+        switchTower(i);
     }
 
     public void Touched(/* bool TowerState, TodasTorres Tower_Script, Vector3 StartingPos */)
