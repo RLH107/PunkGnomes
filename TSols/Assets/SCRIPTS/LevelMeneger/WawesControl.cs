@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WawesControl : MonoBehaviour
 {
+    //Esternal Info
+    private WaweMaker WaweMaker_Script;
+
     //Lists Of Lists
     private List<List<GameObject>> LOfObjLs; // List Of GameOjectcts Lists
     private List<List<int>> LOfIntLs; // List Of IntegerNumbers Lists
@@ -88,26 +91,9 @@ public class WawesControl : MonoBehaviour
             L_Temp.Clear();
         }
     }
-
-    public void NumberOfWawes(int Number)
-    {
-        for(int i = 0; i < Number; i++)
-        {
-            LOfObjLs[i] = new List<GameObject>();
-            LOfIntLs[i] = new List<int>();
-        }
-    }
     
 
-    public void AddGameObjToListOfLists(int WhatListToAddTo, GameObject GO)
-    {
-        LOfObjLs[WhatListToAddTo].Add(GO);
-    }
-    public void AddToIntListOfLists(int WhatListToAddTo, int Int)
-    {
-        List<int> LIO = LOfIntLs[WhatListToAddTo];
-        LIO.Add(Int);
-    }
+    
     
     //Return members?
     /*

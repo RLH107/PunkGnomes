@@ -10,12 +10,22 @@ public class WaweMaker : MonoBehaviour
     [SerializeField] private GameObject prefab_3;
     [SerializeField] private GameObject prefab_4;
 
+    //Internal List
+    List<GameObject> G_Obj;
+    List<int> EnemyNumbers;
+
     void Start()
     {
-        Wawes_Script.NumberOfWawes(1);
-        Wawes_Script.AddGameObjToListOfLists(0, prefab_1);
+        /*
+        G_Obj = new List<GameObject> { prefab_1, prefab_2 };
+        EnemyNumbers = new List<int> { 3, 1 };
+        */
+    }
 
-        Wawes_Script.InsWawes();
+    public int ReturnListSize(string ListName)
+    {
+
+        return 1;
     }
 
 }
