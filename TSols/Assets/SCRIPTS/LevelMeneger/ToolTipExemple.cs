@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ToolTipExemple : MonoBehaviour
 {
-    [TextArea] [Tooltip("Description Of the Wave")] 
+    /*[TextArea]*/ [Tooltip("Description Of the Wave")] 
     public string Notes = "Basic Enemys";
 }

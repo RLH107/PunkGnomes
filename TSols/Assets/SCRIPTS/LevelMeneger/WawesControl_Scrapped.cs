@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class WawesControl : MonoBehaviour
+public class WawesControl_Scrapped : MonoBehaviour
 {
     //Esternal Info
-    private WaweMaker WaweMaker_Script;
+    private WaweMaker_Scrapped WaweMaker_Scriped;
 
     //Lists Of Lists
     private List<List<GameObject>> LOfObjLs; // List Of GameOjectcts Lists

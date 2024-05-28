@@ -97,7 +97,7 @@ public class TodasTorres : MonoBehaviour
                 //Fires Projectile
                 Fire();
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         if (EnemysTransforms.Count == 0 && Active == true)
         {
@@ -113,7 +113,7 @@ public class TodasTorres : MonoBehaviour
     /// <param name="other"></param>
 
 
-    //If Enemy Adds to Target List
+    // ADD /////////// Adds to Target List
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "ENEMY")
@@ -122,7 +122,7 @@ public class TodasTorres : MonoBehaviour
         }
     }
 
-    //If Enemy Removes From Target List
+    // REMOVE ///////////////// Removes From Target List
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "ENEMY")

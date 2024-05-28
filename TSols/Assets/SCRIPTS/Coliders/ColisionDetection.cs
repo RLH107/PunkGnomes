@@ -12,16 +12,16 @@ public class ColisionDetection : MonoBehaviour
     private int x;
     private int ListCount;
     Inimigo_Base Inimigo_Base_Script;
-    InsEnemy InsEnemy_Script;
+    TurningColiderList ColiderList_Script;
 
     private void Start()
     {
         x = 0;
         Inimigo_Base_Script = Enemy.GetComponent<Inimigo_Base>();
-        InsEnemy_Script = GameObject.Find("InsEnemy").GetComponent<InsEnemy>();
+        ColiderList_Script = GameObject.Find("LevelMeneger").GetComponent<TurningColiderList>();
 
-        ListCount = InsEnemy_Script.ReturnNumberOfObjectsInColiderList();
-        Target = InsEnemy_Script.GetObjectsFromColiderList(x);
+        ListCount = ColiderList_Script.ReturnNumberOfObjectsInColiderList();
+        Target = ColiderList_Script.GetObjectsFromColiderList(x);
 
         Inimigo_Base_Script.NewTarget(Target);
     }
@@ -38,8 +38,13 @@ public class ColisionDetection : MonoBehaviour
         if (other.gameObject.tag == "TurnColider")
         {
             x++;
-            Target = InsEnemy_Script.GetObjectsFromColiderList(x);
+            Target = ColiderList_Script.GetObjectsFromColiderList(x);
             Inimigo_Base_Script.NewTarget(Target);
         }
+    }
+
+    public void ResetColisionDetection()
+    {
+        x = 0;
     }
 }

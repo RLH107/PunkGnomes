@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaweMaker : MonoBehaviour
+public class WaweMaker_Scrapped : MonoBehaviour
 {
-    [SerializeField] WawesControl Wawes_Script;
+    [SerializeField] WawesControl_Scrapped Wawes_Script;
     [SerializeField] private GameObject prefab_1;
     [SerializeField] private GameObject prefab_2;
     [SerializeField] private GameObject prefab_3;

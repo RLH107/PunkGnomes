@@ -16,6 +16,7 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private float MoveForce;
 
     [SerializeField] private bool ActivationState;
+    [SerializeField] private ColisionDetection CD_Script;
     private Vector3 StartingPos;
     private Vector3 targetDirection;
     private Quaternion StartingRot;
@@ -120,6 +121,11 @@ public class Inimigo_Base : MonoBehaviour
         //Debug.Log("targetDirection = " + targetDirection);
     }
 
+    public void MoveEnemyToANewPosition(Vector3 NewPosition)
+    {
+        transform.position = NewPosition;
+    }
+
     /// <summary>
     /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
@@ -165,6 +171,7 @@ public class Inimigo_Base : MonoBehaviour
             transform.position = StartingPos;
             transform.rotation = StartingRot;
             rb.constraints = RigidbodyConstraints.FreezePosition;
+            CD_Script.ResetColisionDetection();
         }
         if (ActivationState == true)
         {
@@ -222,26 +229,7 @@ public class Inimigo_Base : MonoBehaviour
             yield return new WaitForFixedUpdate();
             //Slows down Movement
 
-            rb.velocity = new Vector3(0, 0, 0);  ///////////////////////////////////////////// MUDA ESTA PORRA
-
-            //rb.AddForce(orientation.forward * -1, ForceMode.VelocityChange);
-
-
-
-
-            //Checks if speed is Slow
-            //Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
-            //Checks if speed is Slow
-
-            /*
-            if (rb.velocity.magnitude < 0.1f)
-            {
-                //Stops
-                rb.velocity = new Vector3(0, 0, 0);
-                Debug.Log("Stops");
-            }
-            */
-            //Debug.Log("rb.velocity.magnitude = " + rb.velocity.magnitude);
+            rb.velocity = new Vector3(0, 0, 0);
         }
         //End OF Loop
         //Debug.Log("RB.velocity = "+ rb.velocity.magnitude);
