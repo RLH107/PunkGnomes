@@ -15,7 +15,7 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float MoveForce;
 
-    [SerializeField] private bool ActivationState;
+    private bool ActivationState;
     [SerializeField] private ColisionDetection CD_Script;
     private Vector3 StartingPos;
     private Vector3 targetDirection;
@@ -49,7 +49,7 @@ public class Inimigo_Base : MonoBehaviour
         StartingPos = transform.position; //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
-        //ActivationState = false;
+        ActivationState = false;
 
         //RSpeed = 1;
         //Health = 20;

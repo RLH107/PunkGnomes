@@ -3305,7 +3305,7 @@ Transform:
   m_GameObject: {fileID: 1385899747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.0103, y: 1.0295, z: -24.650002}
+  m_LocalPosition: {x: 9.0103, y: 1.0295, z: -18.97}
   m_LocalScale: {x: 0.2114814, y: 0.21148138, z: 0.2114814}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3865,9 +3865,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d10289e1657a243901078899d11a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TransformPos: {fileID: 0}
-  BacicEnemy1Number: 
-  BacicEnemy2Number: 
+  TransformPOS_ToMoveEnemys: {fileID: 1385899750}
+  BacicEnemy1Number: 0a000000
+  BacicEnemy2Number: 00000000
+  BacicEnemy1Pool: []
+  BacicEnemy2Pool: []
+  ActiveList: []
 --- !u!114 &1521843522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3893,6 +3896,7 @@ MonoBehaviour:
   - {fileID: 1197716820}
   - {fileID: 1109913324}
   - {fileID: 420095561}
+  - {fileID: 259942121}
 --- !u!114 &1521843523
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class Wall : MonoBehaviour
     public void TakeDamege(float DemegeTaken)
     {
         WallHealth -= DemegeTaken;
-        Debug.Log("EnemyHealth = " + WallHealth);
+        Debug.Log("Wall Health = " + WallHealth);
         if (WallHealth <= 0)
         {
             //Change Scene To Lose
