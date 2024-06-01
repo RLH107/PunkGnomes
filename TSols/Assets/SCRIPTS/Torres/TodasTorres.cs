@@ -20,6 +20,9 @@ public class TodasTorres : MonoBehaviour
     [HideInInspector] public List<Projetil> ProjetilsScripts;
     [HideInInspector] public List<Transform> EnemysTransforms;
 
+    private EnemyTags EnemyTags_Script;
+
+
     private bool Active;
     private int NPorjectile;
     private float FCooldown;
@@ -39,6 +42,7 @@ public class TodasTorres : MonoBehaviour
         FCooldown = TCoolDown;
         NPorjectile = 0;
         Active = false;
+        EnemyTags_Script = GameObject.Find("LevelMeneger").GetComponent<EnemyTags>();
         for (int i = NumberOfProjectiles; i > 0; i--)
         {
             GameObject gameObject;
@@ -116,19 +120,44 @@ public class TodasTorres : MonoBehaviour
     // ADD /////////// Adds to Target List
     private void OnTriggerEnter(Collider other)
     {
+        for (int i = 0; i < EnemyTags_Script.ReturnEnemyTags_Length(); i++)
+        {
+            if (other.gameObject.tag == EnemyTags_Script.ReturnEnemyTags(i))
+            {
+                EnemysTransforms.Add(other.transform);
+            }
+        }
+
+
+
+        /*
         if (other.gameObject.tag == "ENEMY")
         {
             EnemysTransforms.Add(other.transform);
         }
+        */
     }
 
     // REMOVE ///////////////// Removes From Target List
     private void OnTriggerExit(Collider other)
     {
+        for (int i = 0; i < EnemyTags_Script.ReturnEnemyTags_Length(); i++)
+        {
+            if (other.gameObject.tag == EnemyTags_Script.ReturnEnemyTags(i))
+            {
+                EnemysTransforms.Remove(other.transform);
+            }
+        }
+
+
+
+
+        /*
         if (other.gameObject.tag == "ENEMY")
         {
             EnemysTransforms.Remove(other.transform);
         }
+        */
     }
 
     private void Fire()

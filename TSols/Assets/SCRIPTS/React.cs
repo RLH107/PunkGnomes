@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class React : MonoBehaviour
 {
-
     private void Start()
     {
         Vibration.Init();

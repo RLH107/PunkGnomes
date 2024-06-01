@@ -5,12 +5,10 @@ using UnityEngine;
 public class React2 : MonoBehaviour
 {
     private float timer;
-
     private void Start()
     {
         Vibration.Init();
     }
-
     public void Touched()
     {
         Debug.Log("Touched");
@@ -30,7 +28,6 @@ public class React2 : MonoBehaviour
         }
         timer = 0.05f;
     }
-
     IEnumerator TimerToZero()
     {
         while (timer > 0)

@@ -7,6 +7,14 @@ public class Projetil : MonoBehaviour
     Inimigo_Base Inimigo_BaseScript;
     private Vector3 WatingPos;
     [SerializeField] private Rigidbody rb;
+    private EnemyTags EnemyTags_Script;
+
+    private void Start()
+    {
+        EnemyTags_Script = GameObject.Find("LevelMeneger").GetComponent<EnemyTags>();
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Tower")
@@ -14,10 +22,15 @@ public class Projetil : MonoBehaviour
             transform.position = WatingPos;
             rb.velocity = new Vector3(0, 0, 0);
 
-            if (other.gameObject.tag == "ENEMY")
+
+
+            for (int i = 0; i < EnemyTags_Script.ReturnEnemyTags_Length(); i++)
             {
-                Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
-                Inimigo_BaseScript.TakeDamege(5f);
+                if (other.gameObject.tag == EnemyTags_Script.ReturnEnemyTags(i))
+                {
+                    Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
+                    Inimigo_BaseScript.TakeDamege(5f);
+                }
             }
         }
     }

@@ -278,7 +278,6 @@ MonoBehaviour:
   Attack: 1
   MoveSpeed: 2
   MoveForce: 6
-  ActivationState: 1
   CD_Script: {fileID: 8088864867323968394}
 --- !u!1 &6900251111516133210
 GameObject:

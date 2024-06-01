@@ -8,6 +8,8 @@ TagManager:
   - TurnColider
   - Tower
   - Projectile1
+  - BacicEnemy2
+  - BacicEnemy1
   layers:
   - Default
   - TransparentFX

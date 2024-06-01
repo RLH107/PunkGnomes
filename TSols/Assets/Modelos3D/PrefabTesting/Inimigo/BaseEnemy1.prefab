@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4770428042718940681}
   m_Layer: 0
   m_Name: BaseEnemy1
-  m_TagString: ENEMY
+  m_TagString: BacicEnemy2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   Attack: 1
   MoveSpeed: 2
   MoveForce: 6
-  ActivationState: 1
+  CD_Script: {fileID: 7772441564827017282}
 --- !u!1 &6563737955560463339
 GameObject:
   m_ObjectHideFlags: 0

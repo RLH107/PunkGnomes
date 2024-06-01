@@ -37,6 +37,7 @@ public class WaveControl : MonoBehaviour
     {
         //Adds Enemys to BacicEnemyPoolList
         BacicEnemy1Pool = GameObject.FindGameObjectsWithTag("ENEMY").ToList();
+        BacicEnemy2Pool = GameObject.FindGameObjectsWithTag("BacicEnemy2").ToList();
         CallWave(0);
     }
 

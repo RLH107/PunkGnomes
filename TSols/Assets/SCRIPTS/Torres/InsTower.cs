@@ -14,7 +14,7 @@ public class InsTower : MonoBehaviour
     void Start()
     {
         ChangePos = 10;
-        Tower = Instantiate(TowerPrefab, new Vector3(transform.position.x, transform.position.y - ChangePos, transform.position.z), transform.rotation);
+        Tower = Instantiate(TowerPrefab, new Vector3(transform.position.x +100, transform.position.y - ChangePos, transform.position.z), transform.rotation);
     }
 
 
