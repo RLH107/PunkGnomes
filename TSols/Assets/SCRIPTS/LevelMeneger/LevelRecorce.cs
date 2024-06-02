@@ -70,4 +70,9 @@ public class LevelRecorce : MonoBehaviour
             Debug.Log("RES Added");
         }
     }
+
+    public int ReturnCurrentResorce()
+    {
+        return RES_count;
+    }
 }

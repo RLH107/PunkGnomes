@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonNumber: 2
   CheckMarker: {fileID: 76166686}
-  SelectTower_Script: {fileID: 1521843518}
+  SelectTower_Script: {fileID: 0}
 --- !u!114 &76166686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1521843518}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SelectTower, Assembly-CSharp
         m_MethodName: SetTower
         m_Mode: 3
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1521843518}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SelectTower, Assembly-CSharp
         m_MethodName: SetTower
         m_Mode: 3
@@ -970,26 +970,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1210983397}
     m_Modifications:
-    - target: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
-        type: 3}
-      propertyPath: T1_price
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
-        type: 3}
-      propertyPath: T2_price
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
-        type: 3}
-      propertyPath: T3_price
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220763618525975980, guid: 8f8bc66b599c41749acb0247903f40a6,
-        type: 3}
-      propertyPath: T4_price
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 6415326369169441315, guid: 8f8bc66b599c41749acb0247903f40a6,
         type: 3}
       propertyPath: m_Enabled
@@ -1472,7 +1452,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1521843518}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SelectTower, Assembly-CSharp
         m_MethodName: SetTower
         m_Mode: 3
@@ -2464,7 +2444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonNumber: 0
   CheckMarker: {fileID: 916188170}
-  SelectTower_Script: {fileID: 1521843518}
+  SelectTower_Script: {fileID: 0}
 --- !u!114 &916188170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3606,7 +3586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonNumber: 3
   CheckMarker: {fileID: 1258866017}
-  SelectTower_Script: {fileID: 1521843518}
+  SelectTower_Script: {fileID: 0}
 --- !u!114 &1258866017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4078,7 +4058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ButtonNumber: 1
   CheckMarker: {fileID: 1372368067}
-  SelectTower_Script: {fileID: 1521843518}
+  SelectTower_Script: {fileID: 0}
 --- !u!114 &1372368067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4444,18 +4424,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1463436846}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1521843518 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3093799418467252983, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1455495646650875547}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455495646650875549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dbcdb5e3165b61489a6cd8a9335cf94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1553528801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7000202211203381823, guid: 65410285b5a24c849883b9e17a40e17d,
@@ -4725,7 +4693,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1521843518}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SelectTower, Assembly-CSharp
         m_MethodName: SetTower
         m_Mode: 3
@@ -6134,14 +6102,11 @@ PrefabInstance:
       propertyPath: TurnColidersList.Array.data[12]
       value: 
       objectReference: {fileID: 259942121}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3093799418467252983, guid: 67b5c46d526aad54ebd9a240e5f6289f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7681638089158231143, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1455495646650875550}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67b5c46d526aad54ebd9a240e5f6289f, type: 3}
 --- !u!114 &1455495646650875548 stripped
 MonoBehaviour:
@@ -6149,34 +6114,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1455495646650875547}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455495646650875549}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b4848f5f6043404c9062aa3358ad36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1455495646650875549 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7681638089158231143, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1455495646650875547}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1455495646650875550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1455495646650875549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f68c126c2db824b9689b487713cf27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Initial_RES_count: 0
-  Max_RES_count: 0
-  N_of_Seconds_before_next_addition: 0
-  N_of_Passive_Increce: 0
 --- !u!1001 &5052922381048433912
 PrefabInstance:
   m_ObjectHideFlags: 0

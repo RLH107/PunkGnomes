@@ -7,52 +7,62 @@ using UnityEngine.UIElements;
 
 public class InstanTower : MonoBehaviour
 {
-    //External Information
+    // External Information
     [SerializeField] private GameObject TowerPrefab_1;
+    [SerializeField] private int T1_price;
     [SerializeField] private GameObject TowerPrefab_2;
+    [SerializeField] private int T2_price;
     [SerializeField] private GameObject TowerPrefab_3;
+    [SerializeField] private int T3_price;
     [SerializeField] private GameObject TowerPrefab_4;
+    [SerializeField] private int T4_price;
     [SerializeField] private Transform InsPOS;
 
-    //Internal Information
+
+    ////// Internal Information
     private SelectTower SelectTower_Script;
+    private LevelRecorce LevelRecorce_Script;
 
     private GameObject ThisTower1;
     private GameObject ThisTower2;
     private GameObject ThisTower3;
     private GameObject ThisTower4;
 
-    // private GameObject ThisTower;
-
-
+    // private Script ThisTower;
     private TodasTorres Tower_Script1;
     private TodasTorres Tower_Script2;
     private TodasTorres Tower_Script3;
     private TodasTorres Tower_Script4;
 
+    // Current Script Beeing Used
     private TodasTorres Tower_Script;
 
-
+    // Starting pos of the tower
     private Vector3 StartingPos1;
     private Vector3 StartingPos2;
     private Vector3 StartingPos3;
     private Vector3 StartingPos4;
 
+    // Current pos Beeing Used
     private Vector3 StartingPos;
 
+    // Is Tower There?
     private bool TowerState;
+    // Do I Have to chenge Tower?
     private bool TowerChange;
+    // What Tower to Change next?
     private int ChangeNext;
 
-
-    private MeshRenderer ThisMesh;
+    private int TPrice;
 
     //Timer For Button Debounce
     private float timer;
 
     void Start()
     {
-        SelectTower_Script = GameObject.Find("LevelMeneger").GetComponent<SelectTower>();
+        GameObject levelMeneger = GameObject.Find("LevelMeneger");
+        SelectTower_Script = levelMeneger.GetComponent<SelectTower>();
+        LevelRecorce_Script = levelMeneger.GetComponent<LevelRecorce>();
         Vibration.Init();
 
         ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
@@ -69,6 +79,7 @@ public class InstanTower : MonoBehaviour
         Tower_Script4 = ThisTower4.GetComponent<TodasTorres>();
 
         Tower_Script = Tower_Script1;
+        TPrice = T1_price;
 
 
         StartingPos1 = ThisTower1.transform.position;
@@ -94,6 +105,7 @@ public class InstanTower : MonoBehaviour
                 {
                     Tower_Script = Tower_Script1;
                     StartingPos = StartingPos1;
+                    TPrice = T1_price;
                 }
                 if(TowerState == true)
                 {
@@ -106,6 +118,7 @@ public class InstanTower : MonoBehaviour
                 {
                     Tower_Script = Tower_Script2;
                     StartingPos = StartingPos2;
+                    TPrice = T2_price;
                 }
                 if (TowerState == true)
                 {
@@ -118,6 +131,7 @@ public class InstanTower : MonoBehaviour
                 {
                     Tower_Script = Tower_Script3;
                     StartingPos = StartingPos3;
+                    TPrice = T3_price;
                 }
                 if (TowerState == true)
                 {
@@ -130,6 +144,7 @@ public class InstanTower : MonoBehaviour
                 {
                     Tower_Script = Tower_Script4;
                     StartingPos = StartingPos4;
+                    TPrice = T4_price;
                 }
                 if (TowerState == true)
                 {
@@ -159,29 +174,31 @@ public class InstanTower : MonoBehaviour
         }
         if (timer <= 0)
         {
-            Vibration.VibratePop();
-
-            //If Tower Is Active -> Deactivate Tower
-            if (TowerState == true && Used == false)
+            if (LevelRecorce_Script.ReturnCurrentResorce() >= TPrice)
             {
-                Tower_Script.MoveTower(StartingPos);
-                TowerState = false;
-                Used = true;
-
-                if (TowerChange == true)
+                Vibration.VibratePop();
+                //If Tower Is Active -> Deactivate Tower
+                if (TowerState == true && Used == false)
                 {
-                    TowerChange = false;
-                    switchTower(ChangeNext);
+                    Tower_Script.MoveTower(StartingPos);
+                    TowerState = false;
+                    Used = true;
+
+                    if (TowerChange == true)
+                    {
+                        TowerChange = false;
+                        switchTower(ChangeNext);
+                    }
                 }
-            }
 
 
-            //If Tower Is Inactive -> Activate Tower
-            if (TowerState == false && Used == false)
-            {
-                Tower_Script.MoveTower(InsPOS.position);
-                TowerState = true;
-                Used = true;
+                //If Tower Is Inactive -> Activate Tower
+                if (TowerState == false && Used == false)
+                {
+                    Tower_Script.MoveTower(InsPOS.position);
+                    TowerState = true;
+                    Used = true;
+                }
             }
 
             //Debounce Timer Start
