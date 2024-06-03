@@ -134,7 +134,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9010066253838153256}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -204,10 +204,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerPrefab_1: {fileID: 8175552415172699160, guid: 658972f789f1e60479d03b6d9fec2761,
     type: 3}
+  T1_price: 5
   TowerPrefab_2: {fileID: 8175552415172699160, guid: e718eb23273efd1478ab61a84d83d13f,
     type: 3}
+  T2_price: 3
   TowerPrefab_3: {fileID: 8175552415172699160, guid: 1303774387fe24a4ca97fa19fda0bfcf,
     type: 3}
+  T3_price: 1
   TowerPrefab_4: {fileID: 8175552415172699160, guid: 45f785974d6803c4582141fc9b2786e7,
     type: 3}
+  T4_price: 7
   InsPOS: {fileID: 2400584961930172364}
+  Mesh: {fileID: 6415326369169441315}

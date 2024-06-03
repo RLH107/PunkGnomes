@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static TButon;
 
 public class InstanTower : MonoBehaviour
 {
@@ -16,12 +17,15 @@ public class InstanTower : MonoBehaviour
     [SerializeField] private int T3_price;
     [SerializeField] private GameObject TowerPrefab_4;
     [SerializeField] private int T4_price;
+
     [SerializeField] private Transform InsPOS;
+    [SerializeField] private MeshRenderer Mesh;
 
 
     ////// Internal Information
     private SelectTower SelectTower_Script;
     private LevelRecorce LevelRecorce_Script;
+    private TButon Tbuton_Script;
 
     private GameObject ThisTower1;
     private GameObject ThisTower2;
@@ -63,12 +67,14 @@ public class InstanTower : MonoBehaviour
         GameObject levelMeneger = GameObject.Find("LevelMeneger");
         SelectTower_Script = levelMeneger.GetComponent<SelectTower>();
         LevelRecorce_Script = levelMeneger.GetComponent<LevelRecorce>();
+        Tbuton_Script = levelMeneger.GetComponent<TButon>();
+
         Vibration.Init();
 
-        ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
-        ThisTower2 = Instantiate(TowerPrefab_2, new Vector3(InsPOS.position.x, InsPOS.position.y -10, InsPOS.position.z), Quaternion.identity);
-        ThisTower3 = Instantiate(TowerPrefab_3, new Vector3(InsPOS.position.x, InsPOS.position.y -15, InsPOS.position.z), Quaternion.identity);
-        ThisTower4 = Instantiate(TowerPrefab_4, new Vector3(InsPOS.position.x, InsPOS.position.y -20, InsPOS.position.z), Quaternion.identity);
+        ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
+        ThisTower2 = Instantiate(TowerPrefab_2, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -10, InsPOS.position.z), Quaternion.identity);
+        ThisTower3 = Instantiate(TowerPrefab_3, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -15, InsPOS.position.z), Quaternion.identity);
+        ThisTower4 = Instantiate(TowerPrefab_4, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -20, InsPOS.position.z), Quaternion.identity);
 
         //is not used1      ThisTower = ThisTower1;
 
@@ -92,6 +98,8 @@ public class InstanTower : MonoBehaviour
 
         TowerState = false;
         TowerChange = false;
+
+        Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext
     }
 
@@ -163,12 +171,18 @@ public class InstanTower : MonoBehaviour
         switchTower(i);
     }
 
+    public void SetMesh()
+    {
+        Debug.Log("SetMesh Called");
+        Mesh.enabled = !Mesh.enabled;
+    }
+
     public void Touched(/* bool TowerState, TodasTorres Tower_Script, Vector3 StartingPos */)
     {
         bool Used = false;
         if (timer > 0)
         {
-            Debug.Log("StillPressed");
+            //Debug.Log("StillPressed");
             //Debounce Timer Reset
             timer = 0.05f;
         }
@@ -213,7 +227,7 @@ public class InstanTower : MonoBehaviour
         {
             yield return null;
             timer = timer - Time.deltaTime;
-            Debug.Log("Timer = " + timer);
+            //Debug.Log("Timer = " + timer);
         }
     }
 }

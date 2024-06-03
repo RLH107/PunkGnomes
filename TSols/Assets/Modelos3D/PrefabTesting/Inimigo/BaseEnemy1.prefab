@@ -265,6 +265,7 @@ MonoBehaviour:
   MoveSpeed: 2
   MoveForce: 6
   CD_Script: {fileID: 7772441564827017282}
+  PoolListNumber: 2
 --- !u!1 &6563737955560463339
 GameObject:
   m_ObjectHideFlags: 0

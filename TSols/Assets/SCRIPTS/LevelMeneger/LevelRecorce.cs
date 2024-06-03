@@ -21,7 +21,7 @@ public class LevelRecorce : MonoBehaviour
     {
         if( RES_count >= Max_RES_count || RES_count == Max_RES_count)
         {
-            Debug.Log("MAX_NUMBER_OF_RES is " + Max_RES_count);
+            //Debug.Log("MAX_NUMBER_OF_RES is " + Max_RES_count);
         }
         else
         {

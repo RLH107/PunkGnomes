@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 1881892470201564195}
   - component: {fileID: 8624020957278758622}
   - component: {fileID: 3093799418467252983}
-  - component: {fileID: 8235533363373558900}
   - component: {fileID: 174974266459106259}
   - component: {fileID: 3793536495449870939}
+  - component: {fileID: 4280908594791413182}
+  - component: {fileID: 1819185406901984419}
+  - component: {fileID: 2774262368545166853}
   m_Layer: 0
   m_Name: LevelMeneger
   m_TagString: Untagged
@@ -50,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransformPOS_ToMoveEnemys: {fileID: 0}
-  BacicEnemy1Number: 0a000000
-  BacicEnemy2Number: 00000000
+  BacicEnemy1Number: 02000000
+  BacicEnemy2Number: 03000000
   BacicEnemy1Pool: []
   BacicEnemy2Pool: []
   ActiveList: []
@@ -279,19 +281,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8235533363373558900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7681638089158231143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614e33543d1171942a8b47843142913d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: Basic Enemys
 --- !u!114 &174974266459106259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,3 +305,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4848f5f6043404c9062aa3358ad36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyTags_Array:
+  - ENEMY
+  - BacicEnemy2
+--- !u!114 &4280908594791413182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681638089158231143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f68c126c2db824b9689b487713cf27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Initial_RES_count: 0
+  Max_RES_count: 0
+  N_of_Seconds_before_next_addition: 0
+  N_of_Passive_Increce: 0
+--- !u!114 &1819185406901984419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681638089158231143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0b5b56a52b1144580c25e518af0fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2774262368545166853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681638089158231143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d237b6992557ac14c855a87d83e8586c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StatScreenObjects: []
+  PlayScreenObjects: []
+  EndScreenObjects: []

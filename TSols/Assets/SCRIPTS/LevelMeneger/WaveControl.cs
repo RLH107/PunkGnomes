@@ -32,12 +32,14 @@ public class WaveControl : MonoBehaviour
     private Inimigo_Base Inimigo_BaseScript;
     private GameObject AddOrRemove;
     private int WaveNumber;
+    private bool LastWave;
 
     void Start()
     {
         //Adds Enemys to BacicEnemyPoolList
         BacicEnemy1Pool = GameObject.FindGameObjectsWithTag("ENEMY").ToList();
         BacicEnemy2Pool = GameObject.FindGameObjectsWithTag("BacicEnemy2").ToList();
+        LastWave = false;
         CallWave(0);
     }
 
@@ -71,6 +73,13 @@ public class WaveControl : MonoBehaviour
             //Changes Enemy Displacement
             p = p - 2;
         }
+        if (WaveNumber == BacicEnemy1Number.Count - 1)
+        {
+            LastWave = true;
+            Debug.Log("Last Wave = " +  LastWave);
+            // Start a Corutine that Checks active list
+            LastWaveEndCheck();
+        }
     }
 
 
@@ -96,10 +105,22 @@ public class WaveControl : MonoBehaviour
         {
             case 1:
                 BacicEnemy1Pool.Add(EnemyThatHasBeenDestroyed);
+                ActiveList.Remove(EnemyThatHasBeenDestroyed);
                 break;
             case 2:
                 BacicEnemy2Pool.Add(EnemyThatHasBeenDestroyed);
+                ActiveList.Remove(EnemyThatHasBeenDestroyed);
                 break;
         }
+        Debug.Log("Destroyed Enemy = " + EnemyThatHasBeenDestroyed);
+    }
+
+    private IEnumerator LastWaveEndCheck()
+    {
+        while (ActiveList.Count > 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        //Game Over Winn
     }
 }

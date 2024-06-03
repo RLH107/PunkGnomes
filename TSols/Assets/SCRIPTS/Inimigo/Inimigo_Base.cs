@@ -17,11 +17,13 @@ public class Inimigo_Base : MonoBehaviour
 
     private bool ActivationState;
     [SerializeField] private ColisionDetection CD_Script;
+    [SerializeField] private int PoolListNumber;
     private Vector3 StartingPos;
     private Vector3 targetDirection;
     private Quaternion StartingRot;
     private Quaternion TurnTo;
     private GameObject Target;
+    private WaveControl WaveControl_Script;
 
 
     /// <summary>
@@ -46,10 +48,12 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
-        StartingPos = transform.position; //Change Later
+        StartingPos = new Vector3(10,10,10); //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
         ActivationState = false;
+        WaveControl_Script = GameObject.Find("LevelMeneger").GetComponent<WaveControl>();
+
 
         //RSpeed = 1;
         //Health = 20;
@@ -101,13 +105,14 @@ public class Inimigo_Base : MonoBehaviour
         }
     }
 
-    public void DeactivateEnemy()
+    private void DeactivateEnemy()
     {
         if (ActivationState)
         {
             //Debug.Log("DeactivateEnemy");
             StopAllCoroutines();
             ActivationState = false;
+            WaveControl_Script.IsEnemyDestroyed(gameObject, PoolListNumber);
             EnemyStateSwitch(EState.IDLE);
         }
     }
