@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class LevelRecorce : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class LevelRecorce : MonoBehaviour
     [SerializeField] private int Max_RES_count;
     [SerializeField] private float N_of_Seconds_before_next_addition;
     [SerializeField] private int N_of_Passive_Increce;
+    [SerializeField] private TMP_Text REStext;
     private int RES_count;
     private int RES_sheck;
     private float NofSbA;
@@ -36,6 +40,8 @@ public class LevelRecorce : MonoBehaviour
                 Debug.Log("NumberOf_RES" + RES_count);
             }
         }
+        REStext.text = RES_count.ToString();
+
     }
     public void PayResorce(int NumberToSubtract)
     {
