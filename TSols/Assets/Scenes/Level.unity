@@ -3537,7 +3537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.67, y: 0}
+  m_AnchoredPosition: {x: 7.670044, y: 0}
   m_SizeDelta: {x: -52.663, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &977216317
@@ -3869,7 +3869,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1046284067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1455495646650875556}
+        m_TargetAssemblyTypeName: WaveControl, Assembly-CSharp
+        m_MethodName: CallFirstWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1046284067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4340,7 +4352,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.67, y: 0}
+  m_AnchoredPosition: {x: 7.670044, y: 0}
   m_SizeDelta: {x: -52.663, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1172181623
@@ -4626,7 +4638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.67, y: 0}
+  m_AnchoredPosition: {x: 7.670044, y: 0}
   m_SizeDelta: {x: -52.663, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1198515000
@@ -4801,7 +4813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 7.67, y: 0}
+  m_AnchoredPosition: {x: 7.670044, y: 0}
   m_SizeDelta: {x: -52.663, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1227396479
@@ -7210,7 +7222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1719988580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9259,6 +9271,31 @@ PrefabInstance:
       propertyPath: TransformPOS_ToMoveEnemys
       value: 
       objectReference: {fileID: 1385899750}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.data[1]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2197435604339363128, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9541,6 +9578,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e0b5b56a52b1144580c25e518af0fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1455495646650875556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1455495646650875547}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d10289e1657a243901078899d11a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5052922381048433912

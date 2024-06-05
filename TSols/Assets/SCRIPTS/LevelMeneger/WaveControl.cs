@@ -17,9 +17,11 @@ public class WaveControl : MonoBehaviour
 
 
     //Pool_1
+    //[SerializeField] private GameObject BacicEnemy1PoolGObj;
     [HideInInspector] public List<GameObject> BacicEnemy1Pool;
 
     //Pool_2
+    //[SerializeField] private GameObject BacicEnemy2PoolGObj;
     [HideInInspector] public List<GameObject> BacicEnemy2Pool;
 
 
@@ -31,8 +33,9 @@ public class WaveControl : MonoBehaviour
     
     private Inimigo_Base Inimigo_BaseScript;
     private GameObject AddOrRemove;
-    private int WaveNumber;
     private bool LastWave;
+    private int Wave;
+
 
     void Start()
     {
@@ -40,7 +43,12 @@ public class WaveControl : MonoBehaviour
         BacicEnemy1Pool = GameObject.FindGameObjectsWithTag("ENEMY").ToList();
         BacicEnemy2Pool = GameObject.FindGameObjectsWithTag("BacicEnemy2").ToList();
         LastWave = false;
-        CallWave(0);
+        Wave = 0;
+    }
+
+    public void CallFirstWave()
+    {
+        CallWave(Wave);
     }
 
     private void CallWave(int WaveNumber)
@@ -64,12 +72,16 @@ public class WaveControl : MonoBehaviour
         {
             // Get Script from Object
             Inimigo_BaseScript = ActiveList[i].GetComponent<Inimigo_Base>();
+
             // Changes Object POS acording to Last Position
             EnemyStartPos = TransformPOS_ToMoveEnemys.position + new Vector3(0, 0, p);
+
             // Gives new position
             Inimigo_BaseScript.MoveEnemyToANewPosition(EnemyStartPos);
+
             // Activates enemy
             Inimigo_BaseScript.ActivateEnemy();
+
             //Changes Enemy Displacement
             p = p - 2;
         }
@@ -78,8 +90,26 @@ public class WaveControl : MonoBehaviour
             LastWave = true;
             Debug.Log("Last Wave = " +  LastWave);
             // Start a Corutine that Checks active list
-            LastWaveEndCheck();
+            StartCoroutine(LastWaveEndCheck());
         }
+        else
+        {
+            StartCoroutine(BeforNextWave());
+        }
+    }
+
+    private IEnumerator BeforNextWave()
+    {
+        while(ActiveList.Count > 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        for(int i =0; i< ActiveList.Count; i++)
+        {
+            Debug.LogWarning("activeList = " + ActiveList[i]);
+        }
+
+        CallWave(Wave);
     }
 
 
@@ -101,11 +131,14 @@ public class WaveControl : MonoBehaviour
 
     public void IsEnemyDestroyed(GameObject EnemyThatHasBeenDestroyed, int NumberOfTheEnemyPoolList)
     {
+        Debug.Log("BacicEnemy1Pool.Count" +BacicEnemy1Pool.Count);
+        Debug.Log("ActiveList.Count" + ActiveList.Count);
         switch (NumberOfTheEnemyPoolList)
         {
             case 1:
                 BacicEnemy1Pool.Add(EnemyThatHasBeenDestroyed);
                 ActiveList.Remove(EnemyThatHasBeenDestroyed);
+
                 break;
             case 2:
                 BacicEnemy2Pool.Add(EnemyThatHasBeenDestroyed);
@@ -113,6 +146,8 @@ public class WaveControl : MonoBehaviour
                 break;
         }
         Debug.Log("Destroyed Enemy = " + EnemyThatHasBeenDestroyed);
+        Debug.Log("BacicEnemy1Pool.Count" + BacicEnemy1Pool.Count);
+        Debug.Log("ActiveList.Count" + ActiveList.Count);
     }
 
     private IEnumerator LastWaveEndCheck()

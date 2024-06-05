@@ -20,7 +20,7 @@ public class SelectTower : MonoBehaviour
 
     private void BeforeInvoke()
     {
-        Debug.Log("BeforeInvoke");
+        //Debug.Log("BeforeInvoke");
         TowerChange.Invoke();
         CheckChange.Invoke();
     }

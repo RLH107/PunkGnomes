@@ -173,7 +173,7 @@ public class InstanTower : MonoBehaviour
 
     public void SetMesh()
     {
-        Debug.Log("SetMesh Called");
+        //Debug.Log("SetMesh Called");
         Mesh.enabled = !Mesh.enabled;
     }
 

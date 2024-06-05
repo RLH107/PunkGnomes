@@ -15,6 +15,14 @@ public class Inimigo_Base : MonoBehaviour
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float MoveForce;
 
+    private float StartRSpeed;
+    private float StartHealth;
+    private float StartMaxHealth;
+    private float StartAttack;
+    private float StartMoveSpeed;
+    private float StartMoveForce;
+
+
     private bool ActivationState;
     [SerializeField] private ColisionDetection CD_Script;
     [SerializeField] private int PoolListNumber;
@@ -48,19 +56,19 @@ public class Inimigo_Base : MonoBehaviour
 
     void Start()
     {
-        StartingPos = new Vector3(10,10,10); //Change Later
+        StartingPos = transform.position; //Change Later
         StartingRot = transform.rotation;
         rb.freezeRotation = true;
         ActivationState = false;
         WaveControl_Script = GameObject.Find("LevelMeneger").GetComponent<WaveControl>();
 
 
-        //RSpeed = 1;
-        //Health = 20;
-        //MaxHealth = 20;
-        //Attack = 30;
-        //MoveSpeed = 6;
-        //MoveForce = 6;
+        StartRSpeed = RSpeed ;
+        StartHealth = Health;
+        StartHealth = MaxHealth;
+        StartAttack = Attack;
+        StartMoveSpeed = MoveSpeed;
+        StartMoveForce = MoveForce;
 
         EnemyStateSwitch(EState.IDLE);
     }
@@ -70,6 +78,15 @@ public class Inimigo_Base : MonoBehaviour
     /// </summary>
     /// <param name="DemegeTaken"></param>
 
+    private void ResetAllStats()
+    {
+        RSpeed = StartRSpeed;
+        Health = StartHealth;
+        MaxHealth = StartMaxHealth;
+        Attack = StartAttack;
+        MoveSpeed = StartMoveSpeed;
+        MoveForce = StartMoveForce;
+    }
 
     public void TakeDamege(float DemegeTaken)
     {
@@ -111,8 +128,11 @@ public class Inimigo_Base : MonoBehaviour
         {
             //Debug.Log("DeactivateEnemy");
             StopAllCoroutines();
+            CD_Script.ResetColisionDetection();
             ActivationState = false;
             WaveControl_Script.IsEnemyDestroyed(gameObject, PoolListNumber);
+            ResetAllStats();
+            Debug.Log("DeactivateEnemy");
             EnemyStateSwitch(EState.IDLE);
         }
     }
@@ -168,15 +188,16 @@ public class Inimigo_Base : MonoBehaviour
 
     private IEnumerator IDLE()
     {
-        //Debug.Log("IDLE Called");
+        Debug.Log("IDLE Called");
         yield return null;
 
         if (ActivationState == false)
         {
             transform.position = StartingPos;
             transform.rotation = StartingRot;
-            rb.constraints = RigidbodyConstraints.FreezePosition;
             CD_Script.ResetColisionDetection();
+            rb.velocity = new Vector3(0, 0, 0);
+            rb.constraints = RigidbodyConstraints.FreezePosition;
         }
         if (ActivationState == true)
         {
@@ -184,7 +205,7 @@ public class Inimigo_Base : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
             rb.freezeRotation = true;
             TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
-            EnemyStateSwitch(EState.MOVE);
+            EnemyStateSwitch(EState.TURN);
         }
     }
 

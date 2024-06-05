@@ -37,7 +37,7 @@ public class LevelRecorce : MonoBehaviour
             {
                 RES_count += N_of_Passive_Increce;
                 NofSbA = N_of_Seconds_before_next_addition;
-                Debug.Log("NumberOf_RES" + RES_count);
+                //Debug.Log("NumberOf_RES" + RES_count);
             }
         }
         REStext.text = RES_count.ToString();
@@ -53,7 +53,7 @@ public class LevelRecorce : MonoBehaviour
         }
         else
         {
-            Debug.Log("Insuficiant Recorces");
+            //Debug.Log("Insuficiant Recorces");
         }
     }
     public void AddResorce(int NumberToAdd)
@@ -63,17 +63,17 @@ public class LevelRecorce : MonoBehaviour
         if(RES_sheck >= Max_RES_count)
         {
             RES_count = Max_RES_count;
-            Debug.Log("Can Not Pass Max_RES_count" + RES_count);
+            //Debug.Log("Can Not Pass Max_RES_count" + RES_count);
         }
         if (RES_sheck == Max_RES_count)
         {
             RES_count += NumberToAdd;
-            Debug.Log("RES_count = Max_RES_count");
+            //Debug.Log("RES_count = Max_RES_count");
         }
         else
         {
             RES_count += NumberToAdd;
-            Debug.Log("RES Added");
+            //Debug.Log("RES Added");
         }
     }
 
