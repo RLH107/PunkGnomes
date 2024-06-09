@@ -100,15 +100,16 @@ public class WaveControl : MonoBehaviour
 
     private IEnumerator BeforNextWave()
     {
+        Wave++;
         while(ActiveList.Count > 0)
         {
             yield return new WaitForEndOfFrame();
         }
-        for(int i =0; i< ActiveList.Count; i++)
-        {
-            Debug.LogWarning("activeList = " + ActiveList[i]);
-        }
-
+        //for(int i =0; i< ActiveList.Count; i++)
+        //{
+        //Debug.LogWarning("activeList = " + ActiveList[i]);
+        //}
+        yield return new WaitForSeconds(1);
         CallWave(Wave);
     }
 

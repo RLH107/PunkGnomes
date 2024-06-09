@@ -46,5 +46,7 @@ public class ColisionDetection : MonoBehaviour
     public void ResetColisionDetection()
     {
         x = 0;
+        Target = ColiderList_Script.GetObjectsFromColiderList(x);
+        Inimigo_Base_Script.NewTarget(Target);
     }
 }

@@ -26,6 +26,7 @@ public class InstanTower : MonoBehaviour
     private SelectTower SelectTower_Script;
     private LevelRecorce LevelRecorce_Script;
     private TButon Tbuton_Script;
+    private LevelMenues LevelMenues_Script;
 
     private GameObject ThisTower1;
     private GameObject ThisTower2;
@@ -62,12 +63,17 @@ public class InstanTower : MonoBehaviour
     //Timer For Button Debounce
     private float timer;
 
+    //Button Can be pressed
+    private bool IsActive;
+
     void Start()
     {
+        IsActive = false;
         GameObject levelMeneger = GameObject.Find("LevelMeneger");
         SelectTower_Script = levelMeneger.GetComponent<SelectTower>();
         LevelRecorce_Script = levelMeneger.GetComponent<LevelRecorce>();
         Tbuton_Script = levelMeneger.GetComponent<TButon>();
+        LevelMenues_Script = levelMeneger.GetComponent<LevelMenues>();
 
         Vibration.Init();
 
@@ -99,10 +105,23 @@ public class InstanTower : MonoBehaviour
         TowerState = false;
         TowerChange = false;
 
+        LevelMenues_Script.LisenPlayLevelMenu += Activate_DeactivateButton;
         Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext
     }
 
+    public void Activate_DeactivateButton()
+    {
+        StartCoroutine(TimerToZero());
+        if (IsActive == true)
+        {
+            IsActive = false;
+        }
+        if(IsActive == false)
+        {
+            IsActive = true;
+        }
+    }
 
     private void switchTower(int Tower)
     {
@@ -180,6 +199,51 @@ public class InstanTower : MonoBehaviour
     public void Touched(/* bool TowerState, TodasTorres Tower_Script, Vector3 StartingPos */)
     {
         bool Used = false;
+
+        if(IsActive == true)
+        {
+            if (timer > 0)
+            {
+                //Debug.Log("StillPressed");
+                //Debounce Timer Reset
+                timer = 0.05f;
+            }
+            if (timer <= 0)
+            {
+                if (LevelRecorce_Script.ReturnCurrentResorce() >= TPrice)
+                {
+                    Vibration.VibratePop();
+                    //If Tower Is Active -> Deactivate Tower
+                    if (TowerState == true && Used == false)
+                    {
+                        Tower_Script.MoveTower(StartingPos);
+                        TowerState = false;
+                        Used = true;
+
+                        if (TowerChange == true)
+                        {
+                            TowerChange = false;
+                            switchTower(ChangeNext);
+                        }
+                    }
+
+
+                    //If Tower Is Inactive -> Activate Tower
+                    if (TowerState == false && Used == false)
+                    {
+                        Tower_Script.MoveTower(InsPOS.position);
+                        TowerState = true;
+                        Used = true;
+                    }
+                }
+
+                //Debounce Timer Start
+                //timer = 0.05f;
+                StartCoroutine(TimerToZero());
+            }
+        }
+
+        /*
         if (timer > 0)
         {
             //Debug.Log("StillPressed");
@@ -219,10 +283,12 @@ public class InstanTower : MonoBehaviour
             timer = 0.05f;
             StartCoroutine(TimerToZero());
         }
+        */
     }
     
     IEnumerator TimerToZero()
     {
+        timer = 0.05f;
         while (timer > 0)
         {
             yield return null;

@@ -139,7 +139,7 @@ public class Inimigo_Base : MonoBehaviour
 
     public void NewTarget(GameObject NextTarget)
     {
-        //Debug.Log("TurnEnemy");
+        Debug.Log("NewTarget = "+NextTarget);
         Target = NextTarget;
         //Debug.Log("Target = " +  Target);
         targetDirection = Target.transform.position - transform.position;
