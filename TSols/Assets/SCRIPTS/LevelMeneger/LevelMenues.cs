@@ -16,14 +16,14 @@ public class LevelMenues : MonoBehaviour
     //Deleget EndLose
     public LevelMenuSet LisenEndLoseLevelMenu;
 
-    [SerializeField] private GameObject[] StartMenuArray; //When start level pressed. Make all StartMenu objects SetFalse
-    [SerializeField] private GameObject[] PlayMenuArray; //After all other menus are false SetTrue or Setfalse all PlayMenu objects
-    [SerializeField] private GameObject[] EndMenuWinArray; //After all other menus are false SetTrue or Setfalse all EndMenuWin objects
-    [SerializeField] private GameObject[] EndMenuLoseArray; //After all other menues are false SetTrue or Setfalse all EndMenuLose objects
+    [SerializeField] private GameObject StartMenu; //When start level pressed. Make all StartMenu objects SetFalse
+    [SerializeField] private GameObject PlayMenu; //After all other menus are false SetTrue or Setfalse all PlayMenu objects
+    [SerializeField] private GameObject EndMenuWin; //After all other menus are false SetTrue or Setfalse all EndMenuWin objects
+    [SerializeField] private GameObject EndMenuLose; //After all other menues are false SetTrue or Setfalse all EndMenuLose objects
 
     private int PreveosMenu;
     private int CurrentMenu;
-
+    private int While;
 
     private void Start()
     {
@@ -31,24 +31,14 @@ public class LevelMenues : MonoBehaviour
         PreveosMenu = CurrentMenu;
 
 
+        StartMenu.SetActive(false);
+        PlayMenu.SetActive(false);
+        EndMenuWin.SetActive(false);
+        EndMenuLose.SetActive(false);
 
-        for(int i = 0; i < StartMenuArray.Length; i++)
-        {
-            StartMenuArray[i].SetActive(true);
-        }
-        for (int i = 0; i < PlayMenuArray.Length; i++)
-        {
-            PlayMenuArray[i].SetActive(false);
-        }
-        for (int i = 0; i < EndMenuWinArray.Length; i++)
-        {
-            EndMenuWinArray[i].SetActive(false);
-        }
-        for (int i = 0; i < EndMenuLoseArray.Length; i++)
-        {
-            EndMenuLoseArray[i].SetActive(false);
-        }
-
+        While = 2;
+        PreveosMenu = 0;
+        LevelMenuSelect();
     }
 
     public void ChangeMenu(int NextMenu)
@@ -63,7 +53,6 @@ public class LevelMenues : MonoBehaviour
     private void LevelMenuSelect()
     {
         int s = PreveosMenu;
-        int While = 0;
         // Set current menu to false
         
         Debug.Log("LevelMenuSelect");
@@ -78,6 +67,7 @@ public class LevelMenues : MonoBehaviour
                     {
                         //LisenStartLevelMenu();
                     }
+                    ChangeMenu(StartMenu, 0);
                     break;
                 case 1:
                     Debug.Log("case 1 Play");
@@ -85,6 +75,7 @@ public class LevelMenues : MonoBehaviour
                     {
                         //LisenPlayLevelMenu();
                     }
+                    ChangeMenu(PlayMenu, 1);
                     break;
                 case 2:
                     Debug.Log("case 2 Win");
@@ -92,6 +83,7 @@ public class LevelMenues : MonoBehaviour
                     {
                         //LisenEndWinLevelMenu();
                     }
+                    ChangeMenu(EndMenuWin, 2);
                     break;
                 case 3:
                     Debug.Log("case 3 Lose");
@@ -99,22 +91,31 @@ public class LevelMenues : MonoBehaviour
                     {
                         //LisenEndLoseLevelMenu();
                     }
+                    ChangeMenu(EndMenuLose, 3);
                     break;
             }
             s = CurrentMenu;
             While++;
         }
         while (While < 2);
+        While = 0;
         PreveosMenu = CurrentMenu;
     }
 
 
-    private void ChangeMenu(GameObject[] MenuArray,bool TrueOrFalce)
+    private void ChangeMenu(GameObject Menu, int MenuNumber)
     {
         Debug.Log("Change Menu Called");
-        for(int i = 0; i <= MenuArray.Length; i++)
-        {
 
+        if(MenuNumber == CurrentMenu)
+        {
+            Debug.Log("True Called");
+            Menu.SetActive(true);
+        }
+        if(MenuNumber != CurrentMenu)
+        {
+            Debug.Log("False Called");
+            Menu.SetActive(false);
         }
     }
 }

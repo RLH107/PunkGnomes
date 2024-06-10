@@ -9323,6 +9323,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
+      propertyPath: PlayMenu
+      value: 
+      objectReference: {fileID: 1602096684}
+    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: StartMenu
+      value: 
+      objectReference: {fileID: 1719988579}
+    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: EndMenuWin
+      value: 
+      objectReference: {fileID: 1019365392}
+    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: EndMenuLose
+      value: 
+      objectReference: {fileID: 387677669}
+    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
       propertyPath: PlayMenuArray.Array.size
       value: 1
       objectReference: {fileID: 0}
