@@ -7,6 +7,7 @@ using System;
 
 public class LevelRecorce : MonoBehaviour
 {
+    [SerializeField] private LevelMenues LevelMenues_Script;
     [SerializeField] private int Initial_RES_count;
     [SerializeField] private int Max_RES_count;
     [SerializeField] private float N_of_Seconds_before_next_addition;
@@ -15,34 +16,62 @@ public class LevelRecorce : MonoBehaviour
     private int RES_count;
     private int RES_sheck;
     private float NofSbA;
+    private bool IncreceActive;
     void Start()
     {
+        IncreceActive = false;
         RES_count = Initial_RES_count;
         NofSbA = N_of_Seconds_before_next_addition;
+        LevelMenues_Script.LisenPlayLevelMenu += StartIncrece;
     }
 
-    void Update()
+    public void StartIncrece()
     {
-        if( RES_count >= Max_RES_count || RES_count == Max_RES_count)
+        bool used = false;
+        Debug.Log("StartIncrece - Called");
+        if (N_of_Passive_Increce != 0 && IncreceActive == false && used == false)
         {
-            //Debug.Log("MAX_NUMBER_OF_RES is " + Max_RES_count);
+            used = true;
+            IncreceActive = true;
+            StartCoroutine(RES_PassiveIncrece());
         }
-        else
+        if (IncreceActive == true && used == false)
         {
-            if (NofSbA > 0)
+            used = true;
+            IncreceActive = false;
+            RES_count = Initial_RES_count;
+            Debug.Log("RES Resetted");
+        }
+    }
+
+    private IEnumerator RES_PassiveIncrece()
+    {
+        while (IncreceActive == true)
+        {
+            if (RES_count >= Max_RES_count || RES_count == Max_RES_count)
             {
-                NofSbA -= Time.deltaTime;
+                //Debug.Log("MAX_NUMBER_OF_RES is " + Max_RES_count);
             }
             else
             {
-                RES_count += N_of_Passive_Increce;
-                NofSbA = N_of_Seconds_before_next_addition;
-                //Debug.Log("NumberOf_RES" + RES_count);
+                if (NofSbA > 0)
+                {
+                    NofSbA -= Time.deltaTime;
+                }
+                else
+                {
+                    RES_count += N_of_Passive_Increce;
+                    NofSbA = N_of_Seconds_before_next_addition;
+                    //Debug.Log("NumberOf_RES" + RES_count);
+                }
             }
-        }
-        REStext.text = RES_count.ToString();
+            REStext.text = RES_count.ToString();
 
+            yield return new WaitForFixedUpdate();
+        }
     }
+
+
     public void PayResorce(int NumberToSubtract)
     {
         RES_sheck = RES_count;
@@ -53,7 +82,7 @@ public class LevelRecorce : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Insuficiant Recorces");
+            Debug.Log("Insuficiant Recorces");
         }
     }
     public void AddResorce(int NumberToAdd)
@@ -76,7 +105,6 @@ public class LevelRecorce : MonoBehaviour
             //Debug.Log("RES Added");
         }
     }
-
     public int ReturnCurrentResorce()
     {
         return RES_count;

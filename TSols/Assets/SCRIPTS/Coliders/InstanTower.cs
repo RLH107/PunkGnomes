@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static TButon;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class InstanTower : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class InstanTower : MonoBehaviour
 
     //Timer For Button Debounce
     private float timer;
+    private int DeactivationPrice;
 
     //Button Can be pressed
     private bool IsActive;
@@ -105,6 +107,7 @@ public class InstanTower : MonoBehaviour
         TowerState = false;
         TowerChange = false;
 
+        LevelMenues_Script.LisenStartLevelMenu += ResetTower;
         LevelMenues_Script.LisenPlayLevelMenu += Activate_DeactivateButton;
         Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext
@@ -198,8 +201,8 @@ public class InstanTower : MonoBehaviour
 
     public void Touched(/* bool TowerState, TodasTorres Tower_Script, Vector3 StartingPos */)
     {
+        DeactivationPrice = TPrice / 4;
         bool Used = false;
-
         if(IsActive == true)
         {
             if (timer > 0)
@@ -210,12 +213,13 @@ public class InstanTower : MonoBehaviour
             }
             if (timer <= 0)
             {
-                if (LevelRecorce_Script.ReturnCurrentResorce() >= TPrice)
+                if (LevelRecorce_Script.ReturnCurrentResorce() >= DeactivationPrice)
                 {
                     Vibration.VibratePop();
                     //If Tower Is Active -> Deactivate Tower
                     if (TowerState == true && Used == false)
                     {
+                        LevelRecorce_Script.PayResorce(DeactivationPrice);
                         Tower_Script.MoveTower(StartingPos);
                         TowerState = false;
                         Used = true;
@@ -226,66 +230,36 @@ public class InstanTower : MonoBehaviour
                             switchTower(ChangeNext);
                         }
                     }
-
-
+                }
+                if (LevelRecorce_Script.ReturnCurrentResorce() >= TPrice)
+                {
                     //If Tower Is Inactive -> Activate Tower
                     if (TowerState == false && Used == false)
                     {
+                        LevelRecorce_Script.PayResorce(TPrice);
                         Tower_Script.MoveTower(InsPOS.position);
                         TowerState = true;
                         Used = true;
                     }
                 }
-
                 //Debounce Timer Start
                 //timer = 0.05f;
                 StartCoroutine(TimerToZero());
             }
         }
-
-        /*
-        if (timer > 0)
-        {
-            //Debug.Log("StillPressed");
-            //Debounce Timer Reset
-            timer = 0.05f;
-        }
-        if (timer <= 0)
-        {
-            if (LevelRecorce_Script.ReturnCurrentResorce() >= TPrice)
-            {
-                Vibration.VibratePop();
-                //If Tower Is Active -> Deactivate Tower
-                if (TowerState == true && Used == false)
-                {
-                    Tower_Script.MoveTower(StartingPos);
-                    TowerState = false;
-                    Used = true;
-
-                    if (TowerChange == true)
-                    {
-                        TowerChange = false;
-                        switchTower(ChangeNext);
-                    }
-                }
-
-
-                //If Tower Is Inactive -> Activate Tower
-                if (TowerState == false && Used == false)
-                {
-                    Tower_Script.MoveTower(InsPOS.position);
-                    TowerState = true;
-                    Used = true;
-                }
-            }
-
-            //Debounce Timer Start
-            timer = 0.05f;
-            StartCoroutine(TimerToZero());
-        }
-        */
     }
-    
+
+    public void ResetTower()
+    {
+        if (TowerState == true)
+        {
+            Tower_Script.MoveTower(StartingPos);
+            TowerState = false;
+            IsActive = false;
+            switchTower(0);
+        }
+    }
+
     IEnumerator TimerToZero()
     {
         timer = 0.05f;

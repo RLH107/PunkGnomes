@@ -272,12 +272,12 @@ MonoBehaviour:
   EnemyTipe: Enemy
   rb: {fileID: 6324588482039278030}
   orientation: {fileID: 8087198712747310144}
-  RSpeed: 2
+  RSpeed: 5
   Health: 15
   MaxHealth: 20
   Attack: 1
-  MoveSpeed: 2
-  MoveForce: 6
+  MoveSpeed: 6
+  MoveForce: 100
   CD_Script: {fileID: 8088864867323968394}
   PoolListNumber: 1
 --- !u!1 &6900251111516133210

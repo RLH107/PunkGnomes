@@ -55,7 +55,7 @@ public class LevelMenues : MonoBehaviour
         int s = PreveosMenu;
         // Set current menu to false
         
-        Debug.Log("LevelMenuSelect");
+        //Debug.Log("LevelMenuSelect");
         // Set the Current Menu to False and Next Menu to true
         do
         {
@@ -63,33 +63,37 @@ public class LevelMenues : MonoBehaviour
             {
                 case 0:
                     Debug.Log("case 0 Start");
-                    if(LisenStartLevelMenu != null)
+                    if(LisenStartLevelMenu != null && While == 1)
                     {
-                        //LisenStartLevelMenu();
+                        Debug.Log("Start_Listen_Called");
+                        LisenStartLevelMenu();
                     }
                     ChangeMenu(StartMenu, 0);
                     break;
                 case 1:
                     Debug.Log("case 1 Play");
-                    if(LisenPlayLevelMenu != null)
+                    if(LisenPlayLevelMenu != null && While == 1)
                     {
-                        //LisenPlayLevelMenu();
+                        Debug.Log("Play_Listen_Called");
+                        LisenPlayLevelMenu();
                     }
                     ChangeMenu(PlayMenu, 1);
                     break;
                 case 2:
                     Debug.Log("case 2 Win");
-                    if(LisenEndWinLevelMenu != null)
+                    if(LisenEndWinLevelMenu != null && While == 1)
                     {
-                        //LisenEndWinLevelMenu();
+                        Debug.Log("Win_Listen_Called");
+                        LisenEndWinLevelMenu();
                     }
                     ChangeMenu(EndMenuWin, 2);
                     break;
                 case 3:
                     Debug.Log("case 3 Lose");
-                    if(LisenEndLoseLevelMenu != null)
+                    if(LisenEndLoseLevelMenu != null && While == 1)
                     {
-                        //LisenEndLoseLevelMenu();
+                        Debug.Log("Lose_Listen_Called");
+                        LisenEndLoseLevelMenu();
                     }
                     ChangeMenu(EndMenuLose, 3);
                     break;
@@ -105,16 +109,16 @@ public class LevelMenues : MonoBehaviour
 
     private void ChangeMenu(GameObject Menu, int MenuNumber)
     {
-        Debug.Log("Change Menu Called");
+        //Debug.Log("Change Menu Called");
 
         if(MenuNumber == CurrentMenu)
         {
-            Debug.Log("True Called");
+            //Debug.Log("True Called");
             Menu.SetActive(true);
         }
         if(MenuNumber != CurrentMenu)
         {
-            Debug.Log("False Called");
+            //Debug.Log("False Called");
             Menu.SetActive(false);
         }
     }

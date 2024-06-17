@@ -132,14 +132,14 @@ public class Inimigo_Base : MonoBehaviour
             ActivationState = false;
             WaveControl_Script.IsEnemyDestroyed(gameObject, PoolListNumber);
             ResetAllStats();
-            Debug.Log("DeactivateEnemy");
+            //Debug.Log("DeactivateEnemy");
             EnemyStateSwitch(EState.IDLE);
         }
     }
 
     public void NewTarget(GameObject NextTarget)
     {
-        Debug.Log("NewTarget = "+NextTarget);
+        //Debug.Log("NewTarget = "+NextTarget);
         Target = NextTarget;
         //Debug.Log("Target = " +  Target);
         targetDirection = Target.transform.position - transform.position;
@@ -188,7 +188,7 @@ public class Inimigo_Base : MonoBehaviour
 
     private IEnumerator IDLE()
     {
-        Debug.Log("IDLE Called");
+        //Debug.Log("IDLE Called");
         yield return null;
 
         if (ActivationState == false)

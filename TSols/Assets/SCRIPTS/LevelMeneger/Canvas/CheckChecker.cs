@@ -12,7 +12,10 @@ public class CheckChecker : MonoBehaviour
 
     // Internal Information
     private int WhatButton;
-
+    private void Start()
+    {
+        Change_CheckMarker();
+    }
 
     public void Change_CheckMarker()
     {

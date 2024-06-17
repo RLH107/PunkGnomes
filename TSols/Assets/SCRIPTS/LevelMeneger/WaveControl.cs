@@ -5,6 +5,7 @@ using System.Linq;
 
 public class WaveControl : MonoBehaviour
 {
+    [SerializeField] private LevelMenues LevelMenues_Script;
     [SerializeField] private Transform TransformPOS_ToMoveEnemys;
     //TransformPOS_ToMoveEnemys
 
@@ -24,15 +25,12 @@ public class WaveControl : MonoBehaviour
     //[SerializeField] private GameObject BacicEnemy2PoolGObj;
     [HideInInspector] public List<GameObject> BacicEnemy2Pool;
 
-
-
     //ActiveList
     [HideInInspector] public List<GameObject> ActiveList;
 
     // I hate that these Lists have to be public. And I dont know why they can not be privete, because I am not Using them in other classesS
     
     private Inimigo_Base Inimigo_BaseScript;
-    private GameObject AddOrRemove;
     private bool LastWave;
     private int Wave;
 
@@ -44,10 +42,14 @@ public class WaveControl : MonoBehaviour
         BacicEnemy2Pool = GameObject.FindGameObjectsWithTag("BacicEnemy2").ToList();
         LastWave = false;
         Wave = 0;
+        LevelMenues_Script.LisenStartLevelMenu += ResetWaveControl;
+        LevelMenues_Script.LisenPlayLevelMenu += CallFirstWave;
+        LevelMenues_Script.LisenEndLoseLevelMenu += InCaseOfLose;
     }
 
     public void CallFirstWave()
     {
+        Debug.Log("CallFirstWave");
         CallWave(Wave);
     }
 
@@ -88,7 +90,7 @@ public class WaveControl : MonoBehaviour
         if (WaveNumber == BacicEnemy1Number.Count - 1)
         {
             LastWave = true;
-            Debug.Log("Last Wave = " +  LastWave);
+            Debug.Log("Last Wave = " + LastWave);
             // Start a Corutine that Checks active list
             StartCoroutine(LastWaveEndCheck());
         }
@@ -132,8 +134,8 @@ public class WaveControl : MonoBehaviour
 
     public void IsEnemyDestroyed(GameObject EnemyThatHasBeenDestroyed, int NumberOfTheEnemyPoolList)
     {
-        Debug.Log("BacicEnemy1Pool.Count" +BacicEnemy1Pool.Count);
-        Debug.Log("ActiveList.Count" + ActiveList.Count);
+        //Debug.Log("BacicEnemy1Pool.Count" +BacicEnemy1Pool.Count);
+        //Debug.Log("ActiveList.Count" + ActiveList.Count);
         switch (NumberOfTheEnemyPoolList)
         {
             case 1:
@@ -146,9 +148,9 @@ public class WaveControl : MonoBehaviour
                 ActiveList.Remove(EnemyThatHasBeenDestroyed);
                 break;
         }
-        Debug.Log("Destroyed Enemy = " + EnemyThatHasBeenDestroyed);
-        Debug.Log("BacicEnemy1Pool.Count" + BacicEnemy1Pool.Count);
-        Debug.Log("ActiveList.Count" + ActiveList.Count);
+        //Debug.Log("Destroyed Enemy = " + EnemyThatHasBeenDestroyed);
+        //Debug.Log("BacicEnemy1Pool.Count" + BacicEnemy1Pool.Count);
+        //Debug.Log("ActiveList.Count" + ActiveList.Count);
     }
 
     private IEnumerator LastWaveEndCheck()
@@ -158,5 +160,40 @@ public class WaveControl : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         //Game Over Winn
+        LevelMenues_Script.ChangeMenu(2);
+    }
+
+    public void InCaseOfLose()
+    {
+        StopAllCoroutines();
+        StartCoroutine(KillAllEnemys());
+    }
+    private IEnumerator KillAllEnemys()
+    {
+        bool active = true;
+        while (active == true)
+        {
+            for (int i = 0; i < ActiveList.Count; i++)
+            {
+                Inimigo_Base a = ActiveList[i].GetComponent<Inimigo_Base>();
+                a.TakeDamege(10000000);
+            }
+            yield return new WaitForEndOfFrame ();
+            if (ActiveList.Count > 0)
+            {
+                for (int i = 0; i < ActiveList.Count; i++)
+                {
+                    Inimigo_Base a = ActiveList[i].GetComponent<Inimigo_Base>();
+                    a.TakeDamege(10000000);
+                }
+            }
+            else { active = false; Debug.Log("KillAll = Completed 1"); }
+        }
+        Debug.Log("KillAll = Completed 2");
+    }
+
+    public void ResetWaveControl()
+    {
+        Wave = 0;
     }
 }

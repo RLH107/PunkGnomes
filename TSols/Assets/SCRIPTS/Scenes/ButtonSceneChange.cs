@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ButtonSceneChange : MonoBehaviour
 {
-    [SerializeField] private string LoadingScene;
     [SerializeField] private string NextScene;
 
     private GameObject DoNotDestroyObject;
@@ -18,7 +17,7 @@ public class ButtonSceneChange : MonoBehaviour
     }
     public void OnButtonClick_ChangeScene()
     {
-        Debug.Log("ButtonPressed");
-        DontDestroyOnLoad_SCRIPT.ChangeToNextScene(NextScene,LoadingScene);
+        //Debug.Log("ButtonPressed");
+        DontDestroyOnLoad_SCRIPT.ChangeToNextScene(NextScene);
     }
 }

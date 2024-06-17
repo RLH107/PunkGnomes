@@ -674,12 +674,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 36e0b8e0e706eaf4dbfeaefd7d5e6d80,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.79475
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36e0b8e0e706eaf4dbfeaefd7d5e6d80,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.538199
+      value: -11.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36e0b8e0e706eaf4dbfeaefd7d5e6d80,
         type: 3}
@@ -749,20 +749,25 @@ PrefabInstance:
       propertyPath: EnemyTags_Script
       value: 
       objectReference: {fileID: 1455495646650875548}
+    - target: {fileID: 6151731180209394040, guid: 52af80a788b8c514f968e9dfacee3e2c,
+        type: 3}
+      propertyPath: LevelMenues_Script
+      value: 
+      objectReference: {fileID: 1455495646650875549}
     - target: {fileID: 7265812538214143391, guid: 52af80a788b8c514f968e9dfacee3e2c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.74246883
+      value: 1.9696956
       objectReference: {fileID: 0}
     - target: {fileID: 7265812538214143391, guid: 52af80a788b8c514f968e9dfacee3e2c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5156973
+      value: 1.3680934
       objectReference: {fileID: 0}
     - target: {fileID: 7265812538214143391, guid: 52af80a788b8c514f968e9dfacee3e2c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25191665
+      value: 0.6683097
       objectReference: {fileID: 0}
     - target: {fileID: 7265812538214143391, guid: 52af80a788b8c514f968e9dfacee3e2c,
         type: 3}
@@ -3770,7 +3775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1019365393
 Transform:
   m_ObjectHideFlags: 0
@@ -6815,7 +6820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1602096685
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7222,7 +7227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1719988580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8422,7 +8427,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1949019049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1455495646650875549}
+        m_TargetAssemblyTypeName: LevelMenues, Assembly-CSharp
+        m_MethodName: ChangeMenu
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1949019049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9341,96 +9358,6 @@ PrefabInstance:
       propertyPath: EndMenuLose
       value: 
       objectReference: {fileID: 387677669}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: StartMenuArray.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndMenuWinArray.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndMenuLoseArray.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[0]
-      value: 
-      objectReference: {fileID: 1602096684}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[1]
-      value: 
-      objectReference: {fileID: 1235534238}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[2]
-      value: 
-      objectReference: {fileID: 334515023}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[3]
-      value: 
-      objectReference: {fileID: 526850324}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[4]
-      value: 
-      objectReference: {fileID: 153432545}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayMenuArray.Array.data[5]
-      value: 
-      objectReference: {fileID: 1681945228}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: StartMenuArray.Array.data[0]
-      value: 
-      objectReference: {fileID: 1719988579}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndMenuWinArray.Array.data[0]
-      value: 
-      objectReference: {fileID: 1019365392}
-    - target: {fileID: 2233034171169735986, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndMenuLoseArray.Array.data[0]
-      value: 
-      objectReference: {fileID: 387677669}
-    - target: {fileID: 2774262368545166853, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndScreenObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 1019365392}
-    - target: {fileID: 2774262368545166853, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: EndScreenObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 387677669}
-    - target: {fileID: 2774262368545166853, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayScreenObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 1602096684}
-    - target: {fileID: 2774262368545166853, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: PlayScreenObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 1567801378}
-    - target: {fileID: 2774262368545166853, guid: 67b5c46d526aad54ebd9a240e5f6289f,
-        type: 3}
-      propertyPath: StatScreenObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 1719988579}
     - target: {fileID: 3093799418467252983, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: CheckChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target

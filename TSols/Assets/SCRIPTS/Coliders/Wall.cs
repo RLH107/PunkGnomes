@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
+    [SerializeField] private LevelMenues LevelMenues_Script;
     [SerializeField] private EnemyTags EnemyTags_Script;
-
+    [SerializeField] private float WallHealthStart;
 
     private float WallHealth;
     private string EnemyTag;
@@ -13,7 +14,8 @@ public class Wall : MonoBehaviour
 
     private void Start()
     {
-        WallHealth = 50;
+        WallHealth = WallHealthStart;
+        LevelMenues_Script.LisenStartLevelMenu += ResetWall;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,25 +27,11 @@ public class Wall : MonoBehaviour
                 if(other.gameObject.tag == EnemyTags_Script.ReturnEnemyTags(i))
                 {
                     Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
-                    Inimigo_BaseScript.TakeDamege(80f);
+                    Inimigo_BaseScript.TakeDamege(100000f);
                     TakeDamege(1);
                 }
             }
         }
-        
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-        /*
-        if (other.gameObject.tag != "Tower")
-        {
-            if (other.gameObject.tag == "ENEMY")
-            {
-                Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
-                Inimigo_BaseScript.TakeDamege(80f);
-                TakeDamege(1);
-            }
-        }
-        */
     }
 
     public void TakeDamege(float DemegeTaken)
@@ -53,6 +41,12 @@ public class Wall : MonoBehaviour
         if (WallHealth <= 0)
         {
             //Change Scene To Lose
+            LevelMenues_Script.ChangeMenu(3);
         }
+    }
+
+    public void ResetWall()
+    {
+        WallHealth = WallHealthStart;
     }
 }
