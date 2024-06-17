@@ -213,6 +213,6 @@ MonoBehaviour:
   T3_price: 1
   TowerPrefab_4: {fileID: 8175552415172699160, guid: 45f785974d6803c4582141fc9b2786e7,
     type: 3}
-  T4_price: 16
+  T4_price: 8
   InsPOS: {fileID: 2400584961930172364}
   Mesh: {fileID: 6415326369169441315}

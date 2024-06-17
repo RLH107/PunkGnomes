@@ -67,10 +67,10 @@ public class InstanTower : MonoBehaviour
 
     //Button Can be pressed
     private bool IsActive;
+    private bool BeforeActivation;
 
     void Start()
     {
-        IsActive = false;
         GameObject levelMeneger = GameObject.Find("LevelMeneger");
         SelectTower_Script = levelMeneger.GetComponent<SelectTower>();
         LevelRecorce_Script = levelMeneger.GetComponent<LevelRecorce>();
@@ -83,9 +83,6 @@ public class InstanTower : MonoBehaviour
         ThisTower2 = Instantiate(TowerPrefab_2, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -10, InsPOS.position.z), Quaternion.identity);
         ThisTower3 = Instantiate(TowerPrefab_3, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -15, InsPOS.position.z), Quaternion.identity);
         ThisTower4 = Instantiate(TowerPrefab_4, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -20, InsPOS.position.z), Quaternion.identity);
-
-        //is not used1      ThisTower = ThisTower1;
-
 
         Tower_Script1 = ThisTower1.GetComponent<TodasTorres>();
         Tower_Script2 = ThisTower2.GetComponent<TodasTorres>();
@@ -103,25 +100,32 @@ public class InstanTower : MonoBehaviour
 
         StartingPos = StartingPos1;
 
-
+        IsActive = false;
         TowerState = false;
         TowerChange = false;
+        BeforeActivation = false;
 
         LevelMenues_Script.LisenStartLevelMenu += ResetTower;
-        LevelMenues_Script.LisenPlayLevelMenu += Activate_DeactivateButton;
+        LevelMenues_Script.LisenStartLevelMenu += BrforeActivation;
+        LevelMenues_Script.LisenPlayLevelMenu += ActivateButton;
         Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext
     }
 
-    public void Activate_DeactivateButton()
+    public void BrforeActivation()
     {
-        StartCoroutine(TimerToZero());
-        if (IsActive == true)
+        BeforeActivation = true;
+        Debug.Log("Hã? BeforeActivation = " + BeforeActivation);
+    }
+
+    public void ActivateButton()
+    {
+        Debug.Log("ActivateButton");
+        if (BeforeActivation == true)
         {
-            IsActive = false;
-        }
-        if(IsActive == false)
-        {
+            Debug.Log("BEFORE-ACTIVE = " + BeforeActivation);
+            StartCoroutine(TimerToZero());
+            BeforeActivation = false;
             IsActive = true;
         }
     }

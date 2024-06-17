@@ -36,7 +36,7 @@ public class LevelMenues : MonoBehaviour
         EndMenuWin.SetActive(false);
         EndMenuLose.SetActive(false);
 
-        While = 2;
+        While = 1;
         PreveosMenu = 0;
         LevelMenuSelect();
     }

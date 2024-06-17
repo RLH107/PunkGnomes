@@ -22,25 +22,27 @@ public class LevelRecorce : MonoBehaviour
         IncreceActive = false;
         RES_count = Initial_RES_count;
         NofSbA = N_of_Seconds_before_next_addition;
+
         LevelMenues_Script.LisenPlayLevelMenu += StartIncrece;
+        LevelMenues_Script.LisenEndWinLevelMenu += ResetRES;
+        LevelMenues_Script.LisenEndLoseLevelMenu += ResetRES;
+    }
+
+    public void ResetRES()
+    {
+        StopAllCoroutines();
+        IncreceActive = false;
+        RES_count = Initial_RES_count;
+        NofSbA = N_of_Seconds_before_next_addition;
     }
 
     public void StartIncrece()
     {
-        bool used = false;
         Debug.Log("StartIncrece - Called");
-        if (N_of_Passive_Increce != 0 && IncreceActive == false && used == false)
+        if (N_of_Passive_Increce != 0 && IncreceActive == false)
         {
-            used = true;
             IncreceActive = true;
             StartCoroutine(RES_PassiveIncrece());
-        }
-        if (IncreceActive == true && used == false)
-        {
-            used = true;
-            IncreceActive = false;
-            RES_count = Initial_RES_count;
-            Debug.Log("RES Resetted");
         }
     }
 
