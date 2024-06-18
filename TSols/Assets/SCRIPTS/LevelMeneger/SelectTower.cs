@@ -5,9 +5,16 @@ using UnityEngine.Events;
 
 public class SelectTower : MonoBehaviour
 {
-    // External Information
-    [SerializeField] UnityEvent TowerChange;
-    [SerializeField] UnityEvent CheckChange;
+    [SerializeField] public GameObject[] Towers;
+    [SerializeField] public int[] Prices;
+
+
+
+
+    // Delegate
+    public delegate void TowerChangeHandler();
+    public TowerChangeHandler ListenToNewTower;
+    public TowerChangeHandler ListenToNewCheck;
 
     // Internal Information
     private int NextTowerN;
@@ -17,16 +24,21 @@ public class SelectTower : MonoBehaviour
         NextTowerN = TowerN;
         BeforeInvoke();
     }
-
     private void BeforeInvoke()
     {
-        //Debug.Log("BeforeInvoke");
-        TowerChange.Invoke();
-        CheckChange.Invoke();
+        ListenToNewTower();
+        ListenToNewCheck();
     }
-
     public int RetuenTowerN()
     {
         return NextTowerN;
+    }
+    public GameObject[] ReturnTowerArray()
+    {
+        return Towers;
+    }
+    public int[] ReturnTowerPriceArray()
+    {
+        return Prices;
     }
 }

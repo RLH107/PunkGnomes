@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Wall : MonoBehaviour
 {
     [SerializeField] private LevelMenues LevelMenues_Script;
     [SerializeField] private EnemyTags EnemyTags_Script;
+    [SerializeField] private TMP_Text DisplayHealth;
     [SerializeField] private float WallHealthStart;
 
     private float WallHealth;
@@ -15,6 +17,7 @@ public class Wall : MonoBehaviour
     private void Start()
     {
         WallHealth = WallHealthStart;
+        DisplayHealth.text = WallHealth.ToString();
         LevelMenues_Script.LisenStartLevelMenu += ResetWall;
     }
 
@@ -37,6 +40,7 @@ public class Wall : MonoBehaviour
     public void TakeDamege(float DemegeTaken)
     {
         WallHealth -= DemegeTaken;
+        DisplayHealth.text = WallHealth.ToString();
         Debug.Log("Wall Health = " + WallHealth);
         if (WallHealth <= 0)
         {
@@ -48,5 +52,6 @@ public class Wall : MonoBehaviour
     public void ResetWall()
     {
         WallHealth = WallHealthStart;
+        DisplayHealth.text = WallHealth.ToString();
     }
 }
