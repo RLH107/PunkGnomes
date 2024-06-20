@@ -9,18 +9,16 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class InstanTower : MonoBehaviour
 {
-    //////////////////////// NEW_SISTEM
-
-    private GameObject[] Towers;
-    private int[] Prices;
-    public List<TodasTorres> TodasTorres_ScriptsList;
-
-
-    /// <summary>
-    /// ////////// OLD_SISTEM
-    /// </summary>
-
     // External Information
+    [SerializeField] private GameObject TowerPrefab_1;
+    [SerializeField] private int T1_price;
+    [SerializeField] private GameObject TowerPrefab_2;
+    [SerializeField] private int T2_price;
+    [SerializeField] private GameObject TowerPrefab_3;
+    [SerializeField] private int T3_price;
+    [SerializeField] private GameObject TowerPrefab_4;
+    [SerializeField] private int T4_price;
+
     [SerializeField] private Transform InsPOS;
     [SerializeField] private MeshRenderer Mesh;
 
@@ -31,14 +29,25 @@ public class InstanTower : MonoBehaviour
     private TButon Tbuton_Script;
     private LevelMenues LevelMenues_Script;
 
+    private GameObject ThisTower1;
+    private GameObject ThisTower2;
+    private GameObject ThisTower3;
+    private GameObject ThisTower4;
+
     // private Script ThisTower;
     private TodasTorres Tower_Script1;
+    private TodasTorres Tower_Script2;
+    private TodasTorres Tower_Script3;
+    private TodasTorres Tower_Script4;
 
     // Current Script Beeing Used
     private TodasTorres Tower_Script;
 
     // Starting pos of the tower
     private Vector3 StartingPos1;
+    private Vector3 StartingPos2;
+    private Vector3 StartingPos3;
+    private Vector3 StartingPos4;
 
     // Current pos Beeing Used
     private Vector3 StartingPos;
@@ -71,21 +80,23 @@ public class InstanTower : MonoBehaviour
         Vibration.Init();
 
         ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
-
-        for (int i = 0; i < Towers.Length; i++)
-        {
-
-        }
-
+        ThisTower2 = Instantiate(TowerPrefab_2, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -10, InsPOS.position.z), Quaternion.identity);
+        ThisTower3 = Instantiate(TowerPrefab_3, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -15, InsPOS.position.z), Quaternion.identity);
+        ThisTower4 = Instantiate(TowerPrefab_4, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -20, InsPOS.position.z), Quaternion.identity);
 
         Tower_Script1 = ThisTower1.GetComponent<TodasTorres>();
+        Tower_Script2 = ThisTower2.GetComponent<TodasTorres>();
+        Tower_Script3 = ThisTower3.GetComponent<TodasTorres>();
+        Tower_Script4 = ThisTower4.GetComponent<TodasTorres>();
 
         Tower_Script = Tower_Script1;
         TPrice = T1_price;
 
 
         StartingPos1 = ThisTower1.transform.position;
-
+        StartingPos2 = ThisTower2.transform.position;
+        StartingPos3 = ThisTower3.transform.position;
+        StartingPos4 = ThisTower4.transform.position;
 
         StartingPos = StartingPos1;
 
@@ -97,17 +108,8 @@ public class InstanTower : MonoBehaviour
         LevelMenues_Script.LisenStartLevelMenu += ResetTower;
         LevelMenues_Script.LisenStartLevelMenu += BrforeActivation;
         LevelMenues_Script.LisenPlayLevelMenu += ActivateButton;
-
-        SelectTower_Script.ListenToNewTower += NewTower;
-
-
         Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext
-    }
-
-    public void NewTower()
-    {
-
     }
 
     public void BrforeActivation()
