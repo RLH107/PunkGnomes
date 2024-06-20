@@ -127,15 +127,6 @@ public class TodasTorres : MonoBehaviour
                 EnemysTransforms.Add(other.transform);
             }
         }
-
-
-
-        /*
-        if (other.gameObject.tag == "ENEMY")
-        {
-            EnemysTransforms.Add(other.transform);
-        }
-        */
     }
 
     // REMOVE ///////////////// Removes From Target List
@@ -148,16 +139,6 @@ public class TodasTorres : MonoBehaviour
                 EnemysTransforms.Remove(other.transform);
             }
         }
-
-
-
-
-        /*
-        if (other.gameObject.tag == "ENEMY")
-        {
-            EnemysTransforms.Remove(other.transform);
-        }
-        */
     }
 
     private void Fire()
@@ -192,11 +173,5 @@ public class TodasTorres : MonoBehaviour
     public void MoveTower(Vector3 moveTo)
     {
         transform.position = moveTo;
-    }
-
-    //Maybe?
-    private void Dead()
-    {
-
     }
 }
