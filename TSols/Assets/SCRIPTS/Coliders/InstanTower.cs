@@ -14,7 +14,6 @@ public class InstanTower : MonoBehaviour
     private GameObject[] Towers;
     private int[] Prices;
     public List<TodasTorres> TodasTorres_ScriptsList;
-    public List<Vector3> TowerStartingPosList;
 
 
     /// <summary>
@@ -31,6 +30,9 @@ public class InstanTower : MonoBehaviour
     private LevelRecorce LevelRecorce_Script;
     private TButon Tbuton_Script;
     private LevelMenues LevelMenues_Script;
+
+    // private Script ThisTower;
+    private TodasTorres Tower_Script1;
 
     // Current Script Beeing Used
     private TodasTorres Tower_Script;
@@ -68,13 +70,24 @@ public class InstanTower : MonoBehaviour
 
         Vibration.Init();
 
+        ThisTower1 = Instantiate(TowerPrefab_1, new Vector3(InsPOS.position.x + 10, InsPOS.position.y -5, InsPOS.position.z), Quaternion.identity);
+
         for (int i = 0; i < Towers.Length; i++)
         {
-            GameObject InsTower = Instantiate(Towers[i], new Vector3(InsPOS.position.x + 10, InsPOS.position.y - 5 - 1 * i, InsPOS.position.z), Quaternion.identity);
-            TodasTorres Torre_Script = InsTower.GetComponent<TodasTorres>();
-            TodasTorres_ScriptsList.Add(Torre_Script);
-            TowerStartingPosList.Add(InsTower.transform.position);
+
         }
+
+
+        Tower_Script1 = ThisTower1.GetComponent<TodasTorres>();
+
+        Tower_Script = Tower_Script1;
+        TPrice = T1_price;
+
+
+        StartingPos1 = ThisTower1.transform.position;
+
+
+        StartingPos = StartingPos1;
 
         IsActive = false;
         TowerState = false;
@@ -122,9 +135,9 @@ public class InstanTower : MonoBehaviour
             case 0:
                 if(TowerState == false)
                 {
-                    Tower_Script = TodasTorres_ScriptsList[0];
-                    StartingPos = TowerStartingPosList[0];
-                    TPrice = Prices[0];
+                    Tower_Script = Tower_Script1;
+                    StartingPos = StartingPos1;
+                    TPrice = T1_price;
                 }
                 if(TowerState == true)
                 {
@@ -135,9 +148,9 @@ public class InstanTower : MonoBehaviour
             case 1:
                 if (TowerState == false)
                 {
-                    Tower_Script = TodasTorres_ScriptsList[1];
-                    StartingPos = TowerStartingPosList[1];
-                    TPrice = Prices[1];
+                    Tower_Script = Tower_Script2;
+                    StartingPos = StartingPos2;
+                    TPrice = T2_price;
                 }
                 if (TowerState == true)
                 {
@@ -148,9 +161,9 @@ public class InstanTower : MonoBehaviour
             case 2:
                 if (TowerState == false)
                 {
-                    Tower_Script = TodasTorres_ScriptsList[2];
-                    StartingPos = TowerStartingPosList[2];
-                    TPrice = Prices[2];
+                    Tower_Script = Tower_Script3;
+                    StartingPos = StartingPos3;
+                    TPrice = T3_price;
                 }
                 if (TowerState == true)
                 {
@@ -161,9 +174,9 @@ public class InstanTower : MonoBehaviour
             case 3:
                 if (TowerState == false)
                 {
-                    Tower_Script = TodasTorres_ScriptsList[3];
-                    StartingPos = TowerStartingPosList[3];
-                    TPrice = Prices[3];
+                    Tower_Script = Tower_Script4;
+                    StartingPos = StartingPos4;
+                    TPrice = T4_price;
                 }
                 if (TowerState == true)
                 {
