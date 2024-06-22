@@ -14,6 +14,7 @@ public class TodasTorres : MonoBehaviour
     [SerializeField] private int NumberOfProjectiles;
     [SerializeField] private GameObject Projectile;
     [SerializeField] private Transform ProjectileSootPosition;
+    [SerializeField] private ParticleSystem PSystem;
 
     Projetil ProjetilScript;
 
@@ -116,7 +117,7 @@ public class TodasTorres : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
 
-
+    
     // ADD /////////// Adds to Target List
     private void OnTriggerEnter(Collider other)
     {
@@ -128,7 +129,7 @@ public class TodasTorres : MonoBehaviour
             }
         }
     }
-
+    
     // REMOVE ///////////////// Removes From Target List
     private void OnTriggerExit(Collider other)
     {
@@ -151,7 +152,7 @@ public class TodasTorres : MonoBehaviour
         {
             //Gets Script From List
             ProjetilScript = ProjetilsScripts[NPorjectile];
-
+            PSystem.Play();
             //Calles Function From Projectile Script
             ProjetilScript.MoveProjectil(ProjectileSootPosition, PForce);
 
