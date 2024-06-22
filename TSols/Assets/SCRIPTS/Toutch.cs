@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Toutch : MonoBehaviour
 {
+    [SerializeField] private Camera CameraUsed;
     // Update is called once per frame
     void Update()
     {
@@ -11,7 +12,7 @@ public class Toutch : MonoBehaviour
         {
             int i = 0;
             Touch touch = Input.GetTouch(i);
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            Ray ray = CameraUsed.ScreenPointToRay(touch.position);
             RaycastHit hit;
 
             if(Physics.Raycast(ray, out hit))

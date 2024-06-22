@@ -137,6 +137,7 @@ public class InstanTower : MonoBehaviour
             case 0:
                 if(TowerState == false)
                 {
+                    Debug.Log("Tower0");
                     Tower_Script = Tower_Script1;
                     StartingPos = StartingPos1;
                     TPrice = T1_price;
@@ -150,6 +151,7 @@ public class InstanTower : MonoBehaviour
             case 1:
                 if (TowerState == false)
                 {
+                    Debug.Log("Tower1");
                     Tower_Script = Tower_Script2;
                     StartingPos = StartingPos2;
                     TPrice = T2_price;
@@ -163,6 +165,7 @@ public class InstanTower : MonoBehaviour
             case 2:
                 if (TowerState == false)
                 {
+                    Debug.Log("Tower2");
                     Tower_Script = Tower_Script3;
                     StartingPos = StartingPos3;
                     TPrice = T3_price;
@@ -176,6 +179,7 @@ public class InstanTower : MonoBehaviour
             case 3:
                 if (TowerState == false)
                 {
+                    Debug.Log("Tower3");
                     Tower_Script = Tower_Script4;
                     StartingPos = StartingPos4;
                     TPrice = T4_price;

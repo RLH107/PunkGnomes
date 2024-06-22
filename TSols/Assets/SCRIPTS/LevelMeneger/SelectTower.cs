@@ -14,6 +14,7 @@ public class SelectTower : MonoBehaviour
 
     public void SetTower(int TowerN)
     {
+        Debug.Log("SetTower");
         NextTowerN = TowerN;
         BeforeInvoke();
     }
