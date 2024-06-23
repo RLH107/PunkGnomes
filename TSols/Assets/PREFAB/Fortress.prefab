@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2370005360259014558}
   m_Layer: 0
   m_Name: Fortress
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   LevelMenues_Script: {fileID: 0}
   EnemyTags_Script: {fileID: 0}
   WallHealthStart: 20
+  HPtext: {fileID: 0}
 --- !u!1001 &181177821768586982
 PrefabInstance:
   m_ObjectHideFlags: 0

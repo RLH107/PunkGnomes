@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3936491475049518852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -202,17 +202,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ab880e30a6ec4429f50d8dd2318016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab_1: {fileID: 8175552415172699160, guid: 658972f789f1e60479d03b6d9fec2761,
+  TowerPrefab_1: {fileID: 3298605097143156799, guid: ab76ae41d9229274aa4e16bf55107e71,
     type: 3}
-  T1_price: 5
-  TowerPrefab_2: {fileID: 8175552415172699160, guid: e718eb23273efd1478ab61a84d83d13f,
+  T1_price: 1
+  TowerPrefab_2: {fileID: 3298605097143156799, guid: 799603b91681ff746bf4c346bda17b3a,
     type: 3}
-  T2_price: 3
-  TowerPrefab_3: {fileID: 8175552415172699160, guid: 1303774387fe24a4ca97fa19fda0bfcf,
+  T2_price: 2
+  TowerPrefab_3: {fileID: 2222975958517668947, guid: a1016e0f73857a44fb226598758a4c45,
     type: 3}
-  T3_price: 1
-  TowerPrefab_4: {fileID: 8175552415172699160, guid: 45f785974d6803c4582141fc9b2786e7,
+  T3_price: 7
+  TowerPrefab_4: {fileID: 2222975958517668947, guid: 0bc770b6fd8d3b9489f23ae6b92ba0e5,
     type: 3}
-  T4_price: 8
+  T4_price: 9
   InsPOS: {fileID: 2400584961930172364}
   Mesh: {fileID: 6415326369169441315}

@@ -19,7 +19,7 @@ public class Toutch : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    //Debug.Log("Finger " + i + " " + hit.collider.name);
+                    Debug.Log("Finger " + i + " " + hit.collider.name);
                     hit.collider.SendMessage("Touched", SendMessageOptions.DontRequireReceiver);
                 }
             }

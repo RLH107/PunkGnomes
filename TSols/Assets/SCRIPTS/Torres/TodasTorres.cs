@@ -7,9 +7,8 @@ public class TodasTorres : MonoBehaviour
 {
     [SerializeField] private float TCoolDown;
     [SerializeField] private float TSpeed;
-    [SerializeField] private float PForce;
-
-    [SerializeField] private float AngleBeforeFire;
+    private float PForce;
+    private float AngleBeforeFire;
 
     [SerializeField] private int NumberOfProjectiles;
     [SerializeField] private GameObject Projectile;
@@ -40,6 +39,9 @@ public class TodasTorres : MonoBehaviour
 
     private void Start()
     {
+        PForce = 250;
+        AngleBeforeFire = 0.05f;
+
         FCooldown = TCoolDown;
         NPorjectile = 0;
         Active = false;

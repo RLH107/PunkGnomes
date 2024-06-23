@@ -103,10 +103,11 @@ public class InstanTower : MonoBehaviour
         IsActive = false;
         TowerState = false;
         TowerChange = false;
-        BeforeActivation = false;
+        BeforeActivation = true;
 
         LevelMenues_Script.LisenStartLevelMenu += ResetTower;
         LevelMenues_Script.LisenStartLevelMenu += BrforeActivation;
+
         LevelMenues_Script.LisenPlayLevelMenu += ActivateButton;
         Tbuton_Script.butonDelegate += SetMesh;
         //int ChangeNext

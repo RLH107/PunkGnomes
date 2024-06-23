@@ -26,6 +26,7 @@ public class LevelRecorce : MonoBehaviour
         LevelMenues_Script.LisenPlayLevelMenu += StartIncrece;
         LevelMenues_Script.LisenEndWinLevelMenu += ResetRES;
         LevelMenues_Script.LisenEndLoseLevelMenu += ResetRES;
+        REStext.text = RES_count.ToString();
     }
 
     public void ResetRES()
@@ -34,6 +35,7 @@ public class LevelRecorce : MonoBehaviour
         IncreceActive = false;
         RES_count = Initial_RES_count;
         NofSbA = N_of_Seconds_before_next_addition;
+        REStext.text = RES_count.ToString();
     }
 
     public void StartIncrece()

@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Wall : MonoBehaviour
 {
     [SerializeField] private LevelMenues LevelMenues_Script;
     [SerializeField] private EnemyTags EnemyTags_Script;
     [SerializeField] private float WallHealthStart;
+    [SerializeField] private TMP_Text HPtext;
 
     private float WallHealth;
-    private string EnemyTag;
     private Inimigo_Base Inimigo_BaseScript;
 
     private void Start()
     {
         WallHealth = WallHealthStart;
+        HPtext.text = WallHealth.ToString();
         LevelMenues_Script.LisenStartLevelMenu += ResetWall;
     }
 
@@ -28,7 +30,7 @@ public class Wall : MonoBehaviour
                 {
                     Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
                     Inimigo_BaseScript.TakeDamege(100000f);
-                    TakeDamege(1);
+                    TakeDamege(Inimigo_BaseScript.ReturnDeamege());
                 }
             }
         }
@@ -37,7 +39,7 @@ public class Wall : MonoBehaviour
     public void TakeDamege(float DemegeTaken)
     {
         WallHealth -= DemegeTaken;
-        Debug.Log("Wall Health = " + WallHealth);
+        HPtext.text = WallHealth.ToString();
         if (WallHealth <= 0)
         {
             //Change Scene To Lose
@@ -48,5 +50,6 @@ public class Wall : MonoBehaviour
     public void ResetWall()
     {
         WallHealth = WallHealthStart;
+        HPtext.text = WallHealth.ToString();
     }
 }

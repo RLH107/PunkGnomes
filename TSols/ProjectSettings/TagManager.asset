@@ -10,6 +10,7 @@ TagManager:
   - Projectile1
   - BacicEnemy2
   - BacicEnemy1
+  - Wall
   layers:
   - Default
   - TransparentFX

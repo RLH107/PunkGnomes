@@ -24,9 +24,11 @@ public class LevelMenues : MonoBehaviour
     private int PreveosMenu;
     private int CurrentMenu;
     private int While;
+    private bool Hope;
 
     private void Start()
     {
+        Hope = false;
         CurrentMenu = 0;
         PreveosMenu = CurrentMenu;
 
@@ -36,10 +38,42 @@ public class LevelMenues : MonoBehaviour
         EndMenuWin.SetActive(false);
         EndMenuLose.SetActive(false);
 
-        While = 1;
         PreveosMenu = 0;
-        LevelMenuSelect();
+        StartCoroutine(WaitForendOfFrame());
     }
+
+    private IEnumerator WaitForendOfFrame()
+    {
+        yield return new WaitForFixedUpdate();
+        if (LisenStartLevelMenu != null && While == 1)
+        {
+            Debug.Log("Start_Listen_Called");
+            LisenStartLevelMenu();
+        }
+        else
+        {
+            Debug.LogError("FUCK YOU ASHOLE");
+        }
+        ChangeMenu(StartMenu, 0);
+    }
+
+    private void TimeToDoSomeSketshyShitDoDaDoDaHopeIGetAwayWithItDoDaDoDaDay()
+    {
+        if(Hope == false)
+        {
+            if (LisenStartLevelMenu != null && While == 1)
+            {
+                Debug.Log("Start_Listen_Called");
+                LisenStartLevelMenu();
+                Hope = true;
+            }
+            else
+            {
+                Debug.LogError("FUCK YOU ASHOLE Again");
+            }
+        }
+    }
+
 
     public void ChangeMenu(int NextMenu)
     {
@@ -72,7 +106,8 @@ public class LevelMenues : MonoBehaviour
                     break;
                 case 1:
                     Debug.Log("case 1 Play");
-                    if(LisenPlayLevelMenu != null && While == 1)
+                    TimeToDoSomeSketshyShitDoDaDoDaHopeIGetAwayWithItDoDaDoDaDay();
+                    if (LisenPlayLevelMenu != null && While == 1)
                     {
                         Debug.Log("Play_Listen_Called");
                         LisenPlayLevelMenu();

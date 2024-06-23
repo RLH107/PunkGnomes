@@ -151,6 +151,11 @@ public class Inimigo_Base : MonoBehaviour
         transform.position = NewPosition;
     }
 
+    public float ReturnDeamege()
+    {
+        return Attack;
+    }
+
     /// <summary>
     /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /// </summary>
@@ -265,17 +270,11 @@ public class Inimigo_Base : MonoBehaviour
         {
             EnemyStateSwitch(EState.TURN);
         }
-
-        ////REWRITE
-
-
     }
 
     private IEnumerator TURN()
     {
         yield return null;
-
-
         targetDirection = Target.transform.position - transform.position;
         TurnTo = Quaternion.LookRotation(targetDirection, Vector3.up);
 
@@ -299,10 +298,6 @@ public class Inimigo_Base : MonoBehaviour
         {
             EnemyStateSwitch(EState.MOVE);
         }
-
-        ////Rewrite
-
-
     }
 
 }

@@ -6,6 +6,7 @@ public class Projetil : MonoBehaviour
 {
     Inimigo_Base Inimigo_BaseScript;
     private Vector3 WatingPos;
+    [SerializeField] private float Demege;
     [SerializeField] private Rigidbody rb;
     private EnemyTags EnemyTags_Script;
 
@@ -29,7 +30,7 @@ public class Projetil : MonoBehaviour
                 if (other.gameObject.tag == EnemyTags_Script.ReturnEnemyTags(i))
                 {
                     Inimigo_BaseScript = other.GetComponent<Inimigo_Base>();
-                    Inimigo_BaseScript.TakeDamege(5f);
+                    Inimigo_BaseScript.TakeDamege(Demege);
                 }
             }
         }
