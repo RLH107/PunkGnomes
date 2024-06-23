@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df80f025f5f92cc40a3c7a45108d95ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TCoolDown: 1
-  TSpeed: 2
+  TCoolDown: 2
+  TSpeed: 3
   NumberOfProjectiles: 2
   Projectile: {fileID: 3239743058682517361, guid: 935159b5a53f3e14b8ca87c94bb21299,
     type: 3}

@@ -10,14 +10,12 @@ public class Inimigo_Base : MonoBehaviour
 
     [SerializeField] private float RSpeed;
     [SerializeField] private float Health;
-    [SerializeField] private float MaxHealth;
     [SerializeField] private float Attack;
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float MoveForce;
 
     private float StartRSpeed;
     private float StartHealth;
-    private float StartMaxHealth;
     private float StartAttack;
     private float StartMoveSpeed;
     private float StartMoveForce;
@@ -65,7 +63,6 @@ public class Inimigo_Base : MonoBehaviour
 
         StartRSpeed = RSpeed ;
         StartHealth = Health;
-        StartHealth = MaxHealth;
         StartAttack = Attack;
         StartMoveSpeed = MoveSpeed;
         StartMoveForce = MoveForce;
@@ -82,7 +79,6 @@ public class Inimigo_Base : MonoBehaviour
     {
         RSpeed = StartRSpeed;
         Health = StartHealth;
-        MaxHealth = StartMaxHealth;
         Attack = StartAttack;
         MoveSpeed = StartMoveSpeed;
         MoveForce = StartMoveForce;
@@ -95,21 +91,6 @@ public class Inimigo_Base : MonoBehaviour
         if (Health <= 0)
         {
             DeactivateEnemy();
-        }
-    }
-
-    public void AddHealth(float HealthToAdd)
-    {
-        float HealthCheck = Health;
-
-        HealthCheck += HealthToAdd;
-        if (HealthCheck < MaxHealth)
-        {
-            Health += HealthToAdd;
-        }
-        else
-        {
-            Health = MaxHealth;
         }
     }
 

@@ -2676,7 +2676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 003
+  m_text: 002
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9918,9 +9918,79 @@ PrefabInstance:
       objectReference: {fileID: 93199768}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
+      propertyPath: WaveDelay.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
       propertyPath: TransformPOS_ToMoveEnemys
       value: 
       objectReference: {fileID: 1385899750}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy1Number.Array.data[4]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: BacicEnemy2Number.Array.data[4]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2197435604339363128, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10084,12 +10154,22 @@ PrefabInstance:
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: Max_RES_count
-      value: 100
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: Initial_RES_count
-      value: 100
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: N_of_Passive_Increce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: N_of_Seconds_before_next_addition
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7681638089158231143, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}

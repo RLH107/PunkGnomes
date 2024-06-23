@@ -9973,18 +9973,38 @@ PrefabInstance:
       objectReference: {fileID: 93199768}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
+      propertyPath: WaveDelay.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
+      propertyPath: WaveDelay.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
+        type: 3}
       propertyPath: TransformPOS_ToMoveEnemys
       value: 
       objectReference: {fileID: 1385899750}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy1Number.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
@@ -9994,7 +10014,7 @@ PrefabInstance:
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy1Number.Array.data[2]
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
@@ -10004,12 +10024,12 @@ PrefabInstance:
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.data[2]
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}

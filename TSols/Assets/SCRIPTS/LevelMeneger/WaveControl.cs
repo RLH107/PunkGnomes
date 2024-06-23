@@ -14,7 +14,7 @@ public class WaveControl : MonoBehaviour
     [Tooltip("Lists need to have the same size. Every Row in the lists is a Wave. If you do not want a enemy in that wave leve it at 0")]
     [SerializeField] public List<int> BacicEnemy2Number;
 
-    [SerializeField] 
+    [SerializeField] public float[] WaveDelay;
 
     //Internal Working
 
@@ -47,12 +47,17 @@ public class WaveControl : MonoBehaviour
         LevelMenues_Script.LisenStartLevelMenu += ResetWaveControl;
         LevelMenues_Script.LisenPlayLevelMenu += CallFirstWave;
         LevelMenues_Script.LisenEndLoseLevelMenu += InCaseOfLose;
+
+        if (BacicEnemy1Number.Count == BacicEnemy2Number.Count && WaveDelay.Length == BacicEnemy1Number.Count)
+        {
+            Debug.LogWarning("AllListsHave SAME SISE");
+        }
     }
 
     public void CallFirstWave()
     {
         Debug.Log("CallFirstWave");
-        CallWave(Wave);
+        StartCoroutine(DelayFirstWawe());
     }
 
     private void CallWave(int WaveNumber)
@@ -102,18 +107,29 @@ public class WaveControl : MonoBehaviour
         }
     }
 
+    private IEnumerator DelayFirstWawe()
+    {
+        yield return new WaitForSeconds(WaveDelay[Wave]);
+        CallWave(Wave);
+    }
+
     private IEnumerator BeforNextWave()
     {
         Wave++;
-        while(ActiveList.Count > 0)
+        Debug.LogWarning("WAVE NUM = " + Wave);
+        if (BacicEnemy1Number.Count == BacicEnemy2Number.Count && WaveDelay.Length == BacicEnemy1Number.Count)
+        {
+            Debug.LogWarning("AllListsHave SAME SISE");
+            if(Wave > BacicEnemy1Number.Count)
+            {
+                Wave = BacicEnemy1Number.Count;
+            }
+        }
+        while (ActiveList.Count > 0)
         {
             yield return new WaitForEndOfFrame();
         }
-        //for(int i =0; i< ActiveList.Count; i++)
-        //{
-        //Debug.LogWarning("activeList = " + ActiveList[i]);
-        //}
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(WaveDelay[Wave]);
         CallWave(Wave);
     }
 
