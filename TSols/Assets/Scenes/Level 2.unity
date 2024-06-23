@@ -13937,7 +13937,7 @@ PrefabInstance:
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: Max_RES_count
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
