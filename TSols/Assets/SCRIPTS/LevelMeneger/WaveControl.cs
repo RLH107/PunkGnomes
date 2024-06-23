@@ -14,6 +14,8 @@ public class WaveControl : MonoBehaviour
     [Tooltip("Lists need to have the same size. Every Row in the lists is a Wave. If you do not want a enemy in that wave leve it at 0")]
     [SerializeField] public List<int> BacicEnemy2Number;
 
+    [SerializeField] 
+
     //Internal Working
 
 

@@ -13722,7 +13722,7 @@ PrefabInstance:
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy1Number.Array.data[2]
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
@@ -13732,17 +13732,17 @@ PrefabInstance:
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.data[0]
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.data[1]
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: BacicEnemy2Number.Array.data[2]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1881892470201564195, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
@@ -13917,17 +13917,17 @@ PrefabInstance:
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: Initial_RES_count
-      value: 155
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: N_of_Passive_Increce
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4280908594791413182, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
       propertyPath: N_of_Seconds_before_next_addition
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7681638089158231143, guid: 67b5c46d526aad54ebd9a240e5f6289f,
         type: 3}
